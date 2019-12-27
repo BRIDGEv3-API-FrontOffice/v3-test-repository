@@ -1,0 +1,316 @@
+$footer-optimum-bg: $brand-primary;
+$footer-optimum-color: $on-brand-primary;
+$footer-optimum-legal-bg: darken($brand-primary, 5%);
+$footer-optimum-text-bg: lighten($brand-primary, 5%);
+$footer-optimum-rassurance-bg: $brand-secondary;
+$footer-optimum-rassurance-item-hover-bg: darken($brand-secondary, 5%);
+$footer-optimum-rassurance-color: $on-brand-secondary;
+
+.lf-footer-optimum {
+    @media print {
+        display: none;
+    }
+
+    background: $footer-optimum-bg;
+    color: $footer-optimum-color;
+
+    &__rassurance {
+        background-color: $footer-optimum-rassurance-bg;
+        padding-top: $gutter-large - $gutter-small;
+        padding-bottom: $gutter-large;
+
+        &__container {
+            @include container;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            &__item {
+                @media (min-width: $screen-xs-min) {
+                    width: calc(50% - (#{$gutter-small} * 2));
+                }
+
+                @media (min-width: $screen-sm-min) {
+                    flex: 1;
+                }
+
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                margin: $gutter-small $gutter-small 0;
+                padding: ($gutter-small / 2);
+                width: 100%;
+                color: $footer-optimum-rassurance-color;
+
+                &__media {
+                    height: 60px;
+                }
+
+                &__title,
+                &__text {
+                    @media (min-width: $screen-xs-min) {
+                        max-width: 250px;
+                    }
+
+                    text-align: center;
+                    color: $brand-primary;
+                }
+
+                &__title {
+                    font-weight: 600;
+                }
+
+                &__text {
+                    @include font-size-small;
+                }
+
+                &--link {
+                    transition: background-color $transition-time $transition-animation;
+
+                    &:hover,
+                    &:active,
+                    &:focus {
+                        background-color: $footer-optimum-rassurance-item-hover-bg;
+                    }
+                }
+            }
+        }
+    }
+
+    &__slogan {
+        background-color: $footer-optimum-text-bg;
+        padding-top: $gutter-large;
+        padding-bottom: $gutter-large;
+
+        &__container {
+            @include container;
+
+            &__title {
+                text-transform: uppercase;
+                font-weight: $font-weight-bold;
+            }
+
+            &__title + &__text {
+                margin-top: $gutter-small;
+            }
+        }
+    }
+
+    &__links {
+        @media (min-width: $screen-xs-min) {
+            justify-content: flex-start;
+        }
+
+        @include container;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: $gutter-large - $gutter-small;
+        padding-bottom: $gutter-large;
+
+        &__row,
+        &__columns {
+            &__title {
+                color: $footer-optimum-color;
+                font-weight: $font-weight-bold;
+            }
+
+            &__list {
+                @include list-unstyled;
+
+                &__item {
+                    &__link {
+                        @include font-size-small;
+
+                        transition: border-color $transition-time $transition-animation;
+                        border-bottom: 1px solid $transparent;
+                        padding: 3px 0;
+                        color: $footer-optimum-color;
+
+                        &:hover,
+                        &:active,
+                        &:focus {
+                            border-color: $footer-optimum-color;
+                            color: $footer-optimum-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            &__list {
+                display: flex;
+                flex-wrap: wrap;
+
+                &__item {
+                    padding: 2px $gutter-small 2px 0;
+                }
+            }
+        }
+
+        &__columns {
+            @media (min-width: $screen-xs-min) {
+                width: calc(50% - #{$gutter-small});
+            }
+
+            @media (min-width: $screen-lg-min) {
+                width: calc(25% - #{$gutter-small});
+            }
+
+            margin-right: $gutter-small;
+            width: 100%;
+
+            &__title {
+                margin: $gutter-small 0;
+            }
+
+            &__list {
+                margin-left: 5px;
+                border-left: 1px solid;
+
+                &__item {
+                    padding: 2px $gutter-small;
+                }
+            }
+        }
+    }
+
+    &__application {
+        @include list-unstyled;
+
+        display: flex;
+        justify-content: center;
+        margin-bottom: $gutter-large;
+
+        &__item {
+            margin: 0 ceil($gutter-small / 3);
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &__link {
+                display: flex;
+                height: 40px;
+
+                &__media {
+                    @include img-responsive('vertical');
+                }
+            }
+        }
+    }
+
+    &__endline {
+        background-color: $footer-optimum-legal-bg;
+        width: 100%;
+
+        &__container {
+            @include container;
+
+            @media (min-width: $screen-xs-min) {
+                flex-direction: row;
+            }
+
+            display: flex;
+            position: relative;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &__list,
+            &__social {
+                @include list-unstyled;
+
+                display: flex;
+                padding: $gutter-small 0;
+            }
+
+            &__list {
+                @media (min-width: $screen-xs-min) {
+                    justify-content: flex-start;
+                }
+
+                flex: 2;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                &__item {
+                    &:not(:first-child) {
+                        &::before {
+                            margin-left: 3px;
+                            color: $footer-optimum-color;
+                            content: '-';
+                        }
+                    }
+
+                    &__link,
+                    &__copyright {
+                        @include font-size-small;
+
+                        margin: 0 5px;
+                        color: $footer-optimum-color;
+                    }
+
+                    &__link {
+                        transition: $transition-default;
+                        border-bottom: 1px solid $transparent;
+
+                        &:hover,
+                        &:active,
+                        &:focus {
+                            border-color: $footer-optimum-color;
+                        }
+                    }
+                }
+            }
+
+            &__social {
+                @media (min-width: $screen-sm-min) {
+                    justify-content: flex-end;
+                }
+
+                display: flex;
+                flex: 1;
+
+                &__item {
+                    margin: 0 5px;
+                    padding: 5px;
+
+                    &:last-child {
+                        @media (min-width: $screen-sm-min) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    &__link {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: $transition-default;
+                        border-radius: 50%;
+                        width: 25px;
+                        height: 25px;
+
+                        &:hover,
+                        &:active,
+                        &:focus {
+                            background-color: $footer-optimum-color;
+                            color: $footer-optimum-legal-bg;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

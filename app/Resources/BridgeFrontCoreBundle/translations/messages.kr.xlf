@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr" target-language="ko-KR" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"></tool>
+    </header>
+    <body>
+        <trans-unit id="150a2a5b7c99a0442c0337a78b4e8f3e" resname="bridge.core_bundle.twig.form.submit">
+           <source>bridge.core_bundle.twig.form.submit</source>
+           <target>보내기</target>
+        </trans-unit>
+        <trans-unit id="b38a065cc8943c49aeaee5393581a934" resname="bridge.core_bundle.twig.days.monday">
+            <source>bridge.core_bundle.twig.days.monday</source>
+            <target>월요일</target>
+        </trans-unit>
+        <trans-unit id="86e0dbbf60b7a9cc89758eb3752285c4" resname="bridge.core_bundle.twig.days.tuesday">
+            <source>bridge.core_bundle.twig.days.tuesday</source>
+            <target>화요일</target>
+        </trans-unit>
+        <trans-unit id="60f0d88d88ead33f3266825b4a4c0af5" resname="bridge.core_bundle.twig.days.wednesday">
+            <source>bridge.core_bundle.twig.days.wednesday</source>
+            <target>수요일</target>
+        </trans-unit>
+        <trans-unit id="327a43ec2653821414cdc0d696b66d00" resname="bridge.core_bundle.twig.days.thursday">
+            <source>bridge.core_bundle.twig.days.thursday</source>
+            <target>목요일</target>
+        </trans-unit>
+        <trans-unit id="20889092a0d04ec497ebe9fcf8bd0e62" resname="bridge.core_bundle.twig.days.friday">
+            <source>bridge.core_bundle.twig.days.friday</source>
+            <target>금요일</target>
+        </trans-unit>
+        <trans-unit id="621d3eb3a9113c01b5ccefbdac320e20" resname="bridge.core_bundle.twig.days.saturday">
+            <source>bridge.core_bundle.twig.days.saturday</source>
+            <target>토요일</target>
+        </trans-unit>
+        <trans-unit id="541fab693c823614fa25bf61e0123ff6" resname="bridge.core_bundle.twig.days.sunday">
+            <source>bridge.core_bundle.twig.days.sunday</source>
+            <target>일요일</target>
+        </trans-unit>
+        <trans-unit id="c80467eae6b15917f1febb77e173232d" resname="bridge.core_bundle.twig.form.file.error.mimeTypesMessage">
+            <source>bridge.core_bundle.twig.form.file.error.mimeTypesMessage</source>
+            <target>허용되는 파일 유형이 아닙니다.</target>
+        </trans-unit>
+        <trans-unit id="f3c13640306f4f16638a528de9cbf762" resname="bridge.core_bundle.twig.form.file.error.maxSizeMessage">
+            <source>bridge.core_bundle.twig.form.file.error.maxSizeMessage</source>
+            <target>파일의 크기가 허용되는 최대 용량을 초과합니다 (최대 10Mo).</target>
+        </trans-unit>
+        <trans-unit id="226af91aa0f842244358f18be29fbf96" resname="bridge.core_bundle.twig.form.file.error.uploadErrorMessage">
+            <source>bridge.core_bundle.twig.form.file.error.uploadErrorMessage</source>
+            <target>파일 다운로드 중 에러가 발생했습니다.</target>
+        </trans-unit>
+        <trans-unit id="cf6d9301dea31e3035e65a661a817072" resname="bridge.core_bundle.twig.form.file.error.postSizeMessage">
+            <source>bridge.core_bundle.twig.form.file.error.postSizeMessage</source>
+            <target>파일의 크기가 허용되는 최대 용량을 초과합니다 (최대 10Mo).</target>
+        </trans-unit>
+    </body>
+  </file>
+</xliff>

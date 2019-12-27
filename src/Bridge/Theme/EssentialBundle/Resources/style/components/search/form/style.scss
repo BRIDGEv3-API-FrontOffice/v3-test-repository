@@ -1,0 +1,100 @@
+//------------------------------------------------------------------
+// Component SearchForm
+//------------------------------------------------------------------
+
+// Dependencies
+// autocomplete-algolia
+
+.lf-search-form {
+    @media (min-width: $screen-sm-min) {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+    }
+
+    width: 100%;
+
+    &__query {
+        @media (min-width: $screen-sm-min) {
+            width: 325px;
+        }
+
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-flow: row nowrap;
+        transition: all .2s ease-in-out;
+        z-index: $search-z-index;
+        width: calc(100% - 40px);
+
+        &__label {
+            @include sr-only;
+
+            color: $grey-mine-shaft;
+        }
+
+        &__icon,
+        &__input {
+            transition: $transition-default;
+            border: 1px solid $background-color;
+        }
+
+        &__icon {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            background-color: $background-color;
+            width: $input-height-base;
+            height: $input-height-base;
+            color: $text-color;
+
+            &__hover {
+                display: flex;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                align-items: center;
+                justify-content: center;
+                transition: $transition-default;
+                visibility: hidden;
+                opacity: 0;
+                background: $background-color;
+            }
+        }
+
+        &__input {
+            position: unset !important; // algolia overwrite
+            transition: $transition-default;
+            border-radius: $input-border-radius-base;
+            box-shadow: none;
+            background-color: $background-color;
+            padding: 0 ceil($input-horizontal-padding-base / 2);
+            width: 100%;
+            height: $input-height-base;
+            color: $brand-primary;
+
+            &::placeholder {
+                color: $text-color;
+            }
+        }
+
+        &.icon-prefix & {
+            &__icon {
+                border-right: 0;
+            }
+
+            &__input {
+                border-left: 0;
+                padding-left: 0;
+            }
+        }
+    }
+
+    &__coordinates,
+    &__filters {
+        display: none;
+    }
+}

@@ -1,0 +1,29 @@
+//------------------------------------------------------------------
+// Component TopbarDefault
+//------------------------------------------------------------------
+
+.lf-topbar-default {
+    @media print {
+        display: none;
+    }
+
+    transition: background-color .2s ease-in-out;
+    background-color: $brand-secondary;
+    padding-top: $gutter-small;
+    padding-bottom: $gutter-small;
+    color: $on-brand-secondary;
+
+    &.show_overlay {
+        @media screen and (min-width: $screen-sm-min) {
+            background-color: $brand-secondary;
+            color: $on-brand-secondary;
+        }
+
+        background-color: $background-color;
+        color: $text-color;
+    }
+
+    &__container {
+        @include container;
+    }
+}

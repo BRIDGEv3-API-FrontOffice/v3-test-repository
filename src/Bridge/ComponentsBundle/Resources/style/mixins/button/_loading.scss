@@ -1,0 +1,31 @@
+// Mixin Button Loading
+
+@keyframes loadingBar {
+    from {
+        left: -40px;
+    }
+
+    to {
+        left: calc(100% + 40px);
+    }
+}
+
+@mixin button-loading($color: $brand-primary) {
+    &.loading {
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-50%);
+            background-color: $color;
+            width: 40px;
+            height: 4px;
+            animation: loadingBar 2s infinite $transition-animation;
+            content: '';
+        }
+    }
+}

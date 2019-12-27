@@ -1,0 +1,133 @@
+{# component 'forms-templates-address' #}
+
+{# @param  string  id           custom id             default('lf-forms-contact')  example('lf-forms-contact') #}
+{# @param  string  class        custom class          default(null)                example('custom-class') #}
+{# @param  string  legalNotice  legal notice content  default(null)                example('Legal notice') #}
+{# @param  object  location     location object       default(null)                example(location) #}
+
+{# @global  object  forms  forms configuration #}
+
+{% set id = id|default('lf-forms-address') %}
+{% set class = class|default(null) %}
+
+{% if locationAddressForm is defined %}
+    {% embed '@components/forms/default/template.html.twig' with {
+        'class': 'lf-forms-address ' ~ class,
+        'formView': locationAddressForm,
+        'attr': {
+            'id': id,
+            'class': 'lf-forms-address__form active ' ~ (class ? class ~ '__form' : ''),
+            'data-lf-address-form': '',
+            'data-lf-tracking': tracking({bind: 'submit', category: 'locationAdress', label: tracking_location_label(location)}),
+            'data-lf-msg-success': 'bridge.components.forms.address_form.success.message'|trans({}, 'forms'),
+            'data-lf-msg-error': 'bridge.components.forms.error.message'|trans({}, 'forms'),
+            'data-lf-modal-id': modalId
+        },
+        'legalNotice': legalNotice,
+        'location': location
+    } only %}
+        {% block fields %}
+            {% if formView.children['bridge-user-email'] is defined %}
+                <div class="lf-forms-address__form__mail placeholder-fmk">
+                    {{ form_label(formView.children['bridge-user-email'], 
+                        'bridge.components.forms.address_form.mail.label'|trans({}, 'forms'),
+                        {'label_attr': {'id': 'location-address-form_bridge-user-mail_label'}}
+                    ) }}
+                    {{ form_widget(formView.children['bridge-user-email'], {
+                        'type': 'email',
+                        'attr': {
+                            'class': 'lf-forms-address__form__mail__input',
+                            'placeholder': 'example@domain.com',
+                            'data-require-one': 'true',
+                            'data-fv-callback': 'true',
+                            'data-fv-callback___callback': 'requireField',
+                            'data-fv-callback___message': 'bridge.components.forms.error.mail.require.one'|trans({}, 'forms'),
+                            'aria-invalid': 'false',
+                            'data-fv-emailaddress': true,
+                            'data-fv-emailaddress-message':'bridge.components.forms.error.mail.format'|trans({}, 'forms'),
+                            'data-fv-email-address': "true",
+                            'data-fv-email-address___message':'bridge.components.forms.error.mail.format'|trans({}, 'forms')
+                        }
+                    }) }}
+                    
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-user-phone'] is defined %}
+                <div class="lf-forms-address__form__phone placeholder-fmk">
+                    {{ form_label(
+                        formView.children['bridge-user-phone'],
+                        'bridge.components.forms.address_form.phone.label'|trans({}, 'forms'),
+                        {'label_attr': {'id': 'location-address-form_bridge-user-phone_label'}}
+                    ) }}
+                    {{ form_widget(formView.children['bridge-user-phone'], {
+                        'type': 'tel',
+                        'attr': {
+                            'class': 'lf-forms-address__form__phone__input',
+                            'data-require-one': 'true',
+                            'data-fv-callback': 'true',
+                            'data-fv-callback___callback': 'requireField',
+                            'data-fv-callback___message': 'bridge.components.forms.error.mail.require.one'|trans({}, 'forms'),
+                            'data-fv-regexp': 'true',
+                            'data-fv-regexp___regexp': '^[0-9]+$',
+                            'data-fv-regexp___message': 'bridge.components.forms.error.phone.format'|trans({}, 'forms'),
+                            'data-bridge-user-phone-error-message': 'bridge.components.forms.error.phone.format'|trans({}, 'forms')
+                        }
+                    }) }}
+                    <small id="data-bridge-user-phone-error-message"></small>
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-phone-country'] is defined %}
+                <div id="bridge-phone-country">
+                    {{ form_widget(formView.children['bridge-phone-country']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-location-id'] is defined %}
+                <div class="lf-forms-address__form__location">
+                    {{ form_widget(formView.children['bridge-location-id']) }}
+                    {{ form_widget(formView.children['bridge-location-url']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['_token'] is defined %}
+                <div class="lf-forms-address__form__token">
+                    {{ form_widget(formView.children['_token']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-subscribe'] is defined %}
+                <div class="lf-forms-address__form__submit placeholder-fmk submit">
+                    {{ form_widget(formView.children['bridge-subscribe'], {
+                        'attr': {
+                            'class': 'lf-forms-address__form__submit__button'
+                        },
+                        'label': 'bridge.components.forms.address_form.submit.label'|trans({}, 'forms')
+                    }) }}
+                </div>
+            {% endif %}
+
+            <script>
+                function requireField(input) {
+                    var requireOneInputs = input.element.form.querySelectorAll('[data-require-one]');
+                    var res = false;
+
+                    for (var i = 0; i < requireOneInputs.length; i++) {
+                        var currentInput = requireOneInputs[i];
+
+                        if (currentInput.value.length > 0) {
+                            res = true;
+                        }
+                    }
+
+                    if (!res) {
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
+        {% endblock %}
+    {% endembed %}
+{% endif %}

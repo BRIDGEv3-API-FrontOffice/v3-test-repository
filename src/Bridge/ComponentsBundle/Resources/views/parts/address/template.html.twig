@@ -1,0 +1,58 @@
+{# component 'parts-address' #}
+
+{# @param  string  id        custom id        default(null)  example('custom-id') #}
+{# @param  string  class     custom class     default(null)  example('custom-class') #}
+{# @param  object  location  location object  default(null)  example(location) #}
+{# @param number  hLevel  title level `[1-6]`              default(1)     example(1) #}
+
+
+{% set hLevel = hLevel|default(2) %}
+
+{% if location is defined and location.localisation is defined %}
+
+    <address id="{{ id | default('lf-parts-address-' ~ location.id) }}" class="lf-parts-address {{ class|default(null) }}">
+        <div class="lf-parts-address__title" >
+            {{- 'bridge.components.address.print.title'|trans({}, 'components') -}}
+        </div>
+
+        <div class="lf-parts-address__street" data-e2e-address-street>
+            {%- if location.localisation.address1 is defined
+                and location.localisation.address1 is not empty -%}
+                {{- location.localisation.address1|capitalize|striptags -}}
+            {%- endif -%}
+
+            {%- if location.localisation.address1 is defined
+                and location.localisation.address1 is not empty
+                and location.localisation.address2 is defined
+                and location.localisation.address2 is not empty -%}
+                <br/>
+            {%- endif -%}
+
+            {%- if location.localisation.address2 is defined
+                and location.localisation.address2 is not empty -%}
+                {{- location.localisation.address2|capitalize|striptags -}}
+            {%- endif -%}
+        </div>
+
+        <div class="lf-parts-address__city" data-e2e-address-city>
+            {%- if location.localisation.postalCode is defined
+                and location.localisation.postalCode is not empty -%}
+                {{- location.localisation.postalCode|striptags  -}}
+            {%- endif -%}
+
+            {%- if location.localisation.postalCode is defined
+                and location.localisation.postalCode is not empty
+                and location.localisation.city is defined
+                and location.localisation.city.name is defined
+                and location.localisation.city.name is not empty -%}
+                &nbsp;
+            {%- endif -%}
+
+            {%- if location.localisation.city is defined
+                and location.localisation.city.name is defined
+                and location.localisation.city.name is not empty -%}
+                {{- location.localisation.city.name|capitalize|striptags -}}
+            {%- endif %}
+        </div>
+    </address>
+{% endif %}

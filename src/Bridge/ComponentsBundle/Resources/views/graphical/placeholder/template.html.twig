@@ -1,0 +1,13 @@
+{# component 'graphical-placeholder' #}
+
+{# @param  string  id      custom id                       default(null)     example('custom-id') #}
+{# @param  string  class   custom class                    default(null)     example('custom-class') #}
+{# @param  number  width   element width                   default(450)      example(450) #}
+{# @param  number  height  element height                  default(200)      example(200) #}
+{# @param  string  style   stripes style `'dark'|'light'`  default('light')  example('light') #}
+
+<svg {% if id is defined %}id="{{ id }}"{% endif %}
+    class="lf-graphical-placeholder {{ class|default(null) }} {{ style|default('light') }}"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 {{ width|default(450) }} {{ height|default(200) }}" preserveAspectRatio="xMidYMid meet">
+</svg>

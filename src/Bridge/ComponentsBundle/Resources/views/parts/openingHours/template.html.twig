@@ -1,0 +1,93 @@
+{# partial 'parts-openingHours' #}
+
+{# @param  string  id          custom id        default('lf-parts-opening-hours')  example('lf-parts-opening-hours') #}
+{# @param  string  class       custom class     default(null)                      example('custom-class') #}
+{# @param  object  location    location object  default(null)                      example(location) #}
+
+{# @global  string  time_format                time format for opening or closing time #}
+{# @global  string  default_timezone           default time zone id #}
+{# @global  number  special_periods_threshold  special periods threshold parameter (in days) #}
+
+{% set timeZone = default_timezone[app.request.locale] %}
+{% set periods = [] %}
+{% set specialPeriods = [] %}
+{% set status = null %}
+
+{% if location is defined
+    and location.openingHours is defined
+    and location.openingHours.periods is defined %}
+    {% set periods = location.openingHours.periods|periods_to_days %}
+
+    {% if location.openingHours.specialPeriods is defined
+        and special_periods_threshold is defined %}
+        {% set specialPeriods = location.openingHours.specialPeriods|incoming_special_period|filter_special_periods(special_periods_threshold) %}
+    {% endif %}
+
+    {% if location.localisation is defined
+        and location.localisation.timeZone is defined
+        and location.localisation.timeZone is not null %}
+        {% set timeZone = location.localisation.timeZone.timeZoneId %}
+    {% endif %}
+
+    {% set status = locationOpeningStatus(periods, timeZone, date().timestamp, specialPeriods) %}
+{% endif %}
+
+{% if periods|length > 0 %}
+    <section id="{{ id|default('lf-parts-opening-hours') }}"
+        class="lf-parts-opening-hours {% if specialPeriods|length > 0 %}special-periods{% endif %} {{ class|default(null) }}"
+        aria-labelledby="lf-parts-opening-hours_title"
+        >
+        <h2 class="sr-only" id="lf-parts-opening-hours_title">{{- 'bridge.component.opening-hours.title'|trans({}, 'components') -}}</h2>
+        <div class="lf-parts-opening-hours__content">
+            {% for day in periods %}
+                {% set isToday = (day.key == date()|date('l', timeZone)|upper) %}
+
+                <div class="lf-parts-opening-hours__content__day {% if isToday %}lf-parts-opening-hours__content__day--today{% endif %}" {% if isToday %} {% endif %} data-e2e-hours-item>
+                    <span class="sr-only">{{- 'bridge.components.opening-hours.day.today'|trans({}, 'components') -}}</span>
+                    <span class="lf-parts-opening-hours__content__day__name" data-e2e-hours-day>
+                        {{- day.label -}}
+                    </span>
+
+                    <div class="lf-parts-opening-hours__content__day__periods" data-e2e-hours-time>
+                        {% for timeSlot in day.periods %}
+                            {% if timeSlot.openTime == '00:00' and timeSlot.closeTime == '00:00' %}
+                                <span class="lf-parts-opening-hours__content__day__periods__time--full">
+                                    {{- 'bridge.component.opening-hours.day.24-open'|trans({}, 'components') -}}
+                                </span>
+                            {% else %}
+                                <span class="lf-parts-opening-hours__content__day__periods__time">
+                                    <span class="lf-parts-opening-hours__content__day__periods__time--inline">
+                                        {{- timeSlot.openTime|localizeddate('none', time_format, app.request.locale) -}}
+                                    </span>
+                                    <span class="lf-parts-opening-hours__content__day__periods__time__marker"> - </span>
+                                    <span class="lf-parts-opening-hours__content__day__periods__time--inline">
+                                        {{- timeSlot.closeTime|localizeddate('none', time_format, app.request.locale) -}}
+                                    </span>
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            <span class="lf-parts-opening-hours__content__day__periods__time">
+                                {{- 'bridge.components.opening-hours.day.closed'|trans({}, 'components') -}}
+                            </span>
+                        {% endfor %}
+                    </div>
+
+                    {% if isToday and status is defined and status.isImpacted %}
+                        <div class="lf-parts-opening-hours__content__day__impacted" aria-label="{{ 'bridge.components.opening-hours.day.impacted'|trans({}, 'components') }}">
+                            {{- 'bridge.components.opening-hours.day.impacted'|trans({}, 'components') -}}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% include '@components/button/default/template.html.twig' with {
+            'class': 'lf-parts-opening-hours__expand',
+            'label': 'bridge.components.opening-hours.expand.label'|trans({}, 'components'),
+            'srLabel': 'bridge.components.opening-hours.expand.srLabel'|trans({'%location.name%': location.name}, 'components'),
+            'style': 'secondary',
+            'trackingData': {category: 'Opening hours', label: tracking_location_label(location)},
+            'attributes': {'data-lf-expand': '', 'aria-hidden':'true'}
+        } only %}
+    </section>
+{% endif %}

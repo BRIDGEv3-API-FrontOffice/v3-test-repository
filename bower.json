@@ -1,0 +1,31 @@
+{
+  "name": "bridge-front-starter-kit",
+  "homepage": "https://github.com/Leadformance/bridge-front-starter-kit",
+  "main": "",
+  "description": "Leadformance Bridge Front Starter-Kit",
+  "license": "UNLICENSED",
+  "private": true,
+  "authors": [
+    "Leadformance <contact@leadformance.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "^4.2.0",
+    "js-cookie": "^2.1.3",
+    "batMap": "Leadformance/batMap#^1.4.0",
+    "form.validation": "Leadformance/bridge-front-formvalidation",
+    "places.js": "https://cdn.jsdelivr.net/places.js/1.16.4/placesAutocompleteDataset.min.js",
+    "algolia-autocomplete.js": "^0.36.0",
+    "algoliasearch": "^3.33.0",
+    "materialize": "^1.0"
+  },
+  "devDependencies": {
+    "jasmine-jquery": "^2.1.1"
+  }
+}

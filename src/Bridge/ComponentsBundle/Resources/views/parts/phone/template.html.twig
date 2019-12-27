@@ -1,0 +1,71 @@
+{# component 'parts-phone' #}
+
+{# @param  string   id              custom id                         default(null)       example('lf-parts-phone') #}
+{# @param  string   class           custom class                      default(null)       example('custom-class') #}
+{# @param  string   style           color style                       default('primary')  example('primary') #}
+{# @param  string   role            custom role attribute             default(null)       example('button') #}
+{# @param  boolean  isHide          define if phone number is hide    default(true)       example(true) #}
+{# @param  boolean  isLink          define if phone number is a link  default(true)       example(true) #}
+{# @param  boolean  isMiniOnMobile  the mobile button style           default(false)      example(false) #}
+{# @param  object   location        location object                   default(null)       example(location) #}
+{# @param  number   tabIndex        tabindex 0 or -1                  default(0)          example(0) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set class = class|default(null) %}
+{% set style = style|default('primary') %}
+{% set role = role|default(null) %}
+{% set isMiniOnMobile = isMiniOnMobile|default(false) %}
+{% set tabIndex = tabIndex|default(0) %}
+{% set ariaHidden = ariaHidden|default('false') %}
+
+{% if isHide is not defined %}
+    {% set isHide = true %}
+{% endif %}
+
+{% if isLink is not defined %}
+    {% set isLink = true %}
+{% endif %}
+
+{% if location is defined
+    and location.contact is defined
+    and location.contact.phone is defined
+    and location.contact.phone.number is defined %}
+    {% set phoneNumber = location.contact.phone.number|striptags %}
+{% endif %}
+
+{% if phoneNumber is defined and phoneNumber is not empty %}
+    <div aria-live="polite" {% if id is defined %}id="{{ id }}"{% endif %} class="lf-parts-phone {{ class }}" {{ htmlAttrs(attributes|default(null)) }}>
+        {% include '@components/button/default/template.html.twig' with {
+            'type': isLink ? 'a' : 'button',
+            'role': role,
+            'aria-live': 'polite',
+            'class': isHide ? 'lf-parts-phone__button lf-parts-phone__button--link hidden ' ~ class ~ '__button' : 'lf-parts-phone__button lf-parts-phone__button--link ' ~ class ~ '__button',
+            'style': style,
+            'label': isMiniOnMobile ? 'bridge.components.parts.phone.label'|trans({}, 'components') : phoneNumber,
+            'srLabel': 'bridge.components.parts.phone.srLabel'|trans({'%location.name%': location.name}, 'components'),
+            'icon': 'bridge-icon-' ~ icon_set ~ '-phone',
+            'href': isLink ? 'tel:' ~ phoneNumber|replace({' ': ''}) : null,
+            'isMiniOnMobile': isMiniOnMobile,
+            'ariaHidden': true,
+            'attributes': isHide ? {'tabindex': tabIndex, 'data-lf-phone-link': location._id, 'data-e2e-phone-link': ''} : {'data-bridge-tracking-call-intention': location._id, 'data-e2e-phone-link': ''},
+            'trackingData': isLink ? {category: 'Phone', action: 'call', label: tracking_location_label(location)} : {}
+        } only %}
+
+        {% if isHide %}
+            {% include '@components/button/default/template.html.twig' with {
+                'type': 'button',
+                'role': role,
+                'class': 'lf-parts-phone__button lf-parts-phone__button--button ' ~ class ~ '__button',
+                'style': style,
+                'label': 'bridge.components.parts.phone.label'|trans({}, 'components'),
+                'srLabel': 'bridge.components.parts.phone.number.srLabel'|trans({'%location.name%': location.name}, 'components'),
+                'icon': 'bridge-icon-' ~ icon_set ~ '-phone',
+                'isMiniOnMobile': isMiniOnMobile,
+                'ariaHidden': true,
+                'attributes': {'tabindex': tabIndex, 'data-lf-phone': location._id, 'data-bridge-tracking-call-intention': location._id, 'data-e2e-phone-show': ''},
+                'trackingData': {category: 'Phone', action: 'display', label: tracking_location_label(location)}
+            } only %}
+        {% endif %}
+    </div>
+{% endif %}

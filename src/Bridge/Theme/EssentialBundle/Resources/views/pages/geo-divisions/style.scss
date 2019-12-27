@@ -1,0 +1,134 @@
+//------------------------------------------------------------------
+// Geo-divisions style
+//------------------------------------------------------------------
+
+// Main
+@import "~@theme/style/main";
+
+// Dependencies
+@import '~@theme/style/components/parts/actions/style';
+@import '~@theme/style/components/parts/address/style';
+@import '~@theme/style/components/parts/phone/style';
+@import "~@theme/style/components/parts/itinerary/style";
+@import '~@theme/style/components/parts/status/style';
+@import "~@theme/style/components/search/geolocation/style";
+@import "~@theme/style/components/search/form/style";
+@import "~@theme/style/components/search/filters/style";
+@import "~@theme/style/components/search/overlay/style";
+@import "~@theme/style/components/autocomplete/algolia/style";
+
+// Components
+@import "~@theme/style/components/topbar/default/style";
+@import "~@theme/style/components/breadcrumb/scroll/style";
+@import '~@theme/style/components/facets/default/style';
+@import "~@theme/style/components/footer/seo/style";
+@import '~@theme/style/components/location/default/style';
+@import '~@theme/style/components/pagination/default/style';
+@import '~@theme/style/components/search/default/style';
+
+// Page style
+.lf-geo-divisions {
+    &__main {
+        @include container;
+
+        @media (min-width: $screen-md-min) {
+            align-items: flex-start;
+            // grid-template-columns: 2fr 1fr;
+            // grid-template-areas:
+            //     "description ."
+            //     "title ."
+            //     "locations facets";
+        }
+
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        // grid-gap: $gutter-base;
+        padding-top: $gutter-small;
+        padding-bottom: $gutter-small;
+
+        &__description {
+            order: 1;
+            margin-bottom: $gutter-base * 2;
+            width: 100%;
+            color: $brand-primary;
+        }
+
+        &__title {
+            @media (min-width: $screen-md-min) {
+                text-align: left;
+            }
+
+            order: 2;
+            margin-bottom: $gutter-base;
+            width: 100%;
+            text-align: center;
+
+            > span {
+                display: block;
+                line-height: 1;
+                font-size: .8em;
+            }
+        }
+
+        &__facets {
+            @media (min-width: $screen-md-min) {
+                order: 4;
+                margin-bottom: 0;
+                margin-left: $gutter-base;
+                width: calc(100% / 3);
+            }
+
+            order: 3;
+            margin-bottom: $gutter-base;
+            width: 100%;
+        }
+
+        &__locations {
+            @media (min-width: $screen-md-min) {
+                order: 3;
+                width: calc((100% /3 * 2) - #{$gutter-base});
+            }
+
+            display: flex;
+            flex-wrap: wrap;
+            order: 4;
+            width: 100%;
+
+            &__location {
+                @media (min-width: $screen-md-min) {
+                    width: calc((100% - #{$gutter-base}) / 2);
+                }
+
+                margin-bottom: $gutter-base;
+                width: 100%;
+
+                &:nth-child(2n+2) {
+                    @media (min-width: $screen-md-min) {
+                        margin-left: $gutter-base;
+                    }
+                }
+            }
+
+            &__pagination {
+                @media (min-width: $screen-sm-min) {
+                    width: 100%;
+                }
+
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__bottom {
+        @media print {
+            display: none;
+        }
+
+        margin-top: $gutter-base;
+
+        &__breadcrumb {
+            margin-bottom: $gutter-small;
+        }
+    }
+}

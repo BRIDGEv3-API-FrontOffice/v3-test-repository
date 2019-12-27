@@ -1,0 +1,14 @@
+{# component 'technical-toybox' #}
+
+{# @param  string  token  toybox project token  default(null)  example('rOUrrdMt1Mwi') #}
+
+{# @global  string  deployment_namespace  environment name #}
+
+{% if token is defined
+    and token is not empty
+    and deployment_namespace == 'preview-front-offices'
+%}
+    <!-- ToyBox script -->
+    <script src="https://d16ahjtmf9d1au.cloudfront.net/inject.bundle.js" data-id="ToyboxSnippet" data-token="{{ token }}" async></script>
+    <!-- End ToyBox script -->
+{% endif %}

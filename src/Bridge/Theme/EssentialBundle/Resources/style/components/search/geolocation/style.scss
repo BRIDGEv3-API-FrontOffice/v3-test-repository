@@ -1,0 +1,10 @@
+//------------------------------------------------------------------
+// Component SearchGeolocation
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+.lf-search-geolocation {
+    @include button-loading($on-brand-secondary);
+}

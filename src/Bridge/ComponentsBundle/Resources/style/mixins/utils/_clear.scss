@@ -1,0 +1,10 @@
+@mixin clear {
+    &::after {
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        font-size: 0;
+        content: ' ';
+    }
+}

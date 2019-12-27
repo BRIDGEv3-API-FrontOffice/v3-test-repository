@@ -1,0 +1,99 @@
+//------------------------------------------------------------------
+// Gdpr style
+//------------------------------------------------------------------
+
+// Main
+@import "~@theme/style/main";
+
+// Components
+@import "~@theme/style/components/topbar/default/style";
+
+// Page style
+.lf-gdpr {
+    &__main {
+        @include container;
+
+        @media print {
+            color: $black;
+        }
+
+        padding-top: $gutter-base;
+        padding-bottom: $gutter-base;
+        color: $grey-mine-shaft;
+
+        &__title {
+            margin-bottom: $gutter-base;
+        }
+
+        &__content {
+            ol,
+            ul {
+                margin: 0;
+            }
+
+            @for $n from 1 to 6 {
+                h#{$n} {
+                    margin: 0;
+
+                    & + p,
+                    & + ul,
+                    & + ol {
+                        margin-top: 1em;
+                    }
+                }
+
+                p + h#{$n},
+                ol + h#{$n},
+                ul + h#{$n} {
+                    margin-top: 1.5em;
+                }
+            }
+
+            p + ol,
+            ol + p,
+            p + ul,
+            ul + p {
+                margin-top: 1em;
+            }
+
+            a[href] {
+                text-decoration: underline;
+
+                &::after {
+                    @media print {
+                        content: " (" attr(href) ")";
+                    }
+                }
+
+                &:hover,
+                &:focus,
+                &:active {
+                    text-decoration: underline;
+                }
+            }
+
+            a[href^="#"],
+            a[href^="javascript:"] {
+                @media print {
+                    display: none;
+                }
+
+                &::after {
+                    @media print {
+                        content: "";
+                    }
+                }
+            }
+
+            mark {
+                @media print {
+                    color: $black;
+                }
+
+                background: none;
+                color: $danger-color;
+                font-weight: $font-weight-bold;
+            }
+        }
+    }
+}

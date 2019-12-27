@@ -1,0 +1,37 @@
+{# component 'parts-itinerary' #}
+
+{# @param  string   id              custom id                default('lf-parts-itinerary')  example('lf-parts-itinerary') #}
+{# @param  string   class           custom class             default(null)                  example('custom-class') #}
+{# @param  string   style           color style              default('primary')             example('primary') #}
+{# @param  boolean  isMiniOnMobile  the mobile button style  default(false)                 example(false) #}
+{# @param  object   location        location object          default(null)                  example(location) #}
+{# @param  number   tabIndex        tabindex 0 or -1         default(0)                     example(0) #}
+
+{# @global  string  icon_set   icon set class prefix #}
+{# @global  object  itinerary  itinerary configuration #}
+
+{% if location is defined and location.localisation is defined and itinerary is defined %}
+    {% set itineraryDest = '' %}
+    {% set itineraryDest = itineraryDest ~ location.localisation.address1|default('') ~ ', ' %}
+    {% set itineraryDest = itineraryDest ~ location.localisation.city.name|default('') ~ ' ' %}
+    {% set itineraryDest = itineraryDest ~ location.localisation.postalCode|default('') %}
+    {% set itineraryDest = itineraryDest|url_encode %}
+    {% set tabIndex = tabIndex|default(0) %}
+    {% set ariaHidden = ariaHidden|default('false') %}
+
+
+    {% include '@components/button/default/template.html.twig' with {
+        'type': 'a',
+        'id': id|default('lf-parts-itinerary') ~ '-' ~ location.seoId,
+        'class': 'lf-parts-itinerary ' ~ class|default(null),
+        'style': style|default('primary'),
+        'label': 'bridge.components.parts.itinerary.label'|trans({}, 'components'),
+        'srLabel': 'bridge.components.parts.itinerary.srLabel'|trans({'%location.name%': location.name}, 'components'),
+        'icon': 'bridge-icon-' ~ icon_set ~ '-itinerary',
+        'href': itinerary.host ~ itinerary.start_addr ~ itinerary.dest_addr ~ itineraryDest,
+        'isMiniOnMobile': isMiniOnMobile|default(false),
+        'ariaHidden': true,
+        'attributes': {'tabindex': tabIndex, 'data-bridge-tracking-itinerary': location._id, 'data-lf-itinerary': itineraryDest, 'target': '_blank'},
+        'trackingData': {category: 'Get directions', label: tracking_location_label(location)}
+    } only %}
+{% endif %}

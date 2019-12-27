@@ -1,0 +1,106 @@
+{# component 'location-default' #}
+
+{# @param  string  id        custom id            default(null)  example('custom-id') #}
+{# @param  string  class     custom class         default(null)  example('custom-class') #}
+{# @param  number  hLevel    title level `[1-6]`  default(2)     example(2) #}
+{# @param  object  location  location object      default(null)  example(location) #}
+{# @param  number  counter   map marker counter   default(null)  example(1) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set hLevel = hLevel|default(2) %}
+
+<li class="lf-location-default {{ class|default(null) }}"
+    data-lf-location="{{ location._id }}"
+    {{ htmlAttrs(attributes|default(null)) }}
+    aria-labelledby="lf-location-default__content__title-{{ location._id }}"
+    aria-describedby="lf-parts-address-{{ location._id }}">
+    {% block content %}
+        {% if location.hasStoreLocatorPage %}
+            <a href="#" class="sr-only" tabindex="0" data-change-tabindex>{{ location.name }} {{location.localisation.city.name}}</a> 
+            <a class="lf-location-default__content"
+                href="{{ path('locations', {seoId: location.seoId, slug: location.slug}) }}"
+                title="{{ 'bridge.components.location.go_to_store'|trans({}, 'components') }}"
+                data-lf-tracking="{{ tracking({category: 'Go to store', label: tracking_location_label(location)}) }}"
+                tabindex="-1"
+                aria-hidden="true"
+                data-lf-infos>
+        {% else %}
+            <div class="lf-location-default__content">
+        {% endif %}
+
+        {% block title %}
+            <h{{ hLevel }} id="lf-location-default__content__title-{{ location._id }}" class="lf-location-default__content__title" {{ htmlAttrs(titleattributes|default(null)) }}>
+                {% if counter is defined and counter is not null %}
+                    <span>{{ counter }}. </span>
+                {% endif %}
+                <span>{{ location.name }}</span>
+            </h{{ hLevel }}>
+        {% endblock %}
+
+        {% block status %}
+            {% include '@components/parts/status/template.html.twig' with {
+                'class': 'lf-location-default__content__status',
+                'location': location
+            } only %}
+        {% endblock %}
+
+        {% block address %}
+            {% include '@components/parts/address/template.html.twig' with {
+                'class': 'lf-location-default__content__address',
+                'location': location
+            } only %}
+        {% endblock %}
+
+        {% if location.hasStoreLocatorPage %}
+            </a>
+        {% else %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block bottom %}
+        <div class="lf-location-default__bottom">
+            {% include '@components/parts/phone/template.html.twig' with {
+                'class': 'lf-location-default__bottom__phone',
+                'style': 'secondary',
+                'location': location,
+                'tabIndex': '-1',
+                'aria-hidden': 'true'
+            } only %}
+
+            {% include '@components/parts/itinerary/template.html.twig' with {
+                'class': 'lf-location-default__bottom__itinerary',
+                'style': 'secondary',
+                'location': location,
+                'tabIndex': '-1',
+                'ariaHidden': 'true'
+            } only %}
+        </div>
+    {% endblock %}
+
+    {% block options %}
+        <button class="lf-location-default__options"
+            data-lf-options tabindex="-1" aria-hidden="true">
+            <em class="bridge-icon-{{ icon_set }}-options" role="img" alt=""></em>
+            <span class="sr-only">{{ 'bridge.components.location.options.label' | trans({}, 'components') }}</span>
+        </button>
+    {% endblock %}
+
+    {% block actions %}
+        {% embed '@components/parts/actions/template.html.twig' with {
+            'class': 'lf-location-default__actions hidden',
+            'location': location
+        } only %}
+            {% block customActions %}
+                {% if location.localisation is defined and location.localisation.coordinates is defined %}
+                    <button class="lf-parts-actions__item"
+                        data-lf-locate-on-map="{{ location._id }}"
+                        data-lf-tracking="{{ tracking({category: 'Locate on map', label: tracking_location_label(location)}) }}">
+                        {{- 'bridge.components.location.locate_on_map'|trans({}, 'components') -}}
+                    </button>
+                {% endif %}
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+</li>

@@ -1,0 +1,11 @@
+//------------------------------------------------------------------
+// Component ButtonText
+//------------------------------------------------------------------
+
+.lf-button-text {
+    @media print {
+        display: none;
+    }
+
+    @include button-text($brand-primary);
+}

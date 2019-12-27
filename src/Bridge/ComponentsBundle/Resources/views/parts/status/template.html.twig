@@ -1,0 +1,68 @@
+{# component 'parts-status' #}
+
+{# @param  string   id            custom id             default(null)  example('custom-id') #}
+{# @param  string   class         custom class          default(null)  example('custom-class') #}
+{# @param  boolean  displayHours  display closing hour  default(true)  example(true) #}
+{# @param  object   location      location object       default(null)  example(location) #}
+
+{# @global  string  time_format       default time format for opening or closing time #}
+{# @global  string  default_timezone  default location timezone #}
+
+{% set displayHours = displayHours is not defined ? true : displayHours %}
+
+{% if location is defined
+    and location.openingHours is defined
+    and location.openingHours.periods is defined
+    and location.openingHours.periods is not empty
+    and location.localisation.timeZone is defined %}
+
+    {% if location.openingHours.specialPeriods is defined and location.openingHours.specialPeriods is not empty %}
+        {% set specialPeriods = location.openingHours.specialPeriods %}
+    {% endif %}
+
+    {% set periods = location.openingHours.periods|periods_to_days %}
+    {% set timeZone = location.localisation.timeZone.timeZoneId|default(default_timezone[app.request.locale]) %}
+    {% set status = locationOpeningStatus(periods, timeZone, date().timestamp, specialPeriods|default(null)) %}
+
+    {% if status is not null %}
+        {% set diff = (status.diff / 60)|round %}
+        {% set closeHour = status.closingTime|default(null)|localizeddate('none', time_format, app.request.locale) %}
+
+        {% set messages = {
+            'openingIn': 'bridge.components.parts.status.opening-in'|trans({'%diff%': diff}, 'components'),
+            'closingIn': 'bridge.components.parts.status.closing-in'|trans({'%diff%': diff}, 'components'),
+            'closingAt': 'bridge.components.parts.status.closing-at'|trans({'%time%': closeHour}, 'components'),
+            'currentlyOpen': 'bridge.components.parts.status.currently-open'|trans({}, 'components'),
+            'currentlyClosed': 'bridge.components.parts.status.currently-closed'|trans({}, 'components')
+        } %}
+
+        {% if (status.open) %}
+            {% if (diff > 0 and diff <= 60) %}
+                {% set state = 'closing' %}
+                {% set message = messages.closingIn %}
+            {% else %}
+                {% set state = 'open' %}
+
+                {% if displayHours is defined and displayHours and status.closingTime is not null %}
+                    {% set message = messages.closingAt %}
+                {% else %}
+                    {% set message = messages.currentlyOpen %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if (diff > 0 and diff <= 60) %}
+                {% set state = 'opening' %}
+                {% set message = messages.openingIn %}
+            {% else %}
+                {% set state = 'closed' %}
+                {% set message = messages.currentlyClosed %}
+            {% endif %}
+        {% endif %}
+
+        <div id="{{ id | default('lf-parts-status-' ~ location.id) }}" class="lf-parts-status lf-parts-status--{{ state }} {{ class|default(null) }}">
+            <span class="lf-parts-status__message">
+                {{- message -}}
+            </span>
+        </div>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,73 @@
+//------------------------------------------------------------------
+// Component MapDefault
+//------------------------------------------------------------------
+
+// Dependencies
+// graphical-loader
+
+.lf-map-default {
+    position: relative;
+
+    &__title {
+        @media print {
+            display: block;
+            position: relative;
+            top: -30px;
+            font-size: $font-size-h2;
+        }
+
+        display: none;
+    }
+
+    &__canvas {
+        position: relative;
+        left: 0;
+        transition: $transition-default;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__infowindow {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transition: $transition-default;
+        visibility: hidden;
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+
+        &__content {
+            width: 100%;
+            height: 100%;
+        }
+
+        &__loader {
+            svg {
+                fill: $brand-primary;
+            }
+        }
+    }
+
+    &.infowindow-active & {
+        &__canvas {
+            left: 30%;
+            opacity: .8;
+            width: 70%;
+        }
+
+        &__infowindow {
+            visibility: visible;
+            opacity: 1;
+            width: 30%;
+        }
+    }
+}
+
+#lf-map-canvas div {
+    @media print {
+        position: absolute;
+    }
+}

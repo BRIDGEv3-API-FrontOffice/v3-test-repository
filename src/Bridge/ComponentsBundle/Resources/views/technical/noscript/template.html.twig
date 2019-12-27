@@ -1,0 +1,15 @@
+{# component 'technical-noscript' #}
+
+{# @global  object  tracking  tracking config #}
+
+{% if tracking is defined %}
+    {% for name, key in tracking if key[app.request.locale] is not empty %}
+        {% set key = key[app.request.locale] %}
+        {% set isGTM = key|slice(0,3) %}
+        {% if isGTM == 'GTM' %}
+            <noscript>
+                <iframe src="https://www.googletagmanager.com/ns.html?id={{ key }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+        {% endif %}
+    {% endfor %}
+{% endif %}

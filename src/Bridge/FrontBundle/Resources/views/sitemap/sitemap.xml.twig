@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>{{ url('main_sitemap', { _format: 'xml' }) | https }}</loc>
+    </sitemap>
+    {% if nbLocationsSitemap > 0 %}
+        {% for index in 1..nbLocationsSitemap %}
+            <sitemap>
+                <loc>{{ url('locations_sitemap', {_format: 'xml', index: index }) | https }}</loc>
+            </sitemap>
+        {% endfor %}
+    {% endif %}
+</sitemapindex>

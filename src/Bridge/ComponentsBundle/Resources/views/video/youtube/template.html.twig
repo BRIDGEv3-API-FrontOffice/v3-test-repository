@@ -1,0 +1,14 @@
+{# component 'video-youtube' #}
+
+{# @param  string  id     custom id         default('lf-video-youtube')  example('lf-video-youtube') #}
+{# @param  string  class  custom class      default(null)                example('custom-class') #}
+{# @param  string  src    video youtube id  default(null)                example(3xGJZoaTODQ) #}
+
+{% set di = id|default('lf-video-youtube') %}
+
+{% if src is defined %}
+    <div id="{{ id }}" class="lf-video-youtube {{ class|default(null) }}"
+        data-lf-youtube="{{ src }}">
+        <div id="youtube-player" class="lf-video-youtube__player"></div>
+    </div>
+{% endif %}

@@ -1,0 +1,45 @@
+//------------------------------------------------------------------
+// Home style
+//------------------------------------------------------------------
+
+// Main
+@import "~@theme/style/main";
+
+// Dependencies
+@import '~@theme/style/components/slider/swiper/style';
+@import '~@theme/style/components/autocomplete/algolia/style';
+@import "~@theme/style/components/button/text/style";
+@import '~@theme/style/components/search/geolocation/style';
+@import "~@theme/style/components/search/form/style";
+
+// Components
+@import "~@theme/style/components/graphical/placeholder/style";
+@import "~@theme/style/components/graphical/srcset/style";
+@import "~@theme/style/components/search/home/style";
+@import "~@theme/style/components/presentation/default/style";
+@import "~@theme/style/components/publications/banners/default/style";
+@import "~@theme/style/components/publications/news/default/style";
+@import "~@theme/style/components/footer/seo/style";
+
+// Page style
+.lf-home {
+    &__illustration {
+        @media print {
+            display: none;
+        }
+    }
+
+    &__search {
+        margin-top: -$gutter-base;
+    }
+
+    &__presentation,
+    &__banner,
+    &__news,
+    &__events {
+        @include container;
+
+        margin-top: $gutter-large;
+        margin-bottom: $gutter-large;
+    }
+}

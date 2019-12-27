@@ -1,0 +1,62 @@
+{# component 'search-home' #}
+
+{# @param  string  id      custom id            default(null)  example('custom-id') #}
+{# @param  string  class   custom class         default(null)  example('custom-class') #}
+{# @param  string  title   title text           default(null)  example('Find a Bridge store') #}
+{# @param  number  hLevel  title level `[1-6]`  default(1)     example(1) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set hLevel = hLevel|default(1) %}
+
+<section role="search" {% if id is defined %}id="{{ id }}"{% endif %} class="lf-search-home {{ class|default(null) }}">
+    <div class="lf-search-home__overlay">
+        {% block title %}
+            {% if title is defined %}
+                <h{{ hLevel }} class="lf-search-home__overlay__title">
+                    {{- title -}}
+                </h{{ hLevel }}>
+            {% endif %}
+        {% endblock %}
+
+        <div class="lf-search-home__overlay__content">
+            {% block geolocation %}
+                {% include '@components/search/geolocation/template.html.twig' with {
+                    'class': 'lf-search-home__overlay__content__geolocation',
+                    'style': 'secondary'
+                } only %}
+            {% endblock %}
+
+            {% block separator %}
+                <span class="lf-search-home__overlay__content__separator">
+                    {{- 'bridge.components.search.home.or.label'|trans({}, 'components') -}}
+                </span>
+            {% endblock %}
+
+            {% block form %}
+                <div role="search" class="lf-search-home__overlay__content__search" aria-live="polite">
+                    {% embed '@components/search/form/template.html.twig' with {
+                                'class': 'lf-search-home__overlay__content__search__form'
+                            } only %}
+                        {% block submit %}
+                            {% include '@components/button/default/template.html.twig' with {
+                                'class': 'lf-search-home__overlay__content__search__form__submit',
+                                'type': 'button',
+                                'label': 'bridge.components.search.submit.label'|trans({}, 'components'),
+                                'srLabel': 'bridge.components.search.submit.srLabel'|trans({'%brand.name%': brand.name}, 'components'),
+                                'icon': 'bridge-icon-' ~ icon_set ~ '-search',
+                                'attributes': {'type':'submit', 'data-e2e-search-submit': ''},
+                                'trackingData': {}
+                            } only %}
+                        {% endblock %}
+                    {% endembed %}
+                </div>
+            {% endblock %}
+
+            
+
+            
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,94 @@
+//------------------------------------------------------------------
+// Component ButtonDefault
+//------------------------------------------------------------------
+
+.lf-button-default {
+    @media print {
+        display: none;
+    }
+
+    &--primary {
+        @include button($button-primary-bg, $button-primary-color, $button-primary-outlined);
+    }
+
+    &--secondary {
+        @include button($button-secondary-bg, $button-secondary-color, $button-secondary-outlined);
+    }
+
+    &--small {
+        @include button-size('small');
+    }
+
+    &--medium {
+        @include button-size('medium');
+    }
+
+    &--large {
+        @include button-size('large');
+    }
+
+    &--mini-mobile {
+        @media (max-width: $screen-xs-max) {
+            border-radius: 50%;
+            padding: 0;
+            width: $button-height-large;
+            height: $button-height-large;
+            overflow: visible;
+        }
+
+        & > em {
+            &.left {
+                @media (max-width: $screen-xs-max) {
+                    margin-right: 0;
+                }
+            }
+
+            &.right {
+                @media (max-width: $screen-xs-max) {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        & > span {
+            @media (max-width: $screen-xs-max) {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 100%);
+                padding: $gutter-small / 2 0;
+                white-space: nowrap;
+                font-size: ceil($font-size-base * .8);
+            }
+        }
+
+        &.lf-button-default--primary {
+            & > span {
+                @media (max-width: $screen-xs-max) {
+                    color: $button-primary-bg;
+                }
+            }
+        }
+
+        &.lf-button-default--secondary {
+            & > span {
+                @media (max-width: $screen-xs-max) {
+                    color: $button-secondary-bg;
+                }
+            }
+        }
+    }
+
+    &--icon {
+        & > em {
+            &.left,
+            &.right {
+                margin: 0;
+            }
+        }
+    }
+
+    &--hidden {
+        display: none;
+    }
+}

@@ -1,0 +1,26 @@
+//------------------------------------------------------------------
+// Exception style
+//------------------------------------------------------------------
+
+// Main
+@import "~@theme/style/main";
+
+// Dependencies
+@import "~@theme/style/components/graphical/404/style";
+
+// Components
+@import '~@theme/style/components/exceptions/default/style';
+
+// Page style
+.lf-exceptions {
+    &__main {
+        @include container;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: $gutter-base;
+        padding-bottom: $gutter-base;
+        min-height: calc(100vh - 100px);
+    }
+}

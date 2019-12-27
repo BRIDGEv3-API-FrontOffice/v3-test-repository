@@ -1,0 +1,12 @@
+@mixin ellipsis-content($lines-to-show: 5, $font-size: $font-size-base, $line-height: $line-height-base) {
+    display: block; //Fallback for non-webkit browser
+    display: -webkit-box;
+    margin: 0 auto;
+    max-height: $font-size-base * $line-height * $lines-to-show; //Fallback for non-webkit browser
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: $line-height;
+    font-size: $font-size;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+}

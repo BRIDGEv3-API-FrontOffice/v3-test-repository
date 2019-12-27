@@ -1,0 +1,48 @@
+//------------------------------------------------------------------
+// Component PartsPhone
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+.lf-parts-phone {
+    display: inline;
+
+    &__button {
+        width: 100%;
+
+        &--link {
+            padding: 0 $gutter-small;
+
+            > span {
+                min-width: 75px;
+                font-size: 1rem;
+            }
+        }
+
+        &.hidden {
+            display: none;
+        }
+
+        &.disabled {
+            > span {
+                @include sr-only;
+            }
+        }
+
+        @media print {
+            &--link,
+            &--link.hidden {
+                display: initial;
+                background-color: unset;
+                padding: 1px;
+                color: $black;
+            }
+
+            &--button,
+            &--button.hidden {
+                display: none;
+            }
+        }
+    }
+}

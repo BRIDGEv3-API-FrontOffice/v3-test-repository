@@ -1,0 +1,19 @@
+{# component 'video-default' #}
+
+{# @param  string  id     custom id         default('lf-video-default')  example('lf-video-default') #}
+{# @param  string  class  custom class      default(null)                example('custom-class') #}
+{# @param  string  src    video source url  default(null)                example(null) #}
+{# @param  string  type   video file type   default('video/mp4')         example('video/mp4') #}
+
+{% set id = id|default('lf-video-default') %}
+
+{% if src is defined %}
+    <div id="{{ id }}" class="lf-video-default {{ class|default(null) }}">
+        <video class="lf-video-default__video"
+               loop="true">
+            <source src="{{ src }}"
+                type="{{ type|default('video/mp4') }}">
+            Sorry, your browser doesn't support embedded videos.
+        </video>
+    </div>
+{% endif %}

@@ -1,0 +1,116 @@
+{% extends '@views/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/home' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/home' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name
+} %}
+
+{% block title %}
+    <title>{{ 'bridge.theme.home.meta.title'|trans(translationVars, 'seo')|striptags }}</title>
+{% endblock %}
+
+{% block additional_meta %}
+    <meta name="description" content="{{ 'bridge.theme.home.meta.description'|trans(translationVars, 'seo')|striptags }}">
+    <meta name="twitter:title" content="{{ 'bridge.theme.home.meta.title'|trans(translationVars, 'seo')|striptags }}">
+    <meta name="twitter:description" content="{{ 'bridge.theme.home.meta.description'|trans(translationVars, 'seo')|striptags }}">
+    <meta name="twitter:image" content="{{ asset('build/assets/images/home' ~ homeIllustration|first) }}">
+    <meta property="og:title" content="{{ 'bridge.theme.home.meta.title'|trans(translationVars, 'seo')|striptags }}">
+    <meta property="og:description" content="{{ 'bridge.theme.home.meta.description'|trans(translationVars, 'seo')|striptags }}">
+    <meta property="og:image" content="{{ asset('build/assets/images/home' ~ homeIllustration|first) }}">
+    <meta property="og:url" content="{{ url('home')|https }}">
+    <meta property="og:type" content="website">
+{% endblock %}
+
+{% block content %}
+    <main class="lf-home">
+        
+        {% block pageTop %}
+                {% block pageIllustration %}
+                    {% if homeIllustration is defined and homeIllustration is not empty %}
+                        {% include '@components/graphical/srcset/template.html.twig' with {
+                            'class': 'lf-home__illustration lf-home__illustration--image',
+                            'sources': homeIllustration,
+                            'alt': brand.name
+                        } only %}
+                    {% elseif homeVideoYoutube is defined and homeVideoYoutube is not empty %}
+                        {% include '@components/video/youtube/template.html.twig' with {
+                            'class': 'lf-home__illustration lf-home__illustration--video',
+                            'src': homeVideoYoutube
+                        } only %}
+                    {% elseif homeVideo is defined and homeVideo is not empty %}
+                        {% include '@components/video/default/template.html.twig' with {
+                            'class': 'lf-home__illustration lf-home__illustration--video',
+                            'src': homeVideo
+                        } only %}
+                    {% endif %}
+                {% endblock %}
+
+                {% block pageSearch %}
+                    {% include '@components/search/home/template.html.twig' with {
+                        'id': 'lf-search',
+                        'class': 'lf-home__search',
+                        'title': 'bridge.theme.home.h1'|trans(translationVars, 'seo')
+                    } only %}
+                {% endblock %}
+        {% endblock %}
+        
+        {% block pageMain %}
+            <div id="lf-content">
+            {% block pagePresentation %}
+                {% include '@components/presentation/default/template.html.twig' with {
+                    'class': 'lf-home__presentation',
+                    'title': 'bridge.theme.home.presentation.title'|trans(translationVars, 'seo'),
+                    'content': 'bridge.theme.home.presentation.content'|trans(translationVars, 'seo'),
+                    'imageSrc': locationIllustration|default(null),
+                    'imageDescription': 'bridge.theme.home.presentation.image_description'|trans(translationVars, 'seo'),
+                    'titleattributes': {'data-e2e-home-introduction-title': ''}
+                } only %}
+            {% endblock %}
+
+            {% block pageNews %}
+                {% include '@components/publications/news/default/template.html.twig' with {
+                    'class': 'lf-home__news',
+                    'title': 'bridge.theme.home.news.title'|trans(translationVars, 'seo'),
+                    'zoneSlug': 'news',
+                    'zones': zones|default(null)
+                } only %}
+            {% endblock %}
+
+            {% block pageBanner %}
+                {% include '@components/publications/banners/default/template.html.twig' with {
+                    'class': 'lf-home__banner',
+                    'title': 'bridge.theme.home.banners.title'|trans(translationVars, 'seo'),
+                    'zonePrefix': 'banners',
+                    'zones': zones|default(null)
+                } only %}
+            {% endblock %}
+
+            {% block pageEvents %}
+                {% include '@components/publications/news/default/template.html.twig' with {
+                    'id': 'lf-publications-events',
+                    'class': 'lf-home__events',
+                    'title': 'bridge.theme.home.events.title'|trans(translationVars, 'seo'),
+                    'zoneSlug': 'events',
+                    'zones': zones|default(null)
+                } only %}
+            {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block pageBottom %}
+            {% include '@components/footer/seo/template.html.twig' with {
+                'title': 'bridge.theme.home.footer_seo.title'|trans(translationVars, 'seo'),
+                'cities': topCities,
+                'seoPrefix': seoPrefix
+            } only %}
+        {% endblock %}
+
+    </main>
+{% endblock %}

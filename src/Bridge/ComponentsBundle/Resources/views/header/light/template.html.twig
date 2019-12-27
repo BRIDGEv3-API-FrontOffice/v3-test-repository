@@ -1,0 +1,78 @@
+{# component 'header-light' #}
+
+{# @param  string  id      custom id         default('lf-header-light')  example('lf-header-light') #}
+{# @param  string  class   custom class      default(null)               example('custom-class') #}
+
+{# @global  object  brand   brand config   #}
+{# @global  object  header  header options #}
+
+{% set id = id|default('lf-header-light') %}
+
+{% if header is defined and brand is defined %}
+    <div id="{{ id }}"
+        class="lf-header-light {{ class|default(null) }}"
+        aria-live="polite">
+        <div class="lf-header-light__navbar">
+            <a class="lf-header-light__navbar__brand"
+                href="{{ path('home') }}"
+                data-lf-tracking="{{ tracking({ category: 'Header', label: 'Logo' }) }}"
+                title="{{ 'bridge.components.header.brand.logo.link'|trans({}, 'components') }}">
+                {% if brand.logo is defined and brand.name is defined %}
+                    <img class="lf-header-light__navbar__brand__logo"
+                        src="{{ brand.logo }}"
+                        alt="{{ brand.name }}"
+                        >
+                {% endif %}
+                {% if header.showBrandName and brand.name is defined %}
+                    <span class="lf-header-light__navbar__brand__name">{{ brand.name }}</span>
+                {% endif %}
+            </a>
+
+            {% if (header.links[app.request.locale] is defined and header.links[app.request.locale]|length > 0)
+                or (header.socials[app.request.locale] is defined and header.socials[app.request.locale]|length > 0) %}
+                <button class="lf-header-light__navbar__toggler"
+                    title="{{ 'bridge.components.header.navigation_toggle'|trans({}, 'components') }}"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-lf-toggler>
+                    <span class="lf-header-light__navbar__toggler__bar top"></span>
+                    <span class="lf-header-light__navbar__toggler__bar middle"></span>
+                    <span class="lf-header-light__navbar__toggler__bar bottom"></span>
+                </button>
+            {% endif %}
+        </div>
+
+        <nav data-lf-toggled class="lf-header-light__navbar__collapse" aria-hidden="true">
+            {% if header.links[app.request.locale] is defined and header.links[app.request.locale]|length > 0 %}
+                <ul class="lf-header-light__navbar__collapse__list" role="menu">
+                    {% for label, url in header.links[app.request.locale] %}
+                        <li class="lf-header-light__navbar__collapse__list__item">
+                            <a class="lf-header-light__navbar__collapse__list__item__link"
+                                href="{{ url }}"
+                                data-lf-tracking="{{ tracking({ category: 'Header', label: label }) }}"
+                                role="menuitem">
+                                {{ label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if header.socials[app.request.locale] is defined and header.socials[app.request.locale]|length > 0 %}
+                <ul class="lf-header-light__navbar__collapse__list lf-header-light__navbar__collapse__list--socials" role="menu" aria-label="{{ 'bridge.components.nav.list.socialnetworks'|trans({}, 'components') }}">
+                    {% for label, url in header.socials[app.request.locale] %}
+                        <li class="lf-header-light__navbar__collapse__list__item">
+                            <a class="lf-header-light__navbar__collapse__list__item__link"
+                                href="{{ url }}"
+                                title="{{ label }}"
+                                data-lf-tracking="{{ tracking({ category: 'Header', label: label }) }}"
+                                role="menuitem">
+                                <em class="bridge-icon-brand-{{ label }}"></em>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </nav>
+    </div>
+{% endif %}

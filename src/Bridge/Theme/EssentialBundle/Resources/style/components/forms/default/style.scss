@@ -1,0 +1,252 @@
+//------------------------------------------------------------------
+// Component FormsDefault
+//------------------------------------------------------------------
+
+.lf-forms-default {
+    & > form {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            height: auto;
+        }
+    }
+
+    &__legal-notice {
+        margin-top: $gutter-base;
+        text-align: justify;
+        font-size: 9px;
+    }
+
+    &.theme-materialize {
+        @import "~@components/scripts/modules/common/forms/materialize";
+
+        // Materialize override
+
+        .input-field {
+            margin: $gutter-base auto;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            & label {
+                color: $text-color;
+
+                &:not(.label-icon).active {
+                    transform: translateY(-9px) scale(.8);
+                    transform-origin: 14px 0;
+                    background-color: $background-color;
+                    padding-right: $gutter-small / 2;
+                    padding-left: $gutter-small / 2;
+                }
+            }
+
+            & input[type=text]:not(.browser-default),
+            & input[type=password]:not(.browser-default),
+            & input[type=email]:not(.browser-default),
+            & input[type=url]:not(.browser-default),
+            & input[type=time]:not(.browser-default),
+            & input[type=date]:not(.browser-default),
+            & input[type=datetime]:not(.browser-default),
+            & input[type=datetime-local]:not(.browser-default),
+            & input[type=tel]:not(.browser-default),
+            & input[type=number]:not(.browser-default),
+            & input[type=search]:not(.browser-default),
+            & textarea {
+                box-sizing: border-box;
+                transition: $transition-default;
+                border-color: $text-color;
+                box-shadow: none;
+                background-color: $background-color;
+                padding-right: $gutter-small;
+                padding-left: $gutter-small;
+                width: 100%;
+                color: $grey-mine-shaft;
+
+                &.invalid {
+                    border-bottom-color: $danger-color;
+                    box-shadow: none;
+                }
+
+                &:focus:not([readonly]) {
+                    border: 1px solid $text-color;
+                    box-shadow: none;
+                    background: $background-color;
+
+                    & + label {
+                        color: $text-color;
+                    }
+                }
+
+                & + label {
+                    left: $gutter-small / 2;
+                    background-color: $background-color;
+                    padding-right: $gutter-small / 2;
+                    padding-left: $gutter-small / 2;
+
+                    &.active {
+                        top: .3em;
+                    }
+                }
+            }
+
+            & > textarea {
+                width: 100%;
+            }
+
+            &.submit {
+                text-align: center;
+
+                &::before {
+                    display: block;
+                    margin-bottom: $gutter-base;
+                    background: $brand-secondary;
+                    width: 100%;
+                    height: 1px;
+                    content: '';
+                }
+
+                & > button {
+                    @include button($brand-primary, $on-brand-primary);
+                }
+            }
+
+            // Override intl-tel-input
+            & .iti {
+                display: block;
+                width: 100%;
+            }
+
+            & .helper-text[data-validator] {
+                color: $danger-color;
+            }
+        }
+    }
+
+    & .legal-inactif {
+        opacity: 0;
+        height: 0;
+    }
+
+    &__notifications {
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        transition: all .3s ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+        margin-top: 0;
+        height: 0;
+
+        &__icon {
+            display: block;
+            transform: translateY(-10px);
+            transition: all .3s ease-in-out;
+            transition-delay: .4s;
+            opacity: 0;
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        &__text {
+            display: block;
+            transform: translateY(-10px);
+            transition: all .3s ease-in-out;
+            transition-delay: .8s;
+            opacity: 0;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        &__button {
+            transform: translateY(-10px);
+            transition: all .3s ease-in-out;
+            transition-delay: 1.2s;
+            visibility: hidden;
+            opacity: 0;
+            margin-top: 20px;
+            height: 0;
+
+            & a[disabled] {
+                opacity: 1;
+                cursor: pointer;
+                color: $button-primary-color;
+            }
+        }
+
+        &.active {
+            transform: translateY(0);
+            visibility: visible;
+            opacity: 1;
+            margin-top: 20px;
+            height: auto;
+        }
+
+        &.active & {
+            &__icon,
+            &__text {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        &.success & {
+            &__icon {
+                @include bridge-icon('correct');
+
+                color: lighten($success-color, 5%);
+                font-size: 65px;
+            }
+
+            &__text {
+                color: lighten($success-color, 5%);
+                font-size: 25px;
+            }
+
+            &__button {
+                transform: translateY(0);
+                visibility: visible;
+                opacity: 1;
+                height: auto;
+            }
+        }
+
+        &.fail & {
+            &__icon {
+                @include bridge-icon('info');
+
+                transition-delay: 0s;
+                color: lighten($warning-color, 5%);
+                font-size: $font-size-base;
+            }
+
+            &__text {
+                transition-delay: 0s;
+                margin-left: 15px;
+                color: lighten($warning-color, 5%);
+                font-size: $font-size-base;
+            }
+        }
+    }
+
+    & label.required {
+        &::before {
+            position: absolute;
+            left: -8px;
+            content: '*';
+        }
+    }
+}
+
+// materialize use it for textarea resize
+.hiddendiv.common {
+    position: absolute;
+    top: -150px;
+}

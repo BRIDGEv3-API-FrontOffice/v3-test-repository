@@ -1,0 +1,41 @@
+.lf-search-overlay {
+    @media (min-width: $screen-sm-min) {
+        background-color: rgba($background-color, .9);
+    }
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: $transition-default;
+    visibility: hidden;
+    opacity: 0;
+    background-color: $background-color;
+
+    &.show {
+        @media (min-width: $screen-sm-min) {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__helper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        &__text {
+            padding-right: floor(($gutter-base / 2));
+            padding-left: floor(($gutter-base / 2));
+            width: 100%;
+        }
+
+        &__or {
+            margin: 5px auto;
+        }
+    }
+}

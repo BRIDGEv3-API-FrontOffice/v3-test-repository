@@ -1,0 +1,51 @@
+{# component 'footer-gdpr' #}
+
+{# @param  string   id             custom id                 default(null)  example('custom-id') #}
+{# @param  string   class          custom class              default(null)  example('custom-class') #}
+{# @param  boolean  manageCookies  show manage cookies link  default(true)  example(true) #}
+
+{# @global  object   gdprLinks  to gdpr pages links #}
+
+{% if manageCookies is not defined %}
+    {% set manageCookies = true %}
+{% endif %}
+
+<div {% if id is defined %}id="{{ id }}"{% endif %}
+    class="lf-footer-gdpr {{ class|default(null) }}">
+    <div class="lf-footer-gdpr__container">
+        {% if gdprLinks is defined %}
+            <ul class="lf-footer-gdpr__container__list">
+                {% for item in gdprLinks %}
+                    {% set link = item[app.request.locale] %}
+                    <li class="lf-footer-gdpr__container__list__item">
+                        <a class="lf-footer-gdpr__container__list__item__link"
+                            href="{{ link.url }}"
+                            target="_blank"
+                            data-lf-tracking="{{ tracking({category: 'GDPR', label: link.label}) }}">
+                            {{- link.label -}}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if manageCookies %}
+                    <li class="lf-footer-gdpr__container__list__item">
+                        <a class="lf-footer-gdpr__container__list__item__link"
+                            href="#"
+                            data-show-cookieconsent-banner="true"
+                            data-lf-tracking="{{ tracking({category: 'GDPR', label: 'Cookies parameters'}) }}">
+                            {{- 'bridge.components.footer.gdpr.manage_cookies'|trans({}, 'components') -}}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            <span class="lf-footer-gdpr__container__separator">-</span>
+        {% endif %}
+        <a class="lf-footer-gdpr__container__copyright"
+            href="https://www.solocal.com/solutions-pour-reseaux"
+            target="_blank"
+            rel="nofollow"
+            data-lf-tracking='{{ tracking({category: 'Copyright', label: 'Bridge'}) }}'>
+            {{- 'bridge.components.footer.gdpr.copyright.powered_by'|trans({}, 'components') -}}
+            <em class="bridge-icon-brand-bridge"></em>
+        </a>
+    </div>
+</div>

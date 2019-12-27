@@ -1,0 +1,82 @@
+{% extends '@views/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/gdpr' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/gdpr' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name
+} %}
+
+{# set page parameters #}
+{% set pageTitle = '' %}
+{% set pageContent = '' %}
+
+{% if pageName == 'cookies' %}
+    {% set pageTitle = 'bridge.theme.gdpr.cookies_info.title' | trans(translationVars, 'gdpr') %}
+    {% set pageContent = 'bridge.theme.gdpr.cookies_info.content' | trans(translationVars, 'gdpr') %}
+{% elseif pageName == 'protection' %}
+    {% set pageTitle = 'bridge.theme.gdpr.data_protection.title' | trans(translationVars, 'gdpr') %}
+    {% set pageContent = 'bridge.theme.gdpr.data_protection.content' | trans(translationVars, 'gdpr') %}
+{% elseif pageName == 'legal' %}
+    {% set pageTitle = 'bridge.theme.gdpr.legal_notice.title' | trans(translationVars, 'gdpr') %}
+    {% set pageContent = 'bridge.theme.gdpr.legal_notice.content' | trans(translationVars, 'gdpr') %}
+{% endif %}
+{# END set page parameters #}
+
+{% block title %}
+    <title>{{ pageTitle | striptags }}</title>
+{% endblock %}
+
+{% block additional_meta %}
+    <meta name="robots" content="noindex">
+    <meta name="description" content="{{ pageTitle | striptags }}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="lf-gdpr">
+        {% block pageTop %}
+            {% embed '@components/topbar/default/template.html.twig' with {
+                'class': 'lf-location__top',
+                'attributes': {'data-lf-search-wrapper': ''},
+                'pageName': pageName,
+                'translationVars': translationVars
+            } only %}
+                {% block content %}
+                    {% include '@components/button/default/template.html.twig' with {
+                        'class': 'lf-gdpr__go-back',
+                        'type': 'a',
+                        'href': path('home'),
+                        'label': 'bridge.theme.go_back.label'|trans(translationVars, 'messages'),
+                        'icon': 'bridge-icon-' ~ icon_set ~ '-arrow-back',
+                        'trackingData': {category: pageName|capitalize ~ ' page'}
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block pageMain %}
+            <div id="lf-content">
+                <div class="lf-gdpr__main">
+                    {% block pageTitle %}
+                        <h1 class="lf-gdpr__main__title">
+                            <span class="lf-gdpr__main__title__span">
+                                {{ pageTitle }}
+                            </span>
+                        </h1>
+                    {% endblock %}
+
+                    {% block pageContent %}
+                        <div class="lf-gdpr__main__content">
+                            {{ pageContent|raw }}
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

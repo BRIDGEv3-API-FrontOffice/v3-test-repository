@@ -1,0 +1,24 @@
+1:
+    path: /from1
+    defaults:
+        _controller: 'FrameworkBundle:Redirect:urlRedirect'
+        path: /to1
+        permanent: true
+2:
+    path: /from2
+    defaults:
+        _controller: 'FrameworkBundle:Redirect:urlRedirect'
+        path: /to2
+        permanent: false
+3:
+    path: /from3
+    defaults:
+        _controller: 'FrameworkBundle:Redirect:urlRedirect'
+        path: /to3
+        permanent: true
+4:
+    path: /from4
+    defaults:
+        _controller: 'FrameworkBundle:Redirect:urlRedirect'
+        path: /to4
+        permanent: true

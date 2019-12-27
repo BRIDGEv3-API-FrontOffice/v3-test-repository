@@ -1,0 +1,214 @@
+//------------------------------------------------------------------
+// Results style
+//------------------------------------------------------------------
+
+// Main
+@import "~@theme/style/main";
+
+// Dependencies
+@import "~@theme/style/components/graphical/loader/style";
+@import "~@theme/style/components/graphical/srcset/style";
+@import "~@theme/style/components/button/fab/style";
+@import "~@theme/style/components/parts/actions/style";
+@import "~@theme/style/components/parts/status/style";
+@import "~@theme/style/components/parts/phone/style";
+@import "~@theme/style/components/parts/address/style";
+@import "~@theme/style/components/parts/itinerary/style";
+@import "~@theme/style/components/search/geolocation/style";
+@import "~@theme/style/components/search/form/style";
+@import "~@theme/style/components/search/filters/style";
+@import "~@theme/style/components/search/overlay/style";
+@import "~@theme/style/components/autocomplete/algolia/style";
+
+// Components
+@import "~@theme/style/components/topbar/default/style";
+@import "~@theme/style/components/footer/seo/style";
+@import "~@theme/style/components/location/default/style";
+@import "~@theme/style/components/map/default/style";
+@import "~@theme/style/components/map/infowindow/style";
+@import "~@theme/style/components/map/toggler/style";
+@import "~@theme/style/components/pagination/default/style";
+@import "~@theme/style/components/search/default/style";
+@import "~@theme/style/components/exceptions/default/style";
+
+// Page style
+.lf-results {
+    overflow-x: hidden;
+
+    &__main {
+        @include container;
+
+        @media (min-width: $screen-sm-min) {
+            display: flex;
+            height: 100vh;
+        }
+
+        position: relative;
+
+        &__c-block {
+            @media (min-width: $screen-sm-min) {
+                width: 400px;
+            }
+
+            position: relative;
+            width: 100%;
+
+            &__title {
+                @media (min-width: $screen-sm-min) {
+                    text-align: left;
+                }
+
+                padding: $gutter-small 0;
+                text-align: center;
+
+                > span {
+                    display: block;
+                    line-height: 1;
+                    font-size: .8em;
+                }
+            }
+
+            &__results {
+                @media (min-width: $screen-sm-min) {
+                    padding-right: $gutter-small;
+                    max-height: 100%;
+                    overflow-y: auto;
+                }
+
+                position: relative;
+                transition: $transition-default;
+                opacity: 1;
+                padding-bottom: $gutter-small;
+                scroll-behavior: smooth;
+
+                &__list {
+                    margin-top: 0;
+                    padding-left: 0;
+                }
+
+                &.map-active {
+                    opacity: 0;
+
+                    @media (min-width: $screen-sm-min) {
+                        opacity: 1;
+                    }
+                }
+
+                &.map-active:not(.list-active) {
+                    transition: all .5s $transition-animation;
+                }
+
+                &.list-active {
+                    position: fixed;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    opacity: 1;
+                    z-index: 150;
+                    overflow-x: auto;
+                }
+
+                &__list {
+                    display: block;
+
+                    &__item {
+                        position: relative;
+                        margin-bottom: $gutter-small;
+                    }
+
+                    a[data-change-tabindex] {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        transition: $transition-default;
+                        height: 0;
+                    }
+
+                    a[data-change-tabindex]:focus {
+                        position: relative;
+                        z-index: 1;
+                        outline: none;
+                        background-color: $brand-primary;
+                        width: auto;
+                        height: 3px;
+                    }
+                }
+
+                &__pagination {
+                    margin-top: $gutter-base;
+                }
+
+                &.map-active.list-active & {
+                    &__list {
+                        display: grid;
+                        grid-gap: $gutter-small;
+                        grid-auto-flow: column;
+                        grid-template-columns: repeat(auto-fill, max-content);
+                        padding: 0 $gutter-small;
+                        width: max-content;
+
+                        &__item {
+                            box-shadow: $box-shadow-default;
+                            background-color: $white;
+                        }
+                    }
+
+                    &__pagination {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &__m-block {
+            width: calc(100% - 340px);
+
+            &__map {
+                @media (min-width: $screen-sm-min) {
+                    position: relative;
+                    top: unset;
+                    right: unset;
+                    bottom: unset;
+                    left: unset;
+                    transform: translate3d(0, 0, 0);
+                    z-index: auto;
+                    height: 100%;
+                }
+
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transform: translate3d(0, 100vh, 0);
+                transition: all .5s $transition-animation;
+                z-index: 100;
+
+                &.map-active {
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+        }
+
+        &__no-results {
+            @include container;
+
+            margin-bottom: $gutter-base;
+
+            & > h1 {
+                text-align: center;
+            }
+        }
+
+        &__map-toggler {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            transition: all $transition-time $transition-animation;
+            transition-delay: .15s;
+            z-index: 160;
+            margin: $gutter-small;
+        }
+    }
+}

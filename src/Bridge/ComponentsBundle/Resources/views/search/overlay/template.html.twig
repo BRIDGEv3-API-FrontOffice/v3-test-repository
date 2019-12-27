@@ -1,0 +1,40 @@
+{# component 'search-overlay' #}
+
+{# @param  string   id             custom id                   default('lf-search-overlay')  example('lf-search-overlay') #}
+{# @param  string   class          custom class                default(null)                     example('custom-class') #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set id = id|default('lf-search-overlay') %}
+
+<div id="{{ id }}" class="lf-search-overlay {{ class|default(null) }}" data-lf-overlay>
+
+    <div class="lf-search-overlay__helper{% if class is defined %} {{ class }}__helper{% endif %}">
+        <div class="lf-search-overlay__helper__text{% if class is defined %} {{ class }}__helper__text{% endif %}">
+            {{ 'bridge.components.search.overlay.helper.text' | trans({},'components') }}
+        </div>
+
+        <span class="lf-search-overlay__helper__or{% if class is defined %} {{ class }}__helper__or{% endif %}">
+            {{ 'bridge.components.search.overlay.helper.or' | trans({},'components') }}
+        </span>
+
+        {% include '@components/button/default/template.html.twig' with {
+            'id': 'lf-search-overlay-geolocation',
+            'class': 'lf-search-overlay__geolocation',
+            'label': 'bridge.components.search.geolocation.label'|trans({}, 'components'),
+            'srLabel': 'bridge.components.search.geolocation.srLabel'|trans({'%brand.name%': brand.name}, 'components'),
+            'style': style|default('secondary'),
+            'icon': 'bridge-icon-' ~ icon_set ~ '-geolocation',
+            'isLabelSrOnly': false,
+            'attributes': {
+                'data-lf-overlay-geolocation-submit': '',
+                'data-lf-search-geolocation-status': false,
+                'data-lf-msg-title':'bridge.components.search.geolocation.title' | trans({},'components'),
+                'data-lf-msg-error':'bridge.components.search.geolocation.error' | trans({},'components'),
+                'data-lf-msg-warning':'bridge.components.search.geolocation.warning' | trans({}, 'components'),
+                'data-lf-msg-timeout':'bridge.components.search.geolocation.timeout' | trans({}, 'components')
+            },
+            'trackingData': {category: 'Search', label: 'bridge.components.search.geolocation.label'|trans({}, 'components')}
+        } only %}
+    </div>
+</div>

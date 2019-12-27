@@ -1,0 +1,29 @@
+services:
+    bridge.front_bundle.exception_controller:
+        class: Bridge\FrontBundle\Controller\FrontExceptionController
+        arguments: ['@twig', '%kernel.debug%']
+    bridge.front_bundle.twig.front_extension:
+        class: Bridge\FrontBundle\Twig\FrontExtension
+        arguments: ['%kernel.environment%']
+        tags:
+            - { name: twig.extension }
+
+    # Uncomment twig extensions needed
+    # https://twig-extensions.readthedocs.io/en/latest/index.html
+    #
+    # twig.extension.text:
+    #   class: Twig_Extensions_Extension_Text
+    #   tags:
+    #     - { name: twig.extension }
+    twig.extension.intl:
+      class: Twig_Extensions_Extension_Intl
+      tags:
+        - { name: twig.extension }
+    # twig.extension.array:
+    #   class: Twig_Extensions_Extension_Array
+    #   tags:
+    #     - { name: twig.extension }
+    # twig.extension.date:
+    #   class: Twig_Extensions_Extension_Date
+    #   tags:
+    #     - { name: twig.extension }

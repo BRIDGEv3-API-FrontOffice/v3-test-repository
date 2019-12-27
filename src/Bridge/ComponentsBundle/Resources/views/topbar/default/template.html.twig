@@ -1,0 +1,15 @@
+{# component 'topbar-default' #}
+
+{# @param  string  id          custom id          default(null)  example('custom-id') #}
+{# @param  string  class       custom class       default(null)  example('custom-class') #}
+{# @param  object  attributes  custom attributes  default(null)  example({'data-foo': 'bar'}) #}
+
+<section
+  {% if id is defined %}id="{{ id }}"{% endif %}
+  class="lf-topbar-default {{ class|default(null) }}"
+  {{ htmlAttrs(attributes|default(null)) }}
+>
+  <div class="lf-topbar-default__container">
+    {% block content %}{% endblock %}
+  </div>
+</section>

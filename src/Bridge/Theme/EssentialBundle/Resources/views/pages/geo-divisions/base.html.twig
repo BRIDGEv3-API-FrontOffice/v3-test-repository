@@ -1,0 +1,97 @@
+{% extends '@views/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/geo-divisions' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/geo-divisions' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set searchFilters = extract_search_parameters(searchSetting) %}
+
+{% block title %}{% endblock %}
+
+{% block additional_meta %}{% endblock %}
+
+{% block content %}
+    <div class="lf-geo-divisions" data-e2e-geo-divisions>
+        {% block pageTop %}
+            {% embed '@components/topbar/default/template.html.twig' with {
+                'class': 'lf-geo-divisions__top',
+                'attributes': {'data-lf-search-wrapper': ''},
+                'searchSetting': searchSetting
+            } only %}
+                {% block content %}
+                    {% include '@components/search/default/template.html.twig' with {
+                        'id': 'lf-search',
+                        'class': 'lf-geo-divisions__top__search',
+                        'searchSetting': searchSetting
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block pageMain %}
+            <div id="lf-content">
+                <div class="lf-geo-divisions__main">
+                    {% block pageDescription %}{% endblock %}
+
+                    {% block pageTitle %}{% endblock %}
+
+                    {% block pageFacets %}
+                        {% include '@components/facets/default/template.html.twig' with {
+                            'class': 'lf-geo-divisions__main__facets',
+                            'facets': search.facets[0],
+                            'division': division,
+                            'seoPrefix': seoPrefix,
+                            'localisation': localisation
+                        } only %}
+                    {% endblock %}
+
+                    {% block pageLocations %}
+                        <div class="lf-geo-divisions__main__locations">
+                            {% for location in search.rows %}
+                                {% block pageLocation %}
+                                    {% embed '@components/location/default/template.html.twig' with {
+                                        'class': 'lf-geo-divisions__main__locations__location',
+                                        'location': location,
+                                        'attributes': {'data-e2e-geo-divisions-item': ''},
+                                        'titleattributes': {'data-e2e-geo-divisions-item-title': ''}
+                                    } only %}
+                                        {% block actions %}
+                                            {% include '@components/parts/actions/template.html.twig' with {
+                                                'class': 'lf-location-default__actions hidden',
+                                                'location': location
+                                            } only %}
+                                        {% endblock %}
+                                    {% endembed %}
+                                {% endblock %}
+                            {% endfor %}
+                            {% include '@components/pagination/default/template.html.twig' with {
+                                'class': 'lf-geo-divisions__main__locations__pagination',
+                                'abstract': 'bridge.theme.pagination.abstract'|trans(translationVars, 'seo'),
+                                'pagination': pagination
+                            } only %}
+                        </div>
+                    {% endblock %}
+
+                    {% include '@components/search/overlay/template.html.twig' only %}
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block pageBottom %}
+            <section aria-label="{{ 'bridge.theme.location.contentfooter'|trans({}, 'messages') }}" class="lf-geo-divisions__bottom">
+                {% block pageBreadcrumb %}
+                    {% include '@components/breadcrumb/scroll/template.html.twig' with {
+                        'class': 'lf-geo-divisions__bottom__breadcrumb',
+                        'breadcrumbs': breadcrumbs
+                    } only %}
+                {% endblock %}
+
+                {% block pageFooter %}{% endblock %}
+            </section>
+        {% endblock %}
+    </div>
+{% endblock %}

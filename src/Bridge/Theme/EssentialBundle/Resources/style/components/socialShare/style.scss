@@ -1,0 +1,64 @@
+//------------------------------------------------------------------
+// Component shareSocial
+//------------------------------------------------------------------
+
+.lf-social-share {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+
+    &__label {
+        margin-right: 5px;
+        font-size: .85rem;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .5s;
+        width: 44px;
+        height: 44px;
+        color: $pale-sky;
+
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none;
+            color: white;
+        }
+
+        &--facebook {
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $facebook;
+            }
+        }
+
+        &--twitter {
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $twitter;
+            }
+        }
+
+        &--linkedin {
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $linkedin;
+            }
+        }
+
+        &--email {
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $red-monza;
+            }
+        }
+    }
+}

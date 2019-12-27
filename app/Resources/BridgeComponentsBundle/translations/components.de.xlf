@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="eadf276a971fb16af8b218dd37d5fc50" resname="bridge.components.header.navigation_toggle">
+        <source>bridge.components.header.navigation_toggle</source>
+        <target>[DE] Menu</target>
+      </trans-unit>
+      <trans-unit id="313305dd6cc77bddf33f0b01c8ad77d9" resname="bridge.components.publications.button_link.label">
+        <source>bridge.components.publications.button_link.label</source>
+        <target>[DE] More info</target>
+      </trans-unit>
+      <trans-unit id="2e50799f33d4f78c0d229321aa5c39c5" resname="bridge.components.publications.button_attachments.label">
+        <source>bridge.components.publications.button_attachments.label</source>
+        <target>[DE] Download</target>
+      </trans-unit>
+      <trans-unit id="451720ce1a492151c476df6bc9e2249f" resname="bridge.components.publications.period">
+        <source>bridge.components.publications.period</source>
+        <target>[DE] From %start_date% to %end_date%</target>
+      </trans-unit>
+      <trans-unit id="b05edf25a00739c4943008559cd9fd8a" resname="bridge.components.search.home.or.label">
+        <source>bridge.components.search.home.or.label</source>
+        <target>[DE] or</target>
+      </trans-unit>
+      <trans-unit id="00c7ca89312053124f38dc480e6eb8f8" resname="bridge.components.footer.gdpr.manage_cookies">
+        <source>bridge.components.footer.gdpr.manage_cookies</source>
+        <target>[DE] Manage cookies</target>
+      </trans-unit>
+      <trans-unit id="c690f2d74e2244cfe1f7b839407f6dd0" resname="bridge.components.footer.gdpr.copyright.powered_by">
+        <source>bridge.components.footer.gdpr.copyright.powered_by</source>
+        <target>[DE] Store locator by</target>
+      </trans-unit>
+      <trans-unit id="ab00832e12b121db085e5f44dbde32d3" resname="bridge.components.parts.status.opening-in">
+        <source>bridge.components.parts.status.opening-in</source>
+        <target>[DE] Open in %diff% minutes</target>
+      </trans-unit>
+      <trans-unit id="9f1bd1d40bd6894ea15aae1cb855d9eb" resname="bridge.components.parts.status.closing-in">
+        <source>bridge.components.parts.status.closing-in</source>
+        <target>[DE] Close in %diff% minutes</target>
+      </trans-unit>
+      <trans-unit id="35ea4d42b0af621daffbeb9442e9c2ee" resname="bridge.components.parts.status.closing-at">
+        <source>bridge.components.parts.status.closing-at</source>
+        <target>[DE] Close at %time%</target>
+      </trans-unit>
+      <trans-unit id="a921d2b57aeba4bb3184b6505e64ce60" resname="bridge.components.parts.status.currently-open">
+        <source>bridge.components.parts.status.currently-open</source>
+        <target>[DE] Currently open</target>
+      </trans-unit>
+      <trans-unit id="284898c1289a2d64317c41d81e68ef32" resname="bridge.components.parts.status.currently-closed">
+        <source>bridge.components.parts.status.currently-closed</source>
+        <target>[DE] Currently closed</target>
+      </trans-unit>
+      <trans-unit id="158b69448246c2d514b327e886941b76" resname="bridge.components.parts.itinerary.label">
+        <source>bridge.components.parts.itinerary.label</source>
+        <target>[DE] Itinerary</target>
+      </trans-unit>
+      <trans-unit id="8a52d51a758bf345859f5bc6ff4aa557" resname="bridge.components.parts.phone.label">
+        <source>bridge.components.parts.phone.label</source>
+        <target>[DE] Call</target>
+      </trans-unit>
+      <trans-unit id="402918453922cc16858f126e129d2c91" resname="bridge.component.parts.actions.go_to_store">
+        <source>bridge.component.parts.actions.go_to_store</source>
+        <target>[DE] Go to store</target>
+      </trans-unit>
+      <trans-unit id="cc07f0b8c744b0187bfad88ca3725933" resname="bridge.component.parts.actions.contact_us">
+        <source>bridge.component.parts.actions.contact_us</source>
+        <target>[DE] Contact us</target>
+      </trans-unit>
+      <trans-unit id="b0f5dc1e5339dc39fd7699b7f6849876" resname="bridge.components.map.infowindow.error">
+        <source>bridge.components.map.infowindow.error</source>
+        <target>[DE] Sorry, an error occured...</target>
+      </trans-unit>
+      <trans-unit id="944885b675a25a47441cde5a104fa214" resname="bridge.components.map.toggle-map">
+        <source>bridge.components.map.toggle-map</source>
+        <target>[DE] Show map</target>
+      </trans-unit>
+      <trans-unit id="ad4e2507d5f45ca1b941ef1320d12110" resname="bridge.components.map.toggle-list">
+        <source>bridge.components.map.toggle-list</source>
+        <target>[DE] Show list</target>
+      </trans-unit>
+      <trans-unit id="dfab3ea2899f298c4dd29d03107809b0" resname="bridge.components.location.locate_on_map">
+        <source>bridge.components.location.locate_on_map</source>
+        <target>[DE] Locate on map</target>
+      </trans-unit>
+      <trans-unit id="c9cacf603cbfdcf208c80c788951e61e" resname="bridge.components.location.go_to_store">
+        <source>bridge.components.location.go_to_store</source>
+        <target>[DE] Go to store</target>
+      </trans-unit>
+      <trans-unit id="c8d55c30309ef9dfb5b5f83b7a9f5540" resname="bridge.components.location.options.label">
+        <source>bridge.components.location.options.label</source>
+        <target>[DE] More options</target>
+      </trans-unit>
+      <trans-unit id="2f2b92343a34b0f95e4a0f1d6b301004" resname="bridge.components.facets.title">
+        <source>bridge.components.facets.title</source>
+        <target>{0} [DE] Regions | {1} [DE] Counties | [2,Inf[ [DE] Cities</target>
+      </trans-unit>
+      <trans-unit id="f3e05199fdc02052834ea5c1e0b6c34a" resname="bridge.components.facets.back.label">
+        <source>bridge.components.facets.back.label</source>
+        <target>[DE] Back to %division.parent%</target>
+      </trans-unit>
+      <trans-unit id="fab03e776e1c5c291ef661dc81302183" resname="bridge.components.special-hours.title">
+        <source>bridge.components.special-hours.title</source>
+        <target>[DE] Exceptional hours</target>
+      </trans-unit>
+      <trans-unit id="67d3f974edd43c718f88074140fae673" resname="bridge.components.special-hours.closed">
+        <source>bridge.components.special-hours.closed</source>
+        <target>[DE] Closed</target>
+      </trans-unit>
+      <trans-unit id="628fa8e6268cec960f4d73853ace51ed" resname="bridge.components.special-hours.date.one-day">
+        <source>bridge.components.special-hours.date.one-day</source>
+        <target>[DE] on %start_period%</target>
+      </trans-unit>
+      <trans-unit id="1f8ec34db89a4d84874c6f3b0f992fa6" resname="bridge.components.special-hours.date.range">
+        <source>bridge.components.special-hours.date.range</source>
+        <target>[DE] from %start_period% to %end_period%</target>
+      </trans-unit>
+      <trans-unit id="caa9d83349dec5178a3274520136e3ce" resname="bridge.components.special-hours.time.one-slot">
+        <source>bridge.components.special-hours.time.one-slot</source>
+        <target>[DE] , %first_time_open% - %first_time_close%</target>
+      </trans-unit>
+      <trans-unit id="ade339d4dd256707b99f13f7336c9c23" resname="bridge.components.special-hours.time.all-day">
+        <source>bridge.components.special-hours.time.all-day</source>
+        <target>[DE] all day</target>
+      </trans-unit>
+      <trans-unit id="462dbd3d9dc20d40d8d0c10ce86424ca" resname="bridge.components.special-hours.time.two-slot">
+        <source>bridge.components.special-hours.time.two-slot</source>
+        <target>[DE] , %first_time_open% - %first_time_close% and %last_time_open% - %last_time_close%</target>
+      </trans-unit>
+      <trans-unit id="0b9c1f74683852d1ea00a40d5c770a45" resname="bridge.components.special-hours.open">
+        <source>bridge.components.special-hours.open</source>
+        <target>[DE] Open</target>
+      </trans-unit>
+      <trans-unit id="188259351a340c557c18f407bb99a65e" resname="bridge.component.opening-hours.day.24-open">
+        <source>bridge.component.opening-hours.day.24-open</source>
+        <target>[DE] Open 24 hours</target>
+      </trans-unit>
+      <trans-unit id="6a362dfcb00c4e4b0d5007e55da468ac" resname="bridge.components.opening-hours.day.closed">
+        <source>bridge.components.opening-hours.day.closed</source>
+        <target>[DE] Closed</target>
+      </trans-unit>
+      <trans-unit id="e5cd05b0656bdc07b90585fea29a6bab" resname="bridge.components.opening-hours.day.impacted">
+        <source>bridge.components.opening-hours.day.impacted</source>
+        <target>[DE] Be careful, this day is impacted by special hours. Please refer to the information of exceptional hours.</target>
+      </trans-unit>
+      <trans-unit id="c5af8d93e2a5211ac4258064f34f2e05" resname="bridge.components.opening-hours.expand.label">
+        <source>bridge.components.opening-hours.expand.label</source>
+        <target>[DE] Show all days</target>
+      </trans-unit>
+      <trans-unit id="654ac23565663be601cf5f8042a08e09" resname="bridge.components.breadcrumb.home.label">
+        <source>bridge.components.breadcrumb.home.label</source>
+        <target>[DE] Home</target>
+      </trans-unit>
+      <trans-unit id="d93325460310da16229edbe8176dada8" resname="bridge.components.accessibility.access.title">
+        <source>bridge.components.accessibility.access.title</source>
+        <target>[DE] Access</target>
+      </trans-unit>
+      <trans-unit id="576d36918f35a3fc86753f44fd8c1a4d" resname="bridge.components.accessibility.parking.title">
+        <source>bridge.components.accessibility.parking.title</source>
+        <target>[DE] Parking</target>
+      </trans-unit>
+      <trans-unit id="28581688aed1cdfca7b2af89f3c7c7d1" resname="bridge.components.offers.link.label">
+        <source>bridge.components.offers.link.label</source>
+        <target>[DE] Read more</target>
+      </trans-unit>
+      <trans-unit id="5ff0394d7db3abae133bb56bb08304d5" resname="bridge.components.show-all">
+        <source>bridge.components.show-all</source>
+        <target>[DE] Show all (%total%)</target>
+      </trans-unit>
+      <trans-unit id="c5098f9eda8be39ccec0daf80534110f" resname="bridge.components.show-less">
+        <source>bridge.components.show-less</source>
+        <target>[DE] Show less</target>
+      </trans-unit>
+      <trans-unit id="aa4db54862a277ab6b89af5fb0dd065f" resname="bridge.components.show-more">
+        <source>bridge.components.show-more</source>
+        <target>[DE] Show more</target>
+      </trans-unit>
+      <trans-unit id="43d2f90eff6e291569b4722f4625dcc9" resname="bridge.components.search.submit.label">
+        <source>bridge.components.search.submit.label</source>
+        <target>[DE] Search</target>
+      </trans-unit>
+      <trans-unit id="2e19bfad074a686d57026c7180bcb063" resname="bridge.components.search.geolocation.title">
+        <source>bridge.components.search.geolocation.title</source>
+        <target>[DE] Geolocation failed</target>
+      </trans-unit>
+      <trans-unit id="4b266b4d62b341ea2a4c57462e9f83c3" resname="bridge.components.search.geolocation.error">
+        <source>bridge.components.search.geolocation.error</source>
+        <target>[DE] An error occured during geolocation</target>
+      </trans-unit>
+      <trans-unit id="efc3f017dd5c16e4875fb486e8ba68aa" resname="bridge.components.search.geolocation.warning">
+        <source>bridge.components.search.geolocation.warning</source>
+        <target>[DE] You have to enable your geolocation</target>
+      </trans-unit>
+      <trans-unit id="94401a102407eeb2c925ff5aada2daed" resname="bridge.components.search.geolocation.timeout">
+        <source>bridge.components.search.geolocation.timeout</source>
+        <target>[DE] We can't define your position (timeout)</target>
+      </trans-unit>
+      <trans-unit id="ffb167721b145441836d4ce4468f44dd" resname="bridge.components.search.algolia.submit.label">
+        <source>bridge.components.search.algolia.submit.label</source>
+        <target>[DE] Search "%query%"</target>
+      </trans-unit>
+      <trans-unit id="9d7244519b16cb043dea9cb608433f8f" resname="bridge.components.search.filters.reset.label">
+        <source>bridge.components.search.filters.reset.label</source>
+        <target>[DE] Reset</target>
+      </trans-unit>
+      <trans-unit id="b481eb3034527e892a7ca44360be28cf" resname="bridge.components.search.filters.button.label">
+        <source>bridge.components.search.filters.button.label</source>
+        <target><![CDATA[{0} [DE] Filter results | {1} [DE] Filter results <span>(1 active filter)</span> | [2,Inf[ [DE] Filter results <span>(%filters% active filters)</span>]]></target>
+      </trans-unit>
+      <trans-unit id="07726d7f5c5cea0c53163948b5e42b7d" resname="bridge.components.search.query.label">
+        <source>bridge.components.search.query.label</source>
+        <target>[DE] Zip code, city...</target>
+      </trans-unit>
+      <trans-unit id="c9dd90314fbafc821160bc13cc0d4add" resname="bridge.components.search.geolocation.label">
+        <source>bridge.components.search.geolocation.label</source>
+        <target>[DE] Near me</target>
+      </trans-unit>
+      <trans-unit id="b655ed32849a814f20ff30b857eeb040" resname="bridge.components.search.filters.submit.label">
+        <source>bridge.components.search.filters.submit.label</source>
+        <target>[DE] Filter results</target>
+      </trans-unit>
+      <trans-unit id="443c7fce63f91efaa85c0c687ef1b915" resname="bridge.components.map.print.title">
+        <source>bridge.components.map.print.title</source>
+        <target>[DE] Map access</target>
+      </trans-unit>
+      <trans-unit id="acc16de1a3a4f2ed84b48fcb5d3c3300" resname="bridge.components.address.print.title">
+        <source>bridge.components.address.print.title</source>
+        <target>[DE] Address</target>
+      </trans-unit>
+      <trans-unit id="a65bf1230823ddce1d17f54aa10c9eae" resname="bridge.components.pagination.previous_page">
+        <source>bridge.components.pagination.previous_page</source>
+        <target>[DE] Previous page</target>
+      </trans-unit>
+      <trans-unit id="81271c9586c120003d2663cd88d9f1b4" resname="bridge.components.pagination.page_number">
+        <source>bridge.components.pagination.page_number</source>
+        <target>[DE] Page %page%</target>
+      </trans-unit>
+      <trans-unit id="b044b895cfb5cbb49eaa52c69597e7af" resname="bridge.components.pagination.next_page">
+        <source>bridge.components.pagination.next_page</source>
+        <target>[DE] Next page</target>
+      </trans-unit>
+      <trans-unit id="3d76165abc8c787df019e56cf2a1467f" resname="bridge.components.search.overlay.helper.text">
+        <source>bridge.components.search.overlay.helper.text</source>
+        <target>[DE] Enter a city or a postal code to search a store</target>
+      </trans-unit>
+      <trans-unit id="e87b918ce2fcbdb8ab0bc3684e8cda75" resname="bridge.components.search.overlay.helper.or">
+        <source>bridge.components.search.overlay.helper.or</source>
+        <target>[DE] or</target>
+      </trans-unit>
+      <trans-unit id="b57e452d82739ea9e36fc1c6e1354c82" resname="bridge.components.search.filters.mobile.actives">
+        <source>bridge.components.search.filters.mobile.actives</source>
+        <target>{1} [DE] 1 active filter | [2,Inf[ [DE] %filters% active filters</target>
+      </trans-unit>
+      <trans-unit id="c4cce0dfefb2a2d1cd3823a3bf7b055f" resname="bridge.components.search.accessibility.aria-label">
+        <source>bridge.components.search.accessibility.aria-label</source>
+        <target>[DE] Type in location to search a store</target>
+      </trans-unit>
+      <trans-unit id="a40dc9fe6e9a38d06c66bb00924bdea7" resname="bridge.components.header.brand.logo.link">
+        <source>bridge.components.header.brand.logo.link</source>
+        <target>[DE] Back to Merevo site</target>
+      </trans-unit>
+      <trans-unit id="d4802c942f2ae87e22aa92005c97c5c5" resname="bridge.components.nav.list.socialnetworks">
+        <source>bridge.components.nav.list.socialnetworks</source>
+        <target>[DE] Follow us on Social Networks</target>
+      </trans-unit>
+      <trans-unit id="a785197b1b19bcc2ba0d3827d75247a9" resname="bridge.components.opening-hours.day.today">
+        <source>bridge.components.opening-hours.day.today</source>
+        <target>[DE] Today</target>
+      </trans-unit>
+      <trans-unit id="6f2dba3f309c8185ad43dacdc949c0c0" resname="bridge.component.opening-hours.title">
+        <source>bridge.component.opening-hours.title</source>
+        <target>[DE] Opening Hours</target>
+      </trans-unit>
+      <trans-unit id="a9a5656ab946063889dc2781ff2126fb" resname="bridge.theme.location.breadcrumb">
+        <source>bridge.theme.location.breadcrumb</source>
+        <target>[DE] Breadcrumb</target>
+      </trans-unit>
+      <trans-unit id="ab133840b76eb2908a923723ab36b872" resname="bridge.components.footer.optimum.application-download">
+        <source>bridge.components.footer.optimum.application-download</source>
+        <target>[DE] Download on %app_store%</target>
+      </trans-unit>
+      <trans-unit id="a5024c0847ecd8414096f5ff78de8321" resname="bridge.components.parts.fax.number">
+        <source>bridge.components.parts.fax.number</source>
+        <target>[DE] Fax: %fax_number%</target>
+      </trans-unit>
+      <trans-unit id="09332ea283fc748e1c84575f26ff7c92" resname="bridge.components.parts.fax.label">
+        <source>bridge.components.parts.fax.label</source>
+        <target>[DE] Show fax number</target>
+      </trans-unit>
+      <trans-unit id="6d32695ba4eb6f57c5cf5cba3c0deb84" resname="bridge.components.wcag.skip.search.text">
+        <source>bridge.components.wcag.skip.search.text</source>
+        <target>[DE] skip to main Search</target>
+      </trans-unit>
+      <trans-unit id="7f579d8f16df316756774830f60aa01c" resname="bridge.components.wcag.skip.content.text">
+        <source>bridge.components.wcag.skip.content.text</source>
+        <target>[DE] skip to main Content</target>
+      </trans-unit>
+      <trans-unit id="9f25c7ffa76682b90425b223e5d10039" resname="bridge.components.wcag.skip.footer.text">
+        <source>bridge.components.wcag.skip.footer.text</source>
+        <target>[DE] skip to main Footer</target>
+      </trans-unit>
+      <trans-unit id="6c4788c997a4ee1a4a323c7ea0772e57" resname="bridge.components.search.submit.srLabel">
+        <source>bridge.components.search.submit.srLabel</source>
+        <target>[DE] a %brand.name% store</target>
+      </trans-unit>
+      <trans-unit id="9b5263530325ebf3086d70d00ddb5189" resname="bridge.components.show-more.srLabel">
+        <source>bridge.components.show-more.srLabel</source>
+        <target>[DE] %client.name% stores</target>
+      </trans-unit>
+      <trans-unit id="5f3cee38c9a40523882196b58cce96d4" resname="bridge.component.parts.actions.go_to_store.srLabel">
+        <source>bridge.component.parts.actions.go_to_store.srLabel</source>
+        <target>[DE] %location.name%</target>
+      </trans-unit>
+      <trans-unit id="8d4c942a282f82b5a476df8a6b99a1f0" resname="bridge.components.parts.itinerary.srLabel">
+        <source>bridge.components.parts.itinerary.srLabel</source>
+        <target>[DE] to the store %location.name%</target>
+      </trans-unit>
+      <trans-unit id="b0c16c82951b5c441f996754c57c3399" resname="bridge.components.opening-hours.expand.srLabel">
+        <source>bridge.components.opening-hours.expand.srLabel</source>
+        <target>[DE] and opening hours of %location.name%</target>
+      </trans-unit>
+      <trans-unit id="b4c0d9f12c42b427028654b4d1a8c692" resname="bridge.components.parts.phone.srLabel">
+        <source>bridge.components.parts.phone.srLabel</source>
+        <target>[DE] the store %location.name%</target>
+      </trans-unit>
+      <trans-unit id="85a403b4b0776959a2027bbbd1ec7793" resname="bridge.components.publications.button_attachments.srLabel">
+        <source>bridge.components.publications.button_attachments.srLabel</source>
+        <target>[DE] the documentation for the %publiTitle% publication</target>
+      </trans-unit>
+      <trans-unit id="ef0aefbcafd887a92ded699238804093" resname="bridge.components.publications.button_link.srLabel">
+        <source>bridge.components.publications.button_link.srLabel</source>
+        <target>[DE] about %publiTitle%</target>
+      </trans-unit>
+      <trans-unit id="0562a8cac2319a2cf882dc894d775021" resname="bridge.components.search.filters.submit.srLabel">
+        <source>bridge.components.search.filters.submit.srLabel</source>
+        <target>[DE] to find a store %client.name%</target>
+      </trans-unit>
+      <trans-unit id="eed74cda5a41f133323f101ed1344b4f" resname="bridge.components.search.geolocation.srLabel">
+        <source>bridge.components.search.geolocation.srLabel</source>
+        <target>[DE] , find a %brand.name% store</target>
+      </trans-unit>
+      <trans-unit id="fe2b445eea788a36c87e01bd0f4927b7" resname="bridge.components.pagination.page.accessibility">
+        <source>bridge.components.pagination.page.accessibility</source>
+        <target>[DE] Page</target>
+      </trans-unit>
+      <trans-unit id="709580e05d2b7f362eda2c490597efc0" resname="bridge.components.pagination.next_page.accessibility">
+        <source>bridge.components.pagination.next_page.accessibility</source>
+        <target>[DE] Next page</target>
+      </trans-unit>
+      <trans-unit id="9410dc0bea2a7efb77971fd1e6380590" resname="bridge.components.swiper.bullets.label">
+        <source>bridge.components.swiper.bullets.label</source>
+        <target>[DE] Got to slide</target>
+      </trans-unit>
+      <trans-unit id="727bb2faac33c8a30c3b3c627c699c0b" resname="bridge.theme.modal.close.label">
+        <source>bridge.theme.modal.close.label</source>
+        <target>[DE] Close</target>
+      </trans-unit>
+      <trans-unit id="5c61d5b22ce7ce9b43b1d61cabebc6e2" resname="bridge.components.footer.socialMedia.srLabel">
+        <source>bridge.components.footer.socialMedia.srLabel</source>
+        <target>[DE] Go on %socialMedia% page of %brand.name%</target>
+      </trans-unit>
+      <trans-unit id="39d226b10341e25f173ac30a3522e9d4" resname="bridge.components.form.default.close.label">
+        <source>bridge.components.form.default.close.label</source>
+        <target>[DE] Back to %location.name%</target>
+      </trans-unit>
+      <trans-unit id="7b7d579989d2c83bb7566566d4d9d080" resname="bridge.components.search.algolia.icon.dataset.label">
+        <source>bridge.components.search.algolia.icon.dataset.label</source>
+        <target>[DE] __bridge.components.search.algolia.icon.dataset.label</target>
+      </trans-unit>
+      <trans-unit id="a319eadd404fccf1ae65b291015b67ff" resname="bridge.components.social-share.label">
+        <source>bridge.components.social-share.label</source>
+        <target>[DE] Share on</target>
+      </trans-unit>
+      <trans-unit id="9c085af86698dfc26f9a109ecac2e68a" resname="bridge.components.social-share.link.label">
+        <source>bridge.components.social-share.link.label</source>
+        <target>[DE] share link to</target>
+      </trans-unit>
+      <trans-unit id="bffddf62e3c36c3894815ea7a5b549ac" resname="bridge.components.wcag.skip.pagination.text">
+        <source>bridge.components.wcag.skip.pagination.text</source>
+        <target>[DE] Skip to Pagination</target>
+      </trans-unit>
+      <trans-unit id="18d16a2a676161f7f4d1e82da385a4f0" resname="bridge.components.parts.phone.number.srLabel">
+        <source>bridge.components.parts.phone.number.srLabel</source>
+        <target>[DE] phone number</target>
+      </trans-unit>
+      <trans-unit id="de6a5343ac25d3cac4c550d2f2b04915" resname="bridge.components.pagination.aria-label">
+        <source>bridge.components.pagination.aria-label</source>
+        <target>[DE] Pagination : Go to other pages of results</target>
+      </trans-unit>
+      <trans-unit id="a8a346d772997d77728e5157c0ab2af7" resname="bridge.components.pagination.current_page_number">
+        <source>bridge.components.pagination.current_page_number</source>
+        <target>[DE] Current page : %current% on %last%</target>
+      </trans-unit>
+      <trans-unit id="2f52b0e975cc6724db14a8a0c912f6cf" resname="bridge.components.search.filters.search.title">
+        <source>bridge.components.search.filters.search.title</source>
+        <target>[DE] Search form</target>
+      </trans-unit>
+      <trans-unit id="2e0c179f31183559657841056d0368a5" resname="bridge.components.search.filters.accessibility">
+        <source>bridge.components.search.filters.accessibility</source>
+        <target>[DE] Select one or multiple filters</target>
+      </trans-unit>
+      <trans-unit id="15561575fa12daf97b7b03960e78f463" resname="bridge.components.search.filters.reset.srLabel">
+        <source>bridge.components.search.filters.reset.srLabel</source>
+        <target>[DE] all the filters</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

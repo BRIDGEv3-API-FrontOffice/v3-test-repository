@@ -1,0 +1,80 @@
+//------------------------------------------------------------------
+// Component FooterGdpr
+//------------------------------------------------------------------
+
+.lf-footer-gdpr {
+    @media print {
+        display: none;
+    }
+
+    @include font-size-small;
+
+    background-color: $brand-secondary;
+    color: $on-brand-secondary;
+
+    &__container {
+        @include container;
+
+        @media (min-width: $screen-sm-min) {
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: $gutter-small;
+        padding-bottom: $gutter-small;
+
+        &__list {
+            @include list-unstyled;
+
+            @media (min-width: $screen-sm-min) {
+                flex-flow: row nowrap;
+                justify-content: space-between;
+            }
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+
+            &__item {
+                &:not(:last-child) {
+                    @media (min-width: $screen-sm-min) {
+                        margin-right: $gutter-small;
+                        margin-bottom: 0;
+                    }
+
+                    margin-bottom: $gutter-small;
+                }
+
+                &__link {
+                    transition: $transition-default;
+                    border-bottom: 1px solid $transparent;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-color: inherit;
+                    }
+                }
+            }
+        }
+
+        &__separator {
+            @media (min-width: $screen-sm-min) {
+                display: none;
+            }
+
+            margin: $gutter-small 0;
+        }
+
+        &__copyright {
+            em {
+                margin-left: 5px;
+            }
+        }
+    }
+}

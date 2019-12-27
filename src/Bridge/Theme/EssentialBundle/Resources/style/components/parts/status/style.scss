@@ -1,0 +1,64 @@
+//------------------------------------------------------------------
+// Component PartsStatus
+//------------------------------------------------------------------
+
+.lf-parts-status {
+    &__message {
+        &::before {
+            display: inline-block;
+            margin-right: .5em;
+            border-radius: 50%;
+            width: .7em;
+            height: .7em;
+            content: '';
+        }
+    }
+
+    &--closing {
+        color: $warning-color;
+    }
+
+    &--closing & {
+        &__message {
+            &::before {
+                background-color: $warning-color;
+            }
+        }
+    }
+
+    &--open {
+        color: $success-color;
+    }
+
+    &--open & {
+        &__message {
+            &::before {
+                background-color: $success-color;
+            }
+        }
+    }
+
+    &--opening {
+        color: $warning-color;
+    }
+
+    &--opening & {
+        &__message {
+            &::before {
+                background-color: $warning-color;
+            }
+        }
+    }
+
+    &--closed {
+        color: $danger-color;
+    }
+
+    &--closed & {
+        &__message {
+            &::before {
+                background-color: $danger-color;
+            }
+        }
+    }
+}

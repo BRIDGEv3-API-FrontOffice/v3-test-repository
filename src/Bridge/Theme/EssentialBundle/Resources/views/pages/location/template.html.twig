@@ -1,0 +1,434 @@
+{% extends '@views/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/location' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script>window.batmapProvider = '{{ map.provider }}'</script>
+    <script src="{{ asset('build/location' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name,
+    '%location.name%': location.name|default(''),
+    '%location.description%': location.description|default(''),
+    '%location.shortDescription%': location.shortDescription|default(''),
+    '%location.address1%': location.localisation.address1|default(''),
+    '%location.address2%': location.localisation.address2|default(''),
+    '%location.postalCode%': location.localisation.postalCode|default(''),
+    '%location.city%': location.localisation.city.name|default(''),
+    '%location.country%': location.localisation.country.name|default(''),
+    '%location.division0%': location.localisation.geoDivisions.division0.name|default(''),
+    '%location.division1%': location.localisation.geoDivisions.division1.name|default(''),
+    '%location.division2%': location.localisation.geoDivisions.division2.name|default(''),
+    '%location.division3%': location.localisation.geoDivisions.division3.name|default(''),
+    '%location.division4%': location.localisation.geoDivisions.division4.name|default(''),
+    '%location.division5%': location.localisation.geoDivisions.division5.name|default(''),
+} %}
+
+{% block title %}
+    <title>
+        {{- 'bridge.theme.location.meta.title'|trans(translationVars, 'seo')|striptags -}}
+    </title>
+{% endblock %}
+
+{% block additional_meta %}
+    <meta name="description" content="{{ 'bridge.theme.location.meta.description'|trans(translationVars, 'seo')|striptags }}"/>
+    <meta name="twitter:title" content="{{ 'bridge.theme.location.meta.title'|trans(translationVars, 'seo')|striptags }}" />
+    <meta name="twitter:description" content="{{ (location.description|striptags)|default('') }}" />
+    <meta property="og:title" content="{{ 'bridge.theme.location.meta.title'|trans(translationVars, 'seo')|striptags }}" />
+    <meta property="og:url" content="{{ url('locations', {seoId: location.seoId, slug: location.slug})|https }}" />
+    <meta property="og:description" content="{{ (location.description|striptags)|default('') }}" />
+    {% if location.media is defined and location.media|media_of_type('location', false)|length > 0 %}
+        {% for item in location.media|media_of_type('location', false) %}
+            <meta name="twitter:image" content="{{ item|image_url({'size':'320x'}) }}" />
+            <meta property="og:image" content="{{ item|image_url({'size':'320x'}) }}"/>
+        {% endfor %}
+    {% else %}
+        <meta name="twitter:image" content="{{ absolute_url(brand.logo)|https }}" />
+        <meta property="og:image" content="{{ absolute_url(brand.logo)|https }}"/>
+    {% endif %}
+    {% if location.localisation.coordinates.latitude is defined and location.localisation.coordinates.latitude|length >- 0
+       and location.localisation.coordinates.longitude is defined and location.localisation.coordinates.longitude|length > 0 %}
+        <meta property="og:type" content="place" />
+        <meta property="place:location:latitude" content="{{ location.localisation.coordinates.latitude }}" />
+        <meta property="place:location:longitude" content="{{ location.localisation.coordinates.longitude }}" />
+    {% else %}
+        <meta property="og:type" content="website" />
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="lf-location" class="lf-location">
+        {% block pageTop %}
+            {% embed '@components/topbar/default/template.html.twig' with {
+                'class': 'lf-location__top',
+                'attributes': {'data-lf-search-wrapper': ''},
+                'searchSetting': searchSetting
+            } only %}
+                {% block content %}
+                    {% include '@components/search/default/template.html.twig' with {
+                        'id': 'lf-search',
+                        'class': 'lf-location__top__search',
+                        'searchSetting': searchSetting
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block pageMain %}
+            <div id="lf-content">
+            {% if not location.active %}
+                <section class="lf-location__inactive">
+                    {% include '@components/exceptions/default/template.html.twig' with {
+                        'class': 'lf-location__inactive__exceptions',
+                        'title': 'bridge.theme.location.inactive.title'|trans(translationVars),
+                        'illustration': 'shop',
+                        'trackingDataContent': 'Location page',
+                        'labelButton': 'bridge.theme.go_back.label'|trans(translationVars),
+                    } only %}
+                </section>
+            {% else %}
+                <div class="lf-location__main">
+                    <aside class="lf-location__main--side hidden-md">
+                        <div id="lf-location-side" class="lf-location__main--side__contain"></div>
+                    </aside>
+                    <main class="lf-location__main--main">
+                        {% block pageHeader %}
+                            <div class="lf-location__main__header">
+                                <h1 class="lf-location__main__header__title" data-e2e-location-title>
+                                    {{- location.name|striptags -}}
+                                </h1>
+
+                                {% include '@components/parts/status/template.html.twig' with {
+                                    'class': 'lf-location__main__header__status',
+                                    'location': location
+                                } only %}
+                            </div>
+                        {% endblock %}
+
+                        {% block pageActions %}
+                            <div id="lf-location-actions" class="lf-location__main__actions hidden-md">
+                                {% include '@components/parts/phone/template.html.twig' with {
+                                    'class': 'lf-location__main__actions__phone lf-location__main__actions__phone--mobile',
+                                    'isHide': false,
+                                    'isLink': true,
+                                    'isMiniOnMobile': true,
+                                    'location': location
+                                } only %}
+
+                                {% include '@components/parts/phone/template.html.twig' with {
+                                    'class': 'lf-location__main__actions__phone lf-location__main__actions__phone--desktop',
+                                    'isHide': true,
+                                    'isLink': true,
+                                    'location': location,
+                                    'attributes': {'data-e2e-phone-item': ''}
+                                } only %}
+
+                                {% include '@components/parts/itinerary/template.html.twig' with {
+                                    'class': 'lf-location__main__actions__itinerary',
+                                    'style': 'primary',
+                                    'isMiniOnMobile': true,
+                                    'location': location
+                                } only %}
+
+                                {% include '@components/button/default/template.html.twig' with {
+                                    'class': 'lf-location__main__actions__contact',
+                                    'type': 'a',
+                                    'label': 'bridge.theme.location.contact.label'|trans(translationVars, 'messages'),
+                                    'srLabel': 'bridge.theme.location.contact.srLabel'|trans(translationVars, 'messages'),
+                                    'href': '#lf-contact-form',
+                                    'icon': 'bridge-icon-' ~ icon_set ~ '-contact',
+                                    'style': 'primary',
+                                    'isMiniOnMobile': true,
+                                        'trackingData': {category: 'Open contact form', label: tracking_location_label(location)},
+                                        'attributes': {'data-micromodal-trigger': 'modal-contact-form', 'data-e2e-contact-btn': ''}
+                                } only %}
+                            </div>
+                        {% endblock %}
+
+                        {% block pageAccess %}
+                            <div class="lf-location__main__access lf-location__container">
+                                {% include '@components/parts/address/template.html.twig' with {
+                                    'class': 'lf-location__main__access__address',
+                                    'location': location,
+                                    'hLevel': 2
+                                } only %}
+
+                                {% if location.contact.phone.number is defined and location.contact.phone.number is not empty %}
+                                    <div class="lf-location__main__access__phone-print">
+                                        <div class="lf-location__main__access__phone-print__title" >{{- 'bridge.theme.location.phone.print.title'|trans -}}</div>
+                                        <div class="lf-location__main__access__phone-print__content">
+                                            {{- location.contact.phone.number|striptags -}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if location.type is defined and location.type is not empty %}
+                                    <div class="lf-location__main__access__type" data-e2e-location-type>
+                                        {{- location.type.label|striptags -}}
+                                    </div>
+                                {% endif %}
+
+                                {% include '@components/button/default/template.html.twig' with {
+                                    'class': 'lf-location__main__access__cta',
+                                    'type': 'a',
+                                    'ariapopup': true,
+                                    'label': 'bridge.theme.location.get-store-coordinates.label'|trans(translationVars, 'messages'),
+                                    'srLabel': 'bridge.theme.location.get-store-coordinates.srLabel'|trans(translationVars, 'messages'),
+                                    'style': 'secondary',
+                                        'trackingData': {category: 'Open coordinates form', label: tracking_location_label(location)},
+                                        'attributes': {'data-micromodal-trigger': 'modal-address-form'}
+                                } only %}
+
+                                {% include '@components/map/default/template.html.twig' with {
+                                    'class': 'lf-location__main__access__map'
+                                } only %}
+
+                                {% include '@components/parts/fax/template.html.twig' with {
+                                    'class': 'lf-location__main__access__fax',
+                                    'isHide': true,
+                                    'isLink': true,
+                                    'location': location
+                                } only %}
+
+                                {% include '@components/parts/accessibility/template.html.twig' with {
+                                    'class': 'lf-location__main__access__accessibility',
+                                    'location': location,
+                                    'hLevel': 2
+                                } only %}
+                            </div>
+                        {% endblock %}
+
+                        {% block pageHours %}
+                            <section class="lf-location__main__hours lf-location__container" aria-labelledby="lf-location__main__hours__title">
+                                <h2 id="lf-location__main__hours__title" class="lf-location__main__hours__title">
+                                    {{- 'bridge.theme.location.hours.title'|trans(translationVars, 'seo') -}}
+                                </h2>
+                                <div class="lf-location__main__hours__content">
+                                    {% block pageSpecialHours %}
+                                        {% include '@components/parts/specialHours/template.html.twig' with {
+                                            'class': 'lf-location__main__hours__content__special-hours',
+                                            'location': location
+                                        } only %}
+                                    {% endblock %}
+
+                                    {% block pageOpeningHours %}
+                                        {% include '@components/parts/openingHours/template.html.twig' with {
+                                            'class': 'lf-location__main__hours__content__opening-hours',
+                                            'location': location
+                                        } only %}
+                                    {% endblock %}
+                                </div>
+                            </section>
+                        {% endblock %}
+
+                        {% block pageMedia %}
+                            {% include '@components/parts/media/template.html.twig' with {
+                                'id': 'lf-location-media',
+                                'class': 'lf-location__main__media hidden-md',
+                                'location': location
+                            } only %}
+                        {% endblock %}
+
+                        {% block pagePresentation %}
+                            <div class="lf-location__main__presentation lf-location__container">
+                                {% include '@components/presentation/default/template.html.twig' with {
+                                    'class': 'lf-location__main__presentation__content',
+                                    'title': 'bridge.theme.location.store-presentation.title'|trans(translationVars, 'seo')|capitalize,
+                                    'content': location.description,
+                                    'ellipsis': true,
+                                    'contentattributes': {'data-e2e-location-description': ''}
+                                } only %}
+
+                                {% include '@components/button/default/template.html.twig' with {
+                                    'class': 'lf-location__main__presentation__cta lf-location__main__presentation__cta--contact',
+                                    'type': 'a',
+                                    'ariapopup': true,
+                                    'label': 'bridge.theme.location.contact-us.label'|trans(translationVars, 'messages'),
+                                    'srLabel': 'bridge.theme.location.contact-us.srLabel'|trans(translationVars, 'messages'),
+                                    'icon': 'bridge-icon-' ~ icon_set ~ '-contact',
+                                    'style': 'primary',
+                                        'trackingData': {category: 'Open contact form', label: tracking_location_label(location)},
+                                        'attributes': {'data-micromodal-trigger': 'modal-contact-form'}
+                                } only %}
+
+                                {% if (newsletterForm is defined and newsletterForm is not empty) %}
+                                {% include '@components/button/default/template.html.twig' with {
+                                    'class': 'lf-location__main__presentation__cta lf-location__main__presentation__cta--newsletter',
+                                    'type': 'a',
+                                    'ariapopup': true,
+                                    'label': 'bridge.theme.location.subscribe-newsletter.label'|trans(translationVars, 'messages'),
+                                    'srLabel': 'bridge.theme.location.subscribe-newsletter.srLabel'|trans(translationVars, 'messages'),
+                                    'style': 'secondary',
+                                        'trackingData': {category: 'Open newsletter form', label: tracking_location_label(location)},
+                                        'attributes': {'data-micromodal-trigger': 'modal-newsletter-form', 'data-e2e-newsletter-btn': ''}
+                                } only %}
+                                {% endif %}
+                            </div>
+                        {% endblock %}
+
+                        {% block pageNews %}
+                            {% include '@components/publications/news/default/template.html.twig' with {
+                                'class': 'lf-location__main__news lf-location__container',
+                                'title': 'bridge.theme.home.news.title'|trans(translationVars, 'seo'),
+                                'zoneSlug': 'news',
+                                'zones': zones|default(null),
+                                'location': location
+                            } only %}
+                        {% endblock %}
+
+                        {% block pageBanner %}
+                            {% include '@components/publications/banners/default/template.html.twig' with {
+                                'class': 'lf-location__main__banner lf-location__container',
+                                'title': 'bridge.theme.home.banners.title'|trans(translationVars, 'seo'),
+                                'zonePrefix': 'banners',
+                                'zones': zones|default(null),
+                                'location': location
+                            } only %}
+                        {% endblock %}
+
+                        {% block pageEvents %}
+                            {% include '@components/publications/news/default/template.html.twig' with {
+                                'id': 'lf-publications-events',
+                                'class': 'lf-location__main__events lf-location__container',
+                                'title': 'bridge.theme.home.events.title'|trans(translationVars, 'seo'),
+                                'zoneSlug': 'events',
+                                'zones': zones|default(null),
+                                'location': location
+                            } only %}
+                        {% endblock %}
+
+                        {% block pageOffers %}
+                            {% if location.availableOfferRanges is defined and location.availableOfferRanges|length > 0 %}
+                                <div class="lf-location__main__offers">
+                                    {% for availableOfferRange in location.availableOfferRanges %}
+                                        {% if availableOfferRange.availableOffers|length > 0 %}
+                                            {% set rangeStyle = offerRangeStyle[availableOfferRange.offerRange.slug]|default('default') %}
+                                            {% include '@components/offers/' ~ rangeStyle ~ '/template.html.twig' with {
+                                                'id': 'lf-location-offers-' ~ availableOfferRange.offerRange.slug,
+                                                'class': 'lf-location__main__offers__range lf-location__container',
+                                                'availableOfferRange': availableOfferRange,
+                                                'location': location,
+                                                'attributes': {'data-lf-range-style': rangeStyle, 'data-e2e-location-offers': ''},
+                                                'titleattributes': {'data-e2e-location-offers-title': ''},
+                                                'itemattributes': {'data-e2e-location-offers-item': ''}
+                                            } only %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    </main>
+                    {% include '@components/search/overlay/template.html.twig' only %}
+                </div>
+            {% endif %}
+            </div>
+        {% endblock %}
+
+        {% block pageBottom %}
+            <section aria-label="{{ 'bridge.theme.location.contentfooter'|trans({}, 'messages') }}" class="lf-location__bottom">
+                {% block pageBreadcrumb %}
+                    {% include '@components/breadcrumb/scroll/template.html.twig' with {
+                        'class': 'lf-location__bottom__breadcrumb',
+                        'breadcrumbs': breadcrumbs
+                    } only %}
+                {% endblock %}
+
+                {% block pageFooter %}
+                    {% include '@components/footer/seo/template.html.twig' with {
+                        'title': 'bridge.theme.location.footer_seo.title'|trans(translationVars, 'seo'),
+                        'cities': closestCities,
+                        'seoPrefix': seoPrefix
+                    } only %}
+                {% endblock %}
+            </section>
+        {% endblock %}
+
+        {% block contactForm %}
+            {% embed '@components/modal/default/template.html.twig' with {
+                'id': 'modal-contact-form',
+                'title': 'bridge.theme.location.contact-form.title'|trans({}, 'messages'),
+                'translationVars': translationVars,
+                'contactForm': contactForm,
+                'legalNotice': 'bridge.theme.forms.contact-form.legal-notice'|trans(translationVars, 'gdpr'),
+                'location': location,
+                'attributes': {'data-e2e-location-contact': ''},
+            } %}
+                {% block content %}
+                    {% include '@components/forms/templates/contact/template.html.twig' with {
+                        'class': 'lf-location__contact-form',
+                        'contactForm': contactForm,
+                        'legalNotice': legalNotice,
+                        'location': location,
+                        'modalId':'modal-contact-form'
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block addressForm %}
+            {% embed '@components/modal/default/template.html.twig' with {
+                'id': 'modal-address-form',
+                'title': 'bridge.theme.location.address-form.title'|trans(translationVars, 'messages'),
+                'translationVars': translationVars,
+                'locationAddressForm': locationAddressForm,
+                'legalNotice': 'bridge.theme.forms.address-form.legal-notice'|trans(translationVars, 'gdpr'),
+                'location': location
+            } %}
+                {% block content %}
+                    {% include '@components/forms/templates/address/template.html.twig' with {
+                        'class': 'lf-location__address-form',
+                        'locationAddressForm': locationAddressForm,
+                        'legalNotice': legalNotice,
+                        'location': location,
+                        'modalId':'modal-address-form'
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block newsletterForm %}
+            {% if (newsletterForm is defined and newsletterForm is not empty) %}
+            {% embed '@components/modal/default/template.html.twig' with {
+                'id': 'modal-newsletter-form',
+                'title': 'bridge.theme.location.newsletter-form.title'|trans(translationVars, 'messages'),
+                'translationVars': translationVars,
+                'newsletterForm': newsletterForm,
+                'legalNotice': 'bridge.theme.forms.newsletter-form.legal-notice'|trans(translationVars, 'gdpr'),
+                'location': location
+            } %}
+                {% block content %}
+                    {% include '@components/forms/templates/newsletter/template.html.twig' with {
+                        'class': 'lf-location__newsletter-form',
+                        'newsletterForm': newsletterForm,
+                        'legalNotice': legalNotice,
+                        'location': location,
+                        'modalId':'modal-newsletter-form'
+
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+            {% endif %}
+        {% endblock %}
+
+        {% if forms.recaptcha.active %}
+            <div id="captcha-container"></div>
+        {% endif %}
+
+        {% include '@components/parts/jsonLd/template.html.twig' with {
+            'location': location
+        } only %}
+
+        {% if zones is defined and zones['events'] is defined %}
+            {% for item in zones['events'].getPublications() %}
+                {% include "@components/publications/jsonLd/template.html.twig" with {
+                    'event': item,
+                    'zoneSlug': 'events',
+                    'location': location
+                } only %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

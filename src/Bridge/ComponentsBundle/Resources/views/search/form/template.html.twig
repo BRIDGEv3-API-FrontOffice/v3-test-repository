@@ -1,0 +1,93 @@
+{# component 'search-form' #}
+
+{# @param  string   id              custom id               default('lf-search-form')  example('lf-search-form') #}
+{# @param  string   class           custom class            default(null)              example('custom-class') #}
+{# @param  boolean  showSearchIcon  show icon input prefix  default(false)             example(false) #}
+{# @param  string   query           search query string     default(null)              example(query) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set id = id|default('lf-search-form') %}
+{% set queryLabel = 'bridge.components.search.query.label'|trans({}, 'components') %}
+
+<form
+    id="{{ id }}"
+    class="lf-search-form{% if class is defined %} {{ class }}{% endif %}"
+    action="{{ path('search') }}"
+    role="search"
+    aria-label="{{'bridge.components.search.accessibility.aria-label'|trans({}, 'components')}}"
+    data-lf-search-form
+    data-lf-tracking="{{ tracking({bind: 'submit', category: 'Search'}) }}"
+>
+    {% block query %}
+        <div class="lf-search-form__query {% if showSearchIcon is defined %}icon-prefix{% endif %}{% if class is defined %} {{ class }}__query{% endif %}">
+            <label
+                class="lf-search-form__query__label{% if class is defined %} {{ class }}__query__label{% endif %}"
+                for="lf-search-form-query"
+            >
+                {{- queryLabel -}}
+            </label>
+
+            {% if showSearchIcon is defined %}
+                <div class="lf-search-form__query__icon{% if class is defined %} {{ class }}__query__icon{% endif %}">
+                    <em class="bridge-icon-{{ icon_set }}-search" role="img"></em>
+
+                    <div class="lf-search-form__query__icon__hover{% if class is defined %} {{ class }}__query__icon__hover{% endif %}" data-lf-search-overlay-button>
+                        <em class="bridge-icon-{{ icon_set }}-arrow-back" role="img"></em>
+                    </div>
+                </div>
+
+
+            {% endif %}
+
+            <input
+                id="lf-search-form-query"
+                class="lf-search-form__query__input browser-default{% if class is defined %} {{ class }}__query__input{% endif %}"
+                name="query"
+                type="text"
+                placeholder="{{ queryLabel }}"
+                value="{{ query|default('') }}"
+                data-lf-search-query
+                data-e2e-search-query
+            />
+        </div>
+    {% endblock %}
+
+    {% block coordinates %}
+        <div class="lf-search-form__coordinates{% if class is defined %} {{ class }}__coordinates{% endif %}">
+            {% block latitude %}
+                <input
+                    name="lat"
+                    type="hidden"
+                    value="{{ latitude|default('') }}"
+                    data-lf-search-latitude
+                />
+            {% endblock %}
+
+            {% block longitude %}
+                <input
+                    name="lon"
+                    type="hidden"
+                    value="{{ longitude|default('') }}"
+                    data-lf-search-longitude
+                />
+            {% endblock %}
+
+            {% block geolocationStatus %}
+                <input
+                    name="geo"
+                    type="hidden"
+                    data-lf-search-geo
+                />
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {% block geolocation %}{% endblock %}
+
+    {% block filters %}{% endblock %}
+
+    {% block submit %}{% endblock %}
+
+    {% include '@components/autocomplete/algolia/template.html.twig' only %}
+</form>

@@ -1,0 +1,112 @@
+//------------------------------------------------------------------
+// Component SliderSwiper
+//------------------------------------------------------------------
+
+// Dependencies
+@import "~swiper/css/swiper.min.css";
+
+$swiper-bullets-scaling: 1.25;
+$swiper-bullets-size: 8px;
+$swiper-bullets-max-size: ceil($swiper-bullets-size * $swiper-bullets-scaling);
+
+.lf-slider-swiper {
+    @media print {
+        display: none;
+    }
+
+    &__wrapper {
+        &__slide {
+            padding: .1px; // fix for bordered slides
+            height: initial;
+            overflow: hidden;
+
+            &:not(.swiper-slide-visible) {
+                visibility: hidden;
+            }
+        }
+    }
+
+    &__pagination {
+        &.swiper-pagination-bullets {
+            display: flex;
+            position: absolute;
+            top: initial;
+            right: initial;
+            bottom: $gutter-small / 3;
+            left: 50%;
+            align-items: center;
+            flex-flow: row nowrap;
+            justify-content: center;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0;
+            width: auto;
+
+            > .swiper-pagination-bullet {
+                transition: $transition-default;
+                opacity: .8;
+                margin: 0 2px;
+                background: $white;
+                width: $swiper-bullets-size;
+                height: $swiper-bullets-size;
+
+                &-active,
+                &:hover,
+                &:focus,
+                &:active {
+                    transform: scale($swiper-bullets-scaling);
+                    opacity: 1;
+                    background: $white;
+                }
+            }
+        }
+    }
+
+    &.swiper-outer-pagination {
+        @media (min-width: $screen-sm-min) {
+            margin-top: -($gutter-small + $swiper-bullets-max-size + 3px);
+            padding-top: $gutter-small + $swiper-bullets-max-size;
+            padding-bottom: 0;
+        }
+
+        padding-bottom: $gutter-small + $swiper-bullets-max-size;
+    }
+
+    .sr-only + &.swiper-outer-pagination {
+        @media (min-width: $screen-sm-min) {
+            margin-top: 0;
+        }
+    }
+
+    &.swiper-outer-pagination & {
+        &__pagination {
+            &.swiper-pagination-bullets {
+                @media (min-width: $screen-sm-min) {
+                    top: 0;
+                    right: 0;
+                    bottom: inherit;
+                    left: inherit;
+                    transform: translateX(0);
+                    width: auto;
+                    height: auto;
+                }
+
+                bottom: 0;
+
+                > .swiper-pagination-bullet {
+                    opacity: .2;
+                    background: $brand-tertiary;
+
+                    &-active,
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        transform: scale($swiper-bullets-scaling);
+                        opacity: 1;
+                        background: $brand-primary;
+                    }
+                }
+            }
+        }
+    }
+}

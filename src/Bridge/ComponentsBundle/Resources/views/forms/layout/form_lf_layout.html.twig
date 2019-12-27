@@ -1,0 +1,13 @@
+{# template use to override symfony formwidget component #}
+{# path : vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig #}
+
+{% form_theme form _self %}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required{% endif -%}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
+{{ form_row(form.name) }}

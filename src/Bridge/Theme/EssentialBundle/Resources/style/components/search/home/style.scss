@@ -1,0 +1,117 @@
+//------------------------------------------------------------------
+// Component SearchHome
+//------------------------------------------------------------------
+
+// Dependencies
+// search-default
+// search-form
+// search-geolocation
+
+.lf-search-home {
+    @media print {
+        display: none;
+    }
+
+    @include container;
+
+    position: relative;
+
+    &__overlay {
+        @media (min-width: $screen-md-min) {
+            margin: 0 $gutter-large;
+            padding: $gutter-base $gutter-large;
+        }
+
+        transition: box-shadow $transition-time $transition-animation;
+        background-color: $brand-secondary;
+        padding: $gutter-base $gutter-small;
+
+        &:focus-within {
+            box-shadow: $box-shadow-large;
+        }
+
+        &__title {
+            margin-bottom: $gutter-base;
+            text-align: center;
+            color: $on-brand-secondary;
+            font-size: floor(($font-size-base * 2.5));
+        }
+
+        &__content {
+            @media (min-width: $screen-md-min) {
+                align-items: center;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+            }
+
+            display: flex;
+            align-items: center;
+            flex-direction: column-reverse;
+
+            &__geolocation {
+                @media (min-width: $screen-md-min) {
+                    width: 22.5%;
+                }
+
+                border: 1px solid $on-brand-primary;
+                width: calc(100% - #{$gutter-large});
+                max-width: 300px;
+            }
+
+            &__separator {
+                @media (min-width: $screen-md-min) {
+                    width: 12%;
+                    color: $brand-primary;
+                }
+
+                margin: $gutter-small;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: $font-weight-bold;
+            }
+
+            &__search {
+                @media (min-width: $screen-md-min) {
+                    width: 65.5%;
+                }
+
+                display: block;
+                width: 100%;
+
+                &__form {
+                    @media (min-width: $screen-md-min) {
+                        flex-flow: row nowrap;
+                        width: 100%;
+                    }
+
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+
+                    &__query {
+                        @media (min-width: $screen-md-min) {
+                            margin-bottom: 0;
+                            width: 65.65%;
+                            max-width: unset;
+                        }
+
+                        display: block;
+                        margin-bottom: 5px;
+                        width: calc(100% - #{$gutter-large});
+                        max-width: 300px;
+                    }
+
+                    &__submit {
+                        @media (min-width: $screen-md-min) {
+                            width: 34.35%;
+                        }
+
+                        display: flex;
+                        width: calc(100% - #{$gutter-large});
+                        max-width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}

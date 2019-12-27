@@ -1,0 +1,56 @@
+{# component 'widgets-critizr' #}
+
+{# @param  string  id        custom id              default(null)               example('custom-id') #}
+{# @param  string  class     custom class           default(null)               example('custom-class') #}
+{# @param  string  customId  custom id of location  default('velo-paris-xvii')  example('merevo-3421')  #}
+{# @param  object  critizr   critizr config         default(null)               example(critizr) #}
+
+{% if customId is defined and customId is not null %}
+    {% if critizr.demo is defined and critizr.demo %}
+        {% set customId = 'velo-paris-xvii' %}
+    {% endif %}
+
+    {# To learn more about parameters and customization for Critizr elements see: https://developers.critizr.com/docs/ #}
+
+    <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-widgets-critizr {{ class|default('null') }}">
+        {% if critizr.buttonCustom.active is defined and critizr.buttonCustom.active %}
+            <div class="lf-widgets-critizr__custom">
+                <a class="critizr-widget"
+                    href="{{ '//critizr.com/widgets/' ~ critizr.clientName ~ '/' ~ customId ~ '/' }}"
+                    data-type="modal:send_feedback" data-params='{"mode":"quiz"}'>
+                    Critizr: Send feedbacks
+                </a>
+            </div>
+        {% endif %}
+
+        {% if critizr.buttonFeedback.active is defined and critizr.buttonFeedback.active %}
+            <div class="lf-widgets-critizr__button-feedback">
+                <a class="critizr-widget"
+                    href="{{ '//critizr.com/widgets/' ~ critizr.clientName ~ '/' ~ customId ~ '/' }}"
+                    data-type="store_button:fact">
+                    Critizr: Send feedbacks
+                </a>
+            </div>
+        {% endif %}
+
+        {% if critizr.notationReviews.active is defined and critizr.notationReviews.active %}
+            <div class="lf-widgets-critizr__notation">
+                <a class="critizr-widget"
+                    href="{{ '//critizr.com/widgets/' ~ critizr.clientName ~ '/' ~ customId ~ '/' }}"
+                    data-type="store_button:rating">
+                    Critizr: Send feedbacks
+                </a>
+            </div>
+        {% endif %}
+
+        {% if critizr.detailedReviews.active is defined and critizr.detailedReviews.active %}
+            <div class="lf-widgets-critizr__reviews">
+                <a class="critizr-widget"
+                    href="{{ '//critizr.com/widgets/' ~ critizr.clientName ~ '/' ~ customId ~ '/' }}"
+                    data-type="store_display:mini">
+                    Critizr: Send feedbacks
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

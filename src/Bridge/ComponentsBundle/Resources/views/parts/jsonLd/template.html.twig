@@ -1,0 +1,57 @@
+{# partial 'parts-jsonLd' #}
+
+{# @param  object  location  location object  default(null)  example(location) #}
+
+{% set openingHours %}
+    {% if location.openingHours is defined and location.openingHours is not empty and location.openingHours.periods is defined and location.openingHours.periods is not empty %}
+        {% for key,day in location.openingHours.periods | periods_to_days %}
+            {% set periods = day.periods | default(null) %}
+            {% if periods | length > 0 %}
+                {% for period in periods %}
+                    {{ key | slice(0,2) | capitalize }} {{ period.openTime }} - {{ period.closeTime }},
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endset %}
+
+{% set defaultImage = absolute_url(locationIllustration) %}
+
+<script type="application/ld+json">
+{
+    "@context":"http://schema.org",
+    "@type":"LocalBusiness",
+    "image":"{{ (location.media|media_of_type('location')|image_url)|default(defaultImage) }}",
+    "name":"{{ location.name }}",
+    "address":{
+        "@type":"PostalAddress",
+        {% if location.localisation.address1 is defined %}
+        "streetAddress":"{{ location.localisation.address1 }}",
+        {% endif %}
+        {% if location.localisation.city is defined and location.localisation.city.name is defined %}
+        "addressLocality":"{{ location.localisation.city.name }}",
+        {% endif %}
+        {% if location.localisation.postalCode is defined %}
+        "postalCode":"{{ location.localisation.postalCode }}",
+        {% endif %}
+        {% if location.localisation.country is defined and location.localisation.country.code is defined %}
+        "addressCountry": "{{ location.localisation.country.code }}"
+        {% endif %}
+    },
+    {% if location.localisation.coordinates is defined and location.localisation.coordinates.latitude is defined and location.localisation.coordinates.longitude is defined %}
+    "geo":{
+        "@type":"GeoCoordinates",
+        "latitude":"{{ location.localisation.coordinates.latitude }}",
+        "longitude":"{{ location.localisation.coordinates.longitude }}"
+    },
+    {% endif %}
+    "url":"{{ location | url }}",
+    {% if location.contact.phone is defined and location.contact.phone.number is defined and location.contact.phone.number != '' %}
+    "telephone":"{{ location.contact.phone.number }}",
+    {% endif %}
+    {% if location.description is defined %}
+    "description":"{{ location.description | replace({"\n":""}) }}",
+    {% endif %}
+    "openingHours":"{{ openingHours | replace({"\n":""}) }}"
+}
+</script>

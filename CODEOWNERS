@@ -1,0 +1,23 @@
+# Default ownership
+*                                          @Leadformance/Developers
+
+# Devs and integrators co-ownership
+/package.json                               @Leadformance/Developers @Leadformance/fo-leads
+/app/config/parameters.yml.dist             @Leadformance/Developers @Leadformance/fo-leads
+/app/config/services.yml                    @Leadformance/Developers @Leadformance/fo-leads
+/app/AppKernel.php                          @Leadformance/Developers @Leadformance/fo-leads
+/src/Bridge/FrontBundle/Controller          @Leadformance/Developers @Leadformance/fo-leads
+/src/Bridge/FrontBundle/Twig                @Leadformance/Developers @Leadformance/fo-leads
+/tests/Bridge                               @Leadformance/Developers @Leadformance/fo-leads
+
+# Integrators ownership
+/web/assets                                 @Leadformance/fo-leads
+/bower.json                                 @Leadformance/fo-leads
+/app/config/parameters_front.yml            @Leadformance/fo-leads
+/app/config/parameters_theme.yml            @Leadformance/fo-leads
+/app/config/parameters_header.yml           @Leadformance/fo-leads
+/app/config/parameters_footer.yml           @Leadformance/fo-leads
+/app/Resources                              @Leadformance/fo-leads
+/src/Bridge/FrontBundle/Resources           @Leadformance/fo-leads
+/src/Bridge/ComponentsBundle                @Leadformance/fo-leads
+/src/Bridge/Theme                           @Leadformance/fo-leads

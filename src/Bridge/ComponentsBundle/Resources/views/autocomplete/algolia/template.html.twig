@@ -1,0 +1,63 @@
+{# component 'autocomplete-algolia' #}
+
+{# @param  string  id             custom id          default(null)                          example('custom-id') #}
+{# @param  string  class          custom class       default(null)                          example('custom-class') #}
+{# @param  string  placesIcon     city icon class    default('bridge-icon-[theme]-city')    example('bridge-icon-essential-city') #}
+{# @param  string  locationsIcon  store icon class   default('bridge-icon-[theme]-store')   example('bridge-icon-essential-store') #}
+{# @param  string  searchIcon     search icon class  default('bridge-icon-[theme]-search')  example('bridge-icon-essential-search') #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set placesIcon = placesIcon|default('bridge-icon-' ~ icon_set ~ '-city') %}
+{% set locationsIcon = locationsIcon|default('bridge-icon-' ~ icon_set ~ '-store') %}
+{% set searchIcon = searchIcon|default('bridge-icon-' ~ icon_set ~ '-search') %}
+
+<div
+    {% if id is defined %}id="{{ id }}"{% endif %}
+    class="lf-autocomplete-algolia {{ class|default(null) }}"
+    data-lf-autocomplete
+>
+
+    {{ _self.suggestion('places', placesIcon, '{name}', '{postalCode} {country}') }}
+
+    {{ _self.suggestion('locations', locationsIcon, '{name}', '{city}, {postalCode} {country}') }}
+
+    {% block submit %}
+        <button
+            type="submit"
+            class="lf-autocomplete-algolia__submit"
+            data-lf-autocomplete-submit
+        >
+            <em class="{{ searchIcon }}" aria-hidden="true"></em>
+            <span>
+                {{- 'bridge.components.search.algolia.submit.label'|trans({'%query%': '{query}'}, 'components') -}}
+            </span>
+        </button>
+    {% endblock %}
+</div>
+
+{% macro suggestion(dataset, icon, name, address) %}
+    {% block suggestion %}
+        <div class="lf-autocomplete-algolia__dataset">
+            <div class="lf-autocomplete-algolia__dataset__suggestion" data-lf-autocomplete-{{ dataset }}-suggestion>
+                {% block suggestionIcon %}
+                    <div class="lf-autocomplete-algolia__dataset__suggestion__icon">
+                        <em class="{{ icon }}" role="img" aria-label="{{ 'bridge.components.search.algolia.icon.dataset.label'|trans({'%dataset%': dataset}, 'components') }}"></em>
+                    </div>
+                {% endblock %}
+
+                {% block suggestionInfos %}
+                    <div class="lf-autocomplete-algolia__dataset__suggestion__infos">
+                        {% block suggestionName %}
+                            <span class="lf-autocomplete-algolia__dataset__suggestion__infos__name">{{ name }}</span>
+                        {% endblock %}
+
+                        {% block suggestionAddress %}
+                            <span class="lf-autocomplete-algolia__dataset__suggestion__infos__address">{{ address }}</span>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+{% endmacro %}

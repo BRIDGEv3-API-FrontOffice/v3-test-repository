@@ -1,0 +1,82 @@
+//------------------------------------------------------------------
+// Component FacetsDefault
+//------------------------------------------------------------------
+
+.lf-facets-default {
+    border: 1px solid $brand-secondary;
+
+    &__title {
+        @include button-reset;
+
+        background-color: $brand-secondary;
+        padding: $gutter-small;
+        color: $on-brand-secondary;
+
+        &--button {
+            @media (min-width: $screen-md-min) {
+                display: none;
+            }
+
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            width: 100%;
+
+            > em {
+                transition: $transition-default;
+            }
+        }
+
+        &--div {
+            @media (min-width: $screen-md-min) {
+                display: block;
+            }
+
+            display: none;
+            cursor: default;
+        }
+    }
+
+    &__list {
+        @include list-unstyled;
+
+        @media (min-width: $screen-md-min) {
+            margin: $gutter-small 0;
+        }
+
+        display: grid;
+        grid-gap: $gutter-small;
+        transition: $transition-default;
+        padding: 0 $gutter-small;
+        overflow: hidden;
+
+        &__item {
+            &__link {
+                text-transform: capitalize;
+                color: $brand-primary;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    text-decoration: underline;
+                    color: $brand-primary;
+                }
+            }
+        }
+    }
+
+    &.open & {
+        &__title {
+            &--button {
+                > em {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+
+        &__list {
+            margin: $gutter-small 0;
+        }
+    }
+}

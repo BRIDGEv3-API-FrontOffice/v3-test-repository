@@ -1,0 +1,8 @@
+redirects:
+    resource: "redirects.yml"
+front:
+    resource: "@BridgeFrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+core:
+    resource: "@BridgeFrontCoreBundle/Resources/config/routing.yml"

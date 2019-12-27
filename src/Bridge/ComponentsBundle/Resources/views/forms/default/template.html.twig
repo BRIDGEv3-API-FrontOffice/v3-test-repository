@@ -1,0 +1,47 @@
+{# component 'forms-default' #}
+
+{# @param  string   id         custom id          default(null)  example('custom-id')    #}
+{# @param  string   class      custom class       default(null)  example('custom-class') #}
+{# @param  string   formTitle  custom class       default(null)  example('Contact us')   #}
+{# @param  object   form       form object        default(null)  example(form)           #}
+{# @param  object   formView   formView object    default(null)  example(formView)       #}
+{# @param  object   attr       custom attributes  default({})    example({})             #}
+
+{% if formView is defined and formView is not null %}
+    <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-forms-default theme-{{ forms.theme }} {{ class|default(null) }}">
+        {% block content %}
+            {% form_theme formView _self %}
+
+            {{ form_start(formView, {'attr': attr|default({}) }) }}
+
+            <div class="lf-forms-default__errors">
+                {{- form_errors(formView) -}}
+            </div>
+
+            {% block fields %}{% endblock %}
+
+            {{ form_end(formView, {'render_rest': false}) }}
+            <div aria-hidden="true" class="lf-forms-default__notifications" data-notifications-items aria-live="polite" data-e2e-notification>
+                <em class="lf-forms-default__notifications__icon" role="img" data-notifications-icon></em>
+                <p class="lf-forms-default__notifications__text" data-notifications-text></p>
+                <div class="lf-forms-default__notifications__button">
+                    {% include '@components/button/default/template.html.twig' with {
+                        'class': 'lf-forms-default__notifications__button__close',
+                        'type': 'button',
+                        'label': 'bridge.components.form.default.close.label'|trans({'%location.name%': location.name|default('')}, 'components'),
+                        'style': 'primary',
+                        'attributes': {"disabled":"disabled", 'data-notifications-button':''},
+                        'trackingData': {}
+                    } %}
+                </div>
+            </div>
+            {% block legalNotice %}
+                {% if legalNotice is defined %}
+                    <div class="lf-forms-default__legal-notice" data-notifications-legal>
+                        {{- legalNotice|raw -}}
+                    </div>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endif %}

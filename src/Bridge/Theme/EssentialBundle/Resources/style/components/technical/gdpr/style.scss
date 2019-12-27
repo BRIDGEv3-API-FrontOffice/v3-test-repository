@@ -1,0 +1,82 @@
+//------------------------------------------------------------------
+// Component TechnicalGDPR
+//------------------------------------------------------------------
+
+.cc-revoke,
+.cc-window {
+    @media print {
+        display: none;
+    }
+}
+
+.cc-revoke {
+    display: none;
+}
+
+.cc-window {
+    display: flex;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    transition: $transition-default;
+    z-index: 999;
+    margin: $gutter-small;
+    border: 1px solid $on-brand-primary;
+    background-color: $brand-primary !important;
+    padding: $gutter-small;
+    width: calc(100% - #{$gutter-base});
+    max-width: 400px;
+    color: $on-brand-primary !important;
+
+    &.cc-invisible {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    > .cc-message {
+        > .cc-link {
+            transition: $transition-default;
+            opacity: .8;
+            text-decoration: underline;
+            color: $on-brand-primary !important;
+
+            &:hover,
+            &:focus,
+            &:active {
+                opacity: 1;
+            }
+        }
+    }
+
+    > .cc-compliance {
+        @media (min-width: $screen-sm-min) {
+            flex-flow: row nowrap;
+        }
+
+        display: flex;
+        align-items: center;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+
+        > .cc-btn {
+            @include button($on-brand-primary, $brand-primary, false, 'small');
+
+            @media (min-width: $screen-sm-min) {
+                max-width: calc(50% - #{$gutter-small / 2});
+            }
+
+            display: flex;
+            margin-top: $gutter-small;
+            width: 100%;
+            color: $brand-primary !important;
+            font-style: $font-size-base * .8;
+
+            &.cc-dismiss {
+                @include button-variant($brand-primary, $on-brand-primary);
+
+                color: $on-brand-primary !important;
+            }
+        }
+    }
+}

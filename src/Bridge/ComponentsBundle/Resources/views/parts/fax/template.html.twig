@@ -1,0 +1,42 @@
+{# component 'parts-fax' #}
+
+{# @param  string   id        custom id                     default(null)  example('lf-parts-fax') #}
+{# @param  string   class     custom class                  default(null)  example('custom-class') #}
+{# @param  string   role      custom button role attribute  default(null)  example('button') #}
+{# @param  boolean  isHide    define if fax number is hide  default(true)  example(true) #}
+{# @param  object   location  location object               default(null)  example(location) #}
+
+{% set class = class|default(null) %}
+{% set role = role|default(null) %}
+
+{% if isHide is not defined %}
+    {% set isHide = true %}
+{% endif %}
+
+{% if location is defined
+    and location.contact is defined
+    and location.contact.fax is defined %}
+    {% set faxNumber = location.contact.fax|striptags %}
+{% endif %}
+
+{% if faxNumber is defined and faxNumber is not empty %}
+    <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-parts-fax {{ class }}">
+        <span
+            class="lf-parts-fax__button lf-parts-fax__button--number {{ isHide ? 'hidden' : '' }} {{ class }}__button" data-e2e-fax-number
+            {% if isHide %}data-lf-fax-link="{{ location._id }}"{% endif %}
+        >
+            {{- 'bridge.components.parts.fax.number'|trans({'%fax_number%': faxNumber}, 'components') -}}
+        </span>
+
+        {% if isHide %}
+            {% include '@components/button/text/template.html.twig' with {
+                'type': 'button',
+                'role': role,
+                'class': 'lf-parts-fax__button lf-parts-fax__button--button ' ~ class ~ '__button',
+                'label': 'bridge.components.parts.fax.label'|trans({}, 'components'),
+                'attributes': {'data-lf-fax': location._id, 'data-e2e-fax-button': ''},
+                'trackingData': {category: 'Fax', action: 'display', label: tracking_location_label(location)}
+            } only %}
+        {% endif %}
+    </div>
+{% endif %}

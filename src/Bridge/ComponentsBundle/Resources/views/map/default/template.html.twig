@@ -1,0 +1,31 @@
+{# component 'map-default' #}
+
+{# @param  string  id     custom id     default('lf-map')  example('lf-map') #}
+{# @param  string  class  custom class  default(null)      example('custom-class') #}
+
+{# @global  object  map  map options #}
+
+{% set id = id|default('lf-map') %}
+
+<div id="{{ id }}" class="lf-map-default {{ class|default(null) }}" data-lf-map>
+    <div class="lf-map-default__title">{{- 'bridge.components.map.print.title'|trans({}, 'components') -}}</div>
+    {% block map %}
+        <div id="{{ id }}-canvas" class="lf-map-default__canvas" data-lf-map-canvas></div>
+    {% endblock %}
+
+    {% block infoWindow %}
+        {% if map.showInfoWindow %}
+            <div class="lf-map-default__infowindow">
+                {% include '@components/graphical/loader/template.html.twig' with {
+                    'class': 'lf-map-default__infowindow__loader'
+                } only %}
+
+                <div id="{{ id }}-infowindow"
+                    class="lf-map-default__infowindow__content"
+                    data-lf-error-msg="{{ 'bridge.components.map.infowindow.error' | trans({}, 'components') }}"
+                    data-lf-infowindow>
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+</div>

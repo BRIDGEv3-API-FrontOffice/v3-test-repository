@@ -1,0 +1,78 @@
+{# component 'forms-templates-newsletter' #}
+
+{# @param  string  id           custom id             default('lf-forms-contact')  example('lf-forms-contact') #}
+{# @param  string  class        custom class          default(null)                example('custom-class') #}
+{# @param  string  legalNotice  legal notice content  default(null)                example('Legal notice') #}
+{# @param  object  location     location object       default(null)                example(location) #}
+
+{# @global  object  forms  forms configuration #}
+
+{% set id = id|default('lf-forms-newsletter') %}
+{% set class = class|default(null) %}
+
+{% if newsletterForm is defined %}
+    {% embed '@components/forms/default/template.html.twig' with {
+        'class': 'lf-forms-newsletter ' ~ class,
+        'formView': newsletterForm,
+        'attr': {
+            'id': id,
+            'class': 'lf-forms-newsletter__form active ' ~ (class ? class ~ '__form' : ''),
+            'data-lf-newsletter-form': '',
+            'data-lf-tracking': tracking({bind: 'submit', category: 'locationAdress', label: tracking_location_label(location)}),
+            'data-lf-msg-success': 'bridge.components.forms.newsletter_form.success.message'|trans({}, 'forms'),
+            'data-lf-msg-error': 'bridge.components.forms.error.message'|trans({}, 'forms'),
+            'data-lf-modal-id': modalId
+
+        },
+        'legalNotice': legalNotice,
+        'location': location
+    } only %}
+        {% block fields %}
+            {% if formView.children['bridge-user-email'] is defined %}
+                <div class="lf-forms-newsletter__form__mail placeholder-fmk">
+                    {{ form_label(formView.children['bridge-user-email'], 'bridge.components.forms.newsletter_form.mail.label'|trans({}, 'forms')) }}
+                    {{ form_widget(formView.children['bridge-user-email'], {
+                        'type': 'email',
+                        'attr': {
+                            'required': true,
+                            'aria-required': 'true',
+                            'aria-invalid': 'false',
+                            'class': 'lf-forms-newsletter__form__mail__input',
+                            'data-fv-emailaddress': 'true',
+                            'data-fv-emailaddress-message':'bridge.components.forms.error.mail.format'|trans({}, 'forms'),
+                            'data-fv-email-address': "true",
+                            'data-fv-email-address___message':'bridge.components.forms.error.mail.format'|trans({}, 'forms'),
+                            'data-fv-not-empty___message':'bridge.components.forms.error.mail.required'|trans({}, 'forms'),
+                            'data-fv-notempty-message':'bridge.components.forms.error.mail.required'|trans({}, 'forms'),
+                            'data-e2e-newsletter-email': ''
+                        }
+                    }) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-location-id'] is defined %}
+                <div class="lf-forms-newsletter__form__location">
+                    {{ form_widget(formView.children['bridge-location-id']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['_token'] is defined %}
+                <div class="lf-forms-newsletter__form__token">
+                    {{ form_widget(formView.children['_token']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-subscribe'] is defined %}
+                <div class="lf-forms-newsletter__form__submit placeholder-fmk submit">
+                    {{ form_widget(formView.children['bridge-subscribe'], {
+                        'attr': {
+                            'class': 'lf-forms-newsletter__form__submit__button',
+                            'data-e2e-newsletter-submit': ''
+                        },
+                        'label': 'bridge.components.forms.newsletter_form.submit.label'|trans({}, 'forms')
+                    }) }}
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endif %}

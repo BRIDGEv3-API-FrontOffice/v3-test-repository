@@ -1,0 +1,18 @@
+<svg id="e45a3bfc-d7f2-4d7b-942f-2d6277a449f1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
+  <defs>
+    <style>
+      .ae684ee4-fc8a-4343-81e7-17522df1ce46, .bd215a44-3f86-4801-a5bb-00a9fff25262 {
+        fill: #333;
+      }
+
+      .bd215a44-3f86-4801-a5bb-00a9fff25262 {
+        opacity: 0.5;
+      }
+    </style>
+  </defs>
+  <title>marker-user</title>
+  <g id="f46dc5d7-32fe-42d6-816a-bd5d7957ebb8" data-name="user">
+    <circle class="bd215a44-3f86-4801-a5bb-00a9fff25262" cx="10.5" cy="10.5" r="10"/>
+    <circle class="ae684ee4-fc8a-4343-81e7-17522df1ce46" cx="10.5" cy="10.5" r="5"/>
+  </g>
+</svg>

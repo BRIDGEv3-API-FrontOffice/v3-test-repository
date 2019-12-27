@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="68f8659c55b6a3b3678f91457fd7d77c" resname="bridge.theme.exceptions.error.title">
+        <source>bridge.theme.exceptions.error.title</source>
+        <target>[DE] Oops! An Error Occurred</target>
+      </trans-unit>
+      <trans-unit id="5717f338a9508fd3dd1498b4c08e861b" resname="bridge.theme.exceptions.error.message">
+        <source>bridge.theme.exceptions.error.message</source>
+        <target>[DE] The server returned "%status.code% %status.text%"
+        The server encountered a syntax error and could not complete you request.</target>
+      </trans-unit>
+      <trans-unit id="24ef928da644c3201e67b97943ba00fb" resname="bridge.theme.exceptions.error_404.title">
+        <source>bridge.theme.exceptions.error_404.title</source>
+        <target>[DE] The page you are looking for does not exist</target>
+      </trans-unit>
+      <trans-unit id="325509169ef121ef302be689f5a9b609" resname="bridge.theme.exceptions.error_404.message">
+        <source>bridge.theme.exceptions.error_404.message</source>
+        <target>[DE] Sorry, but this page does not exist or is no longer available...</target>
+      </trans-unit>
+      <trans-unit id="3459a75917ac53ce4d461ee56e3a9de3" resname="bridge.theme.go_back.label">
+        <source>bridge.theme.go_back.label</source>
+        <target>[DE] Find a %brand.name% store</target>
+      </trans-unit>
+      <trans-unit id="39f66cde3308dfc73b2a8c538c51b7f6" resname="bridge.theme.location.contact.label">
+        <source>bridge.theme.location.contact.label</source>
+        <target>[DE] Contact</target>
+      </trans-unit>
+      <trans-unit id="7cc6b150ec8ae5b17199b3277a1c752d" resname="bridge.theme.location.get-store-coordinates.label">
+        <source>bridge.theme.location.get-store-coordinates.label</source>
+        <target>[DE] Get store coordinates</target>
+      </trans-unit>
+      <trans-unit id="3aad4ce2c6d9180a4283c6ca02a110b0" resname="bridge.theme.location.contact-us.label">
+        <source>bridge.theme.location.contact-us.label</source>
+        <target>[DE] Contact us!</target>
+      </trans-unit>
+      <trans-unit id="a1dfc6e84015dd1796ff37926b6497d1" resname="bridge.theme.location.subscribe-newsletter.label">
+        <source>bridge.theme.location.subscribe-newsletter.label</source>
+        <target>[DE] Subscribe to newsletter</target>
+      </trans-unit>
+      <trans-unit id="d5568e058fd4b155d412acb745afe155" resname="bridge.theme.location.address-form.title">
+        <source>bridge.theme.location.address-form.title</source>
+        <target>[DE] Get %location.name% coordinates</target>
+      </trans-unit>
+      <trans-unit id="cb72ce03a9d053b397002fd1e94473aa" resname="bridge.theme.location.contact-form.title">
+        <source>bridge.theme.location.contact-form.title</source>
+        <target>[DE] Contact us</target>
+      </trans-unit>
+      <trans-unit id="84c83bed0b85b8d2e4fe963a63954edf" resname="bridge.theme.location.phone.print.title">
+        <source>bridge.theme.location.phone.print.title</source>
+        <target>[DE] Phone</target>
+      </trans-unit>
+      <trans-unit id="75ea07d56bafc2db72c3b3ecc0155161" resname="bridge.theme.location.inactive.title">
+        <source>bridge.theme.location.inactive.title</source>
+        <target>[DE] Your store %location.name% is no longer available</target>
+      </trans-unit>
+      <trans-unit id="23761d668e5c6801d682b57b4a03b552" resname="bridge.theme.location.newsletter-form.title">
+        <source>bridge.theme.location.newsletter-form.title</source>
+        <target>[DE] Subscribe to our newsletter</target>
+      </trans-unit>
+      <trans-unit id="f2f7329599d431905f4572bceff19a62" resname="bridge.theme.noresults.message">
+        <source>bridge.theme.noresults.message</source>
+        <target><![CDATA[[DE] You can perform a new search with the search bar located above<br />or go back homepage with the button below]]></target>
+      </trans-unit>
+      <trans-unit id="d74463d4c430411dcffc608beed0f84c" resname="bridge.theme.location.contentfooter">
+        <source>bridge.theme.location.contentfooter</source>
+        <target>[DE] Footer links</target>
+      </trans-unit>
+      <trans-unit id="0a4f02b42bdc4b2ff952f5299fe11ecf" resname="bridge.theme.location.contact.srLabel">
+        <source>bridge.theme.location.contact.srLabel</source>
+        <target>[DE] the store %location.name%</target>
+      </trans-unit>
+      <trans-unit id="037390bd4fc36a69e4c3bd0d545acab2" resname="bridge.theme.location.get-store-coordinates.srLabel">
+        <source>bridge.theme.location.get-store-coordinates.srLabel</source>
+        <target>[DE] of %location.name%</target>
+      </trans-unit>
+      <trans-unit id="60f0e7599a77834a58417be53a3bbc2b" resname="bridge.theme.location.contact-us.srLabel">
+        <source>bridge.theme.location.contact-us.srLabel</source>
+        <target>[DE] the store %location.name%</target>
+      </trans-unit>
+      <trans-unit id="d08d13284ea9521146f6140b45df4284" resname="bridge.theme.location.subscribe-newsletter.srLabel">
+        <source>bridge.theme.location.subscribe-newsletter.srLabel</source>
+        <target>[DE] of %location.name%</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

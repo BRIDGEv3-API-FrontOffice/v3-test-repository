@@ -1,0 +1,63 @@
+//------------------------------------------------------------------
+// Component PresentationDefault
+//------------------------------------------------------------------
+
+// Variables
+$lines-to-show: 12;
+
+.lf-presentation-default {
+    &__title {
+        margin-bottom: $gutter-small;
+    }
+
+    &__content {
+        @media print {
+            display: block;
+        }
+
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        &__image {
+            @include img-responsive;
+
+            @media print {
+                display: block;
+                margin: $gutter-base 0;
+                width: 50%;
+            }
+
+            @media (min-width: $screen-md-min) {
+                display: block;
+                margin-right: $gutter-small;
+                width: calc(100% / 3 - #{$gutter-small});
+            }
+
+            display: none;
+        }
+
+        &__description {
+            width: 100%;
+
+            &__text {
+                &.ellipsis {
+                    @include ellipsis-content($lines-to-show);
+                }
+            }
+
+            &__expand {
+                display: none;
+
+                > span {
+                    margin-left: 0;
+                }
+
+                &.show {
+                    display: inline-flex;
+                }
+            }
+        }
+    }
+}

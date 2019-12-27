@@ -1,0 +1,10 @@
+//------------------------------------------------------------------
+// Component PartsItinerary
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+.lf-parts-itinerary {
+    @include button-loading($on-brand-primary);
+}

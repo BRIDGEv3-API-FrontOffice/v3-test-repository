@@ -1,0 +1,23 @@
+{# component 'map-toggler' #}
+
+{# @param  string  id     custom id     default(null)  example('custom-id') #}
+{# @param  string  class  custom class  default(null)  example('custom-class') #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% block toggle %}
+    <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-map-toggler {{ class|default(null) }}" data-lf-map-toggler>
+        {% include '@components/button/fab/template.html.twig' with {
+            'class': 'lf-map-toggler__button lf-map-toggler__button--map',
+            'label': 'bridge.components.map.toggle-map' | trans({}, 'components'),
+            'icon': 'bridge-icon-' ~ icon_set ~ '-map',
+            'trackingData': {}
+        } only %}
+        {% include '@components/button/fab/template.html.twig' with {
+            'class': 'lf-map-toggler__button lf-map-toggler__button--list',
+            'label': 'bridge.components.map.toggle-list' | trans({}, 'components'),
+            'icon': 'bridge-icon-' ~ icon_set ~ '-list',
+            'trackingData': {}
+        } only %}
+    </div>
+{% endblock %}

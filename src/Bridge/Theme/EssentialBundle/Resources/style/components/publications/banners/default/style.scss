@@ -1,0 +1,48 @@
+//------------------------------------------------------------------
+// Component PublicationsBannerDefault
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+.lf-publications-banners-default {
+    @media print {
+        display: none;
+    }
+
+    &__item {
+        position: relative;
+
+        &__image {
+            @include img-responsive;
+            @include stripes(-45deg, $brand-secondary, $gutter-small);
+        }
+
+        &__img-wrapper {
+            display: block;
+            background-color: $brand-secondary;
+            padding-top: 20.83%;
+            width: 100%;
+            height: 0;
+
+            &.dark {
+                @include stripes-over(-45deg, $black, $gutter-small);
+            }
+
+            &.light {
+                @include stripes-over(-45deg, $white, $gutter-small);
+            }
+        }
+
+        &__attachments {
+            position: absolute;
+            right: $gutter-small;
+            bottom: $gutter-small;
+            opacity: .8;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

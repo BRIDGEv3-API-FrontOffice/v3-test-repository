@@ -1,0 +1,38 @@
+//------------------------------------------------------------------
+// Component MapInfowindow
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+// parts-address
+// graphical-srcset
+
+.lf-map-infowindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: url('~web/assets/images/cursor/iw-cursor.svg'), pointer;
+    padding: $gutter-small;
+    width: 100%;
+    height: 100%;
+
+    &__media {
+        margin-bottom: $gutter-small;
+    }
+
+    &__infos {
+        text-align: center;
+
+        &__title {
+            @include title('h3');
+        }
+
+        &__address {
+            margin-top: $gutter-small;
+        }
+
+        &__cta {
+            margin-top: $gutter-small;
+        }
+    }
+}

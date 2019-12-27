@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{ url('home') | https }}</loc>
+    </url>
+    {% for geodiv in geodivisionPages %}
+        <url>
+            <loc>
+                {{- url('geo_divisions', {
+                    'countryCode': geodiv['countryCode'],
+                    'division0': geodiv['division0'],
+                    'division1': geodiv['division1']
+                }) | https -}}
+            </loc>
+        </url>
+    {% endfor %}
+
+    {% for topCity in topCities %}
+    <url>
+        <loc>
+            {{- url('geo_cities', {
+                'cityName': topCity['slug'],
+                'countryCode': topCity['countryCode'] | lower,
+                'seoPrefix': seoPrefix
+            }) | https -}}
+        </loc>
+    </url>
+    {% endfor %}
+</urlset>

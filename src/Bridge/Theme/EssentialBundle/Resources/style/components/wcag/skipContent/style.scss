@@ -1,0 +1,28 @@
+.lf-skip-content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+        display: inline-block;
+
+        &__link {
+            position: absolute;
+            left: -9999px;
+
+            &:focus,
+            &:active {
+                display: block;
+                position: static;
+                left: 0;
+                background: $on-brand-primary;
+                padding: 4px 8px;
+                color: $brand-primary;
+            }
+        }
+    }
+}

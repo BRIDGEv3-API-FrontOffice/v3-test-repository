@@ -1,0 +1,74 @@
+{# component 'exceptions' #}
+
+{# @param  string  id                   custom id                default(null)          example('custom-id') #}
+{# @param  string  class                custom class             default(null)          example('custom-class') #}
+{# @param  number  hLevel               title level `[1-6]`      default(1)             example(1) #}
+{# @param  string  title                title content            default(null)          example('Lorem ipsum') #}
+{# @param  string  message              message content          default(null)          example('Lorem ipsum dolor sit amet') #}
+{# @param  string  illustration         illustration to display  default('cactus')      example('cactus') #}
+{# @param  string  trackingDataContent  tracking data            default('Error page')  example('Error page') #}
+{# @param  string  labelButton          text on button           default(null)          example('Go back') #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set hLevel = hLevel|default(2) %}
+{% set title = title|default(null) %}
+{% set illustration = illustration|default('cactus') %}
+{% set message = message|default(null) %}
+{% set trackingDataContent = trackingDataContent|default('Error page') %}
+
+{% block content %}
+    <div {% if id is defined %}id="{{ id }}"{% endif %}
+        class="lf-exceptions-default {{ class|default(null) }}">
+        {% block pageMain %}
+            <div class="lf-exceptions-default__main {% if class is defined and class != null %}{{ class|default(null) }}__main{% endif %}">
+                {% block pageTitle %}
+                    {% if title is defined and title != null %}
+                        <h{{ hLevel }} class="lf-exceptions-default__main__title {% if class is defined and class != null %}{{ class|default(null) }}__main__title{% endif %}">
+                            {{- title -}}
+                        </h{{ hLevel }}>
+                    {% endif %}
+                {% endblock %}
+
+                {% block pageMessage %}
+                    {% if message is defined %}
+                        <div class="lf-exceptions-default__main__message {% if class is defined and class != null %}{{ class|default(null) }}__main__message{% endif %}">
+                            {{- message|raw -}}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% if class is defined and class != null %}
+                    {% set illustrationAddonClass = class ~ '__main__illustration' %}
+                {% else %}
+                    {% set illustrationAddonClass = '' %}
+                {% endif %}
+
+                {% block pageIllustration %}
+                    {% include '@components/graphical/' ~ illustration ~ '/template.html.twig' with {
+                        'class': 'lf-exceptions-default__main__illustration ' ~ illustrationAddonClass
+                    } only %}
+                {% endblock %}
+
+                {% if class is defined and class != null %}
+                    {% set buttonAddonClass = class ~ '__main__go-back' %}
+                {% else %}
+                    {% set buttonAddonClass = '' %}
+                {% endif %}
+
+                {% block pageAction %}
+                    {% include '@components/button/default/template.html.twig' with {
+                        'type': 'a',
+                        'class': 'lf-exceptions-default__main__go-back ' ~ buttonAddonClass,
+                        'icon': 'bridge-icon-' ~ icon_set ~ '-arrow-back',
+                        'label': labelButton,
+                        'srLabel': labelButton,
+                        'href': path('home'),
+                        'size': 'large',
+                        'trackingData': { category: trackingDataContent }
+                    } only %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

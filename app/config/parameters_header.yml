@@ -1,0 +1,33 @@
+# Footer functionnal parameters
+parameters:
+    bridge_front_starter_kit.header:
+        showBrandName: false
+        links:
+            en:
+                About: 'https://www.leadformance.com/'
+                Products: 'https://www.leadformance.com/store-locator/'
+                Services: 'https://www.leadformance.com/platform/'
+                Blog: 'http://blog.leadformance.com/'
+            fr:
+                'A Propos': 'https://www.leadformance.com/fr/'
+                Produits: 'https://www.leadformance.com/fr/store-locator/'
+                Services: 'https://www.leadformance.com/fr/platform/'
+                Blog: 'http://blog.leadformance.com/fr/'
+            de:
+                About: 'https://www.leadformance.com/'
+                Products: 'https://www.leadformance.com/store-locator/'
+                Services: 'https://www.leadformance.com/platform/'
+                Blog: 'http://blog.leadformance.com/'
+        socials:
+            en:
+                facebook: 'https://www.facebook.com/'
+                instagram: 'https://www.instagram.com/'
+                twitter: 'https://www.twitter.com/'
+            fr:
+                facebook: 'https://www.facebook.com/'
+                instagram: 'https://www.instagram.com/'
+                twitter: 'https://www.twitter.com/'
+            de:
+                facebook: 'https://www.facebook.com/'
+                instagram: 'https://www.instagram.com/'
+                twitter: 'https://www.twitter.com/'

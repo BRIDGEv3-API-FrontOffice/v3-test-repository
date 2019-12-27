@@ -1,0 +1,87 @@
+{# component 'search-default' #}
+
+{# @param  string  id             custom id                 default('lf-search-default')  example('lf-search-default') #}
+{# @param  string  class          custom class              default(null)                 example('custom-class') #}
+{# @param  string  query          search query string       default('')                   example('Paris') #}
+{# @param  object  searchSetting  available search filters  default(null)                 example(searchSetting) #}
+{# @param  object  queryFilters   selected filters          default(null)                 example(queryFilters) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set id = id|default('lf-search-default') %}
+
+{% set activeFilters = [] %}
+{% if queryFilters is defined %}
+    {% for filter in queryFilters %}
+        {% for key, id in filter %}
+            {% set activeFilters = activeFilters|merge([id]) %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<div id="{{ id }}" class="lf-search-default {{ class|default(null) }}">
+    <h2 class="sr-only">{{- 'bridge.components.search.filters.search.title'|trans({}, 'components') -}}</h2>
+    {% block form %}
+        <div class="lf-search-default__form" data-lf-search-form-container>
+            {% embed '@components/search/form/template.html.twig' with {
+                'class': 'lf-search-default__form__form',
+                'query': query|default(''),
+                'activeFilters': activeFilters|length,
+                'searchSetting': searchSetting|default(null),
+                'queryFilters': queryFilters|default(null),
+                'showSearchIcon': true
+            } only %}
+                {% block submit %}
+                    {% include '@components/button/default/template.html.twig' with {
+                        'class': 'lf-search-default__form__submit',
+                        'type': 'button',
+                        'label': 'bridge.components.search.submit.label'|trans({}, 'components'),
+                        'srLabel': 'bridge.components.search.submit.srLabel'|trans({'%brand.name%': brand.name}, 'components'),
+                        'attributes': {'type':'submit', 'data-e2e-search-submit': ''},
+                        'trackingData': {}
+                    } only %}
+                {% endblock %}
+
+                {% block geolocation %}
+                    {% include '@components/search/geolocation/template.html.twig' with {
+                        'class': 'lf-search-default__form__geolocation',
+                        'style': 'secondary',
+                        'isLabelSrOnly': true
+                    } only %}
+                {% endblock %}
+
+                {% block filters %}
+                    <div class="lf-search-default__filters" aria-live="polite">
+                        <button type="button" class="lf-search-default__filters__button" data-lf-search-filters-button aria-haspopup="true" aria-expanded="false">
+                            <em class="lf-search-default__filters__button__icon bridge-icon-{{ icon_set }}-filters" role="img"></em>
+                            <span class="lf-search-default__filters__button__text">
+                                {{- ('bridge.components.search.filters.button.label'|transchoice(activeFilters, {'%filters%': activeFilters}, 'components'))|raw -}}
+                            </span>
+                        </button>
+
+                        {% include '@components/search/filters/template.html.twig' with {
+                            'class': 'lf-search-default__filters__content',
+                            'searchSetting': searchSetting,
+                            'queryFilters': queryFilters
+                        } only %}
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    {% endblock %}
+
+    {% block mobileActiveFilters %}
+        {% if activeFilters|length > 0 %}
+            <div class="lf-search-default__mobile-filters">
+                <span>
+                    {{- ('bridge.components.search.filters.mobile.actives'|transchoice(activeFilters|length, {'%filters%': activeFilters|length}, 'components')) -}}
+                </span>
+                <button type="button" class="lf-search-default__mobile-filters__reset" data-lf-button-filters-reset>
+                    <span>
+                        {{- 'bridge.components.search.filters.reset.label'|trans({}, 'components') -}}
+                    </span>
+                </button>
+            </div>
+        {% endif %}
+    {% endblock %}
+</div>

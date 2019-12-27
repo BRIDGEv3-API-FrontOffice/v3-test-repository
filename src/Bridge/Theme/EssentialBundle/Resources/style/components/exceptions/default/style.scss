@@ -1,0 +1,53 @@
+//------------------------------------------------------------------
+// Component ExceptionsDefault
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+// graphical-404
+// graphical-shop
+
+.lf-exceptions-default {
+    &__main {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+        &__illustration {
+            @include img-responsive;
+
+            margin: $gutter-base auto;
+
+            path,
+            circle,
+            polygon,
+            line {
+                @media print {
+                    fill: $black;
+                    stroke: $black;
+                }
+
+                fill: $brand-primary;
+            }
+
+            &.lf-graphical {
+                &-404 {
+                    margin-bottom: 0;
+                    width: 100%;
+                    max-width: 320px;
+                }
+
+                &-shop {
+                    width: 100%;
+                    max-width: 320px;
+                }
+
+                &-cactus {
+                    width: 100%;
+                    max-width: 250px;
+                }
+            }
+        }
+    }
+}

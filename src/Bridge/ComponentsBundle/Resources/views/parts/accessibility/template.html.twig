@@ -1,0 +1,44 @@
+{# component 'parts-accessibility' #}
+
+{# @param  string  id        custom id            default(null)  example('custom-id') #}
+{# @param  string  class     custom class         default(null)  example('custom-class') #}
+{# @param  object  location  location object      default(null)  example(location) #}
+{# @param  number  hLevel    title level `[1-6]`  default(2)     example(2) #}
+
+{% set hLevel = hLevel|default(2) %}
+
+
+{% if location is defined and location.accessibility is defined %}
+    {% if (location.accessibility.access is defined and location.accessibility.access is not empty)
+        or (location.accessibility.parking is defined and location.accessibility.parking is not empty) %}
+        <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-parts-accessibility {{ class|default(null) }}">
+            {% if location.accessibility.access is defined and location.accessibility.access is not empty %}
+                <h{{hLevel}} class=" lf-parts-accessibility__title-access">
+                    {{- 'bridge.components.accessibility.access.title'|trans({}, 'components') -}}
+                </h{{hLevel}}>
+
+                <ul class="lf-parts-accessibility__list">
+                    {% for access in location.accessibility.access|split('\n') %}
+                        <li class="lf-parts-accessibility__list__item" data-e2e-location-access-data>
+                            {{- access|striptags -}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if location.accessibility.parking is defined and location.accessibility.parking is not empty %}
+                <h{{hLevel}} class="lf-parts-accessibility__title-park">
+                    {{- 'bridge.components.accessibility.parking.title'|trans({}, 'components') -}}
+                </h{{hLevel}}>
+
+                <ul class="lf-parts-accessibility__list">
+                    {% for parking in location.accessibility.parking|split('\n') %}
+                        <li class="lf-parts-accessibility__list__item" data-e2e-location-access-data>
+                            {{- parking|striptags -}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endif %}

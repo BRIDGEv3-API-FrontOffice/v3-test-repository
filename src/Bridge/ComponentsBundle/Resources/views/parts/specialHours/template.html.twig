@@ -1,0 +1,88 @@
+{# partial 'parts-specialPeriod' #}
+
+{# @param  string  id        custom id        default(null)  example('lf-parts-special-hours') #}
+{# @param  string  class     custom class     default(null)  example('custom-class') #}
+{# @param  object  location  location object  default(null)  example(location) #}
+
+{# @global  string  icon_set                   icon set class prefix #}
+{# @global  string  date_format                date format for opening or closing time #}
+{# @global  string  time_format                time format for opening or closing time #}
+{# @global  number  special_periods_threshold  special periods threshold parameter (in days) #}
+
+{% set specialPeriods = [] %}
+
+{% if location is defined
+    and location.openingHours is defined
+    and location.openingHours.specialPeriods is defined
+    and special_periods_threshold is defined %}
+    {% set specialPeriods = location.openingHours.specialPeriods|incoming_special_period|filter_special_periods(special_periods_threshold) %}
+{% endif %}
+
+{% if specialPeriods|length > 0 %}
+    <div id="{{ id|default('lf-parts-special-hours') }}"
+        class="lf-parts-special-hours {% if class is defined %}{{ class }}{% endif %}">
+        <div class="lf-parts-special-hours__header">
+            <em class="bridge-icon-{{ icon_set }}-danger"></em>
+            <span class="lf-parts-special-hours__header__title">
+                {{ 'bridge.components.special-hours.title'|trans({}, 'components') }}
+            </span>
+        </div>
+        <div class="lf-parts-special-hours__content" data-e2e-special-hours-content>
+            {% for specialPeriod in specialPeriods|sort_special_periods %}
+                {% set specialPeriodStart = specialPeriod.startDate.date|localizeddate(date_format, 'none', app.request.locale) %}
+                {% set specialPeriodEnd = specialPeriod.endDate.date|localizeddate(date_format, 'none', app.request.locale) %}
+
+                {% if specialPeriod.isClosed %}
+                    <div class="lf-parts-special-hours__content__item lf-parts-special-hours__content__item--closed">
+                        <div class="lf-parts-special-hours__content__item__time">
+                            <span>{{ 'bridge.components.special-hours.closed'|trans({}, 'components') -}}</span>
+                            {% if specialPeriodStart == specialPeriodEnd %}
+                                <span>{{ 'bridge.components.special-hours.date.one-day'|trans({'%start_period%': specialPeriodStart}, 'components') -}}</span>
+                            {% else %}
+                                <span>{{ 'bridge.components.special-hours.date.range'|trans({'%start_period%': specialPeriodStart, '%end_period%': specialPeriodEnd}, 'components') -}}</span>
+                            {% endif %}
+                        </div>
+                        {% if specialPeriod.description is defined and specialPeriod.description|length > 0 %}
+                            <div class="lf-parts-special-hours__content__item__description">
+                                {{- specialPeriod.description|striptags -}}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    {% set timeDescription = '' %}
+                    {% for timeSlot in specialPeriod.timeSlots %}
+                        {% if loop.first %}
+                            {% set timeSlotOpenFirst = timeSlot.openTime|localizeddate('none', time_format, app.request.locale) %}
+                            {% set timeSlotCloseFirst = timeSlot.closeTime|localizeddate('none', time_format, app.request.locale) %}
+                            {% set timeDescription = 'bridge.components.special-hours.time.one-slot'|trans({'%first_time_open%': timeSlotOpenFirst, '%first_time_close%': timeSlotCloseFirst}, 'components') %}
+                            {% if timeSlot.openTime == timeSlot.closeTime  %}
+                                {% set timeDescription = 'bridge.components.special-hours.time.all-day'|trans({}, 'components') %}
+                            {% endif %}
+                        {% else %}
+                            {% set timeSlotOpenLast = timeSlot.openTime|localizeddate('none', time_format, app.request.locale) %}
+                            {% set timeSlotCloseLast = timeSlot.closeTime|localizeddate('none', time_format, app.request.locale) %}
+                            {% set timeDescription = 'bridge.components.special-hours.time.two-slot'|trans({'%first_time_open%': timeSlotOpenFirst, '%first_time_close%': timeSlotCloseFirst, '%last_time_open%': timeSlotOpenLast, '%last_time_close%': timeSlotCloseLast}, 'components') %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="lf-parts-special-hours__content__item lf-parts-special-hours__content__item--open">
+                        <div class="lf-parts-special-hours__content__item__time">
+                            <span>{{ 'bridge.components.special-hours.open'|trans({}, 'components') }}</span>
+                            {% if specialPeriodStart == specialPeriodEnd %}
+                                <span>{{ 'bridge.components.special-hours.date.one-day'|trans({'%start_period%': specialPeriodStart}, 'components') }}</span>
+                            {% else %}
+                                <span>{{ 'bridge.components.special-hours.date.range'|trans({'%start_period%': specialPeriodStart, '%end_period%': specialPeriodEnd}, 'components') }}</span>
+                            {% endif %}
+                            <span>{{ timeDescription }}</span>
+                        </div>
+                        {% if specialPeriod.description is defined and specialPeriod.description|length > 0 %}
+                            <div class="lf-parts-special-hours__content__item__description">
+                                {{- specialPeriod.description|striptags -}}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

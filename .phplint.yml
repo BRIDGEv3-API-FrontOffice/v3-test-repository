@@ -1,0 +1,5 @@
+path: src
+jobs: 10
+extensions:
+  - php
+exclude:

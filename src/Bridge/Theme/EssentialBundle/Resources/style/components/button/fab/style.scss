@@ -1,0 +1,17 @@
+//------------------------------------------------------------------
+// Component ButtonFab
+//------------------------------------------------------------------
+
+.lf-button-fab {
+    @media print {
+        display: none;
+    }
+
+    &--primary {
+        @include button-fab($button-primary-bg, $button-primary-color);
+    }
+
+    &--secondary {
+        @include button-fab($button-secondary-bg, $button-secondary-color);
+    }
+}

@@ -1,0 +1,22 @@
+// Responsive image
+//
+// Keep images from scaling beyond the width of their parents.
+@mixin img-responsive($direction: horizontal, $display: block) {
+    display: $display;
+
+    @if $direction == horizontal {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    @if $direction == vertical {
+        width: auto;
+        height: 100%;
+        max-height: 100%;
+    }
+}
+
+.img-responsive {
+    @include img-responsive;
+}

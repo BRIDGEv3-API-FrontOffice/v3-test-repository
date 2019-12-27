@@ -1,0 +1,65 @@
+//------------------------------------------------------------------
+// Component MapToggler
+//------------------------------------------------------------------
+
+// Dependencies
+// button-fab
+
+.lf-map-toggler {
+    @media print {
+        display: none;
+    }
+
+    @media (min-width: $screen-sm-min) {
+        display: none;
+    }
+
+    position: relative;
+    transform: rotate(0);
+    transition: $transition-default;
+    width: 60px;
+    height: 60px;
+
+    &__button {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+
+        &--map {
+            visibility: visible;
+            opacity: 1;
+            z-index: 101;
+        }
+
+        &--list {
+            visibility: hidden;
+            opacity: 0;
+            z-index: 101;
+
+            > em {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    &.map-active {
+        transform: rotate(180deg);
+    }
+
+    &.map-active & {
+        &__button {
+            &--map {
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            &--list {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+}

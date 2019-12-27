@@ -1,0 +1,28 @@
+//------------------------------------------------------------------
+// Main style
+//------------------------------------------------------------------
+
+// Normalize
+@import "~normalize.css/normalize.css";
+
+// Fonts
+@import "fonts";
+
+// Bridge icons
+@import "~@components/style/bridge-icons";
+
+// Colors variables
+@import "colors-vars";
+
+// Generic variables
+@import "generic-vars";
+
+// Mixins
+@import "~@components/style/mixins";
+
+// Global
+@import "global";
+
+// Components
+@import "components-vars";
+@import "components-styles";

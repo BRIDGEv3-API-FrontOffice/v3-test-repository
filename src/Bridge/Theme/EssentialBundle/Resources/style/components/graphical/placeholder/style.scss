@@ -1,0 +1,17 @@
+//------------------------------------------------------------------
+// Component GraphicalPlaceholder
+//------------------------------------------------------------------
+
+.lf-graphical-placeholder {
+    @include img-responsive;
+
+    background-color: $brand-secondary;
+
+    &.dark {
+        @include stripes-over(-45deg, $black, $gutter-small);
+    }
+
+    &.light {
+        @include stripes-over(-45deg, $white, $gutter-small);
+    }
+}

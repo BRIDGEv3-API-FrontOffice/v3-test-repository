@@ -1,0 +1,140 @@
+# Front functionnal parameters
+parameters:
+    ## Theme
+    bridge_front_starter_kit.front_theme: 'Essential' # 'Essential'
+    bridge_front_starter_kit.icon_set: 'essential' # 'essential'
+
+    ## Brand
+    bridge_front_starter_kit.brand:
+        name: 'Merevo'
+        logo: '/build/assets/images/client/brand-logo.svg'
+
+    ## Multilang
+    bridge_front_starter_kit.default_locale: en
+
+    ## Seo prefix
+    bridge_front_starter_kit.seo-prefix:
+        en: 'search'
+        fr: 'recherche'
+        de: 'suche'
+
+    ## ToyBox
+    bridge_front_starter_kit.toybox.token: ''
+
+    ## Webmastertools
+    bridge_front_starter_kit.webmastertools: ''
+
+    ## Tracking
+    bridge_front_components.tracking:
+        bridge:
+            en: 'UA-112854365-1'
+            fr: 'UA-112854365-1'
+            de: 'UA-112854365-1'
+        client:
+            en: ''
+            fr: ''
+            de: ''
+
+    ## Illustrations
+    ### NOTE: Choose between illustration / video youtube / video
+    bridge_front_starter_kit.home_illustration:
+        650w: '/build/assets/images/client/home-illustration-650x.jpg'
+        900w: '/build/assets/images/client/home-illustration-900x.jpg'
+        1920w: '/build/assets/images/client/home-illustration-1920x.jpg'
+    bridge_front_starter_kit.home_video_youtube: ''
+    bridge_front_starter_kit.home_video: ''
+    ### NOTE: default location image for JsonLd
+    bridge_front_starter_kit.location_illustration: '/build/assets/images/client/location-illustration.png'
+
+    ## Offers
+    ### NOTE: set offer ranges design using slug
+    bridge_front_starter_kit.offer_range_style: # 'default'|'slider'|'icon'
+        'our-brands': 'slider'
+        'our-services': 'icon'
+
+    ## Seo footer
+    bridge_front_starter_kit.footer_seo.home.cities_number: 24
+    bridge_front_starter_kit.footer_seo.home.group_by: 'city' # 'city'|'division0'|'division1'|'country'
+    bridge_front_starter_kit.footer_seo.location.cities_number: 24
+    bridge_front_starter_kit.footer_seo.geo_divisions.cities_number: 24
+    bridge_front_starter_kit.footer_seo.order: 'default' # 'name'|'default'
+
+    ## Search
+    bridge_front_starter_kit.pagination: '20'
+    bridge_front_starter_kit.search.radius: 50000
+    bridge_front_core.services.api.geocoding.provider: 'gmap' # 'gmap'|'mappy' - use mappy only for France
+    bridge_front_starter_kit.search.country:
+        - gb
+        - us
+        - fr
+    bridge_front_starter_kit.search.use_geocoding: true
+    bridge_front_starter_kit.search.operator: 'OR'
+
+    ## Forms
+    bridge_front_starter_kit.forms.contact.recaptcha.active: false
+    bridge_front_starter_kit.forms.contact.recaptcha.site_key: ''
+    bridge_front_starter_kit.forms.contact.recaptcha.private_key: ''
+    bridge_front_starter_kit.forms.contact.max_size: 10000000
+    bridge_front_starter_kit.forms.contact.mime_type: 'application/pdf,image/gif,image/jpeg,image/png,image/tiff,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.oasis.opendocument.text,application/vnd.ms-word.document.macroEnabled.12,application/vnd.ms-word.template.macroEnabled.12,text/csv,application/vnd.ms-excel,application/vnd.oasis.opendocument.spreadsheet,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.ms-excel.sheet.macroEnabled.12,application/vnd.ms-excel.template.macroEnabled.12,application/vnd.ms-excel.addin.macroEnabled.12,application/vnd.ms-excel.sheet.binary.macroEnabled.12'
+    bridge_front_starter_kit.forms.location_address.with_email: true
+    bridge_front_starter_kit.forms.location_address.with_phone: true
+    bridge_front_starter_kit.forms.location_address.default_phone_country: '%bridge_front_starter_kit.default_locale%'
+    bridge_front_starter_kit.forms.show_all_fields: true
+
+    ## Datetime
+    bridge_front_api.twig.opening_hours_extension.first_day: 'MONDAY'
+    bridge_front_components.twig.date_format: 'long' # 'short'|'medium'|'long'|'full' see https://twig-extensions.readthedocs.io/en/latest/intl.html
+    bridge_front_components.twig.time_format: 'short' # 'short'|'medium'|'long'|'full' see https://twig-extensions.readthedocs.io/en/latest/intl.html
+    bridge_front_starter_kit.default_timezone:
+        en: 'Europe/London'
+        fr: 'Europe/Paris'
+        de: 'Europe/Berlin'
+
+    ## Special hours
+    bridge_front_components.twig.special_periods_threshold: 30 # days
+
+    ## Map
+    bridge_front_starter_kit.map.provider: 'mappy' # BatMap provider: 'gmaps'|'mappy'|'leaflet'
+    bridge_front_starter_kit.map.api_key: 'PJ_Bridge'
+    bridge_front_starter_kit.map.itinerary:
+        host: 'https://fr.mappy.com/#/2/M2/TItinerary/I'
+        start_addr: 'FR'
+        dest_addr: '|TO'
+    bridge_front_starter_kit.map.markers.show_label: false
+    bridge_front_starter_kit.map.markers.show_position: true
+    bridge_front_starter_kit.map.markers.show_cluster: true
+    bridge_front_starter_kit.map.markers.show_infowindow: false
+
+    ## GDPR
+    ### NOTE: only cookies are required for gdpr consent
+    bridge_front_starter_kit.gdpr_links:
+        cookies:
+            en:
+                label: 'Cookies info'
+                url: '/gdpr/cookies'
+            fr:
+                label: 'Info cookies'
+                url: '/gdpr/cookies'
+            de:
+                label: 'Cookies info'
+                url: '/gdpr/cookies'
+        legal:
+            en:
+                label: 'Legal Notice'
+                url: '/gdpr/legal'
+            fr:
+                label: 'Mentions légales'
+                url: '/gdpr/legal'
+            de:
+                label: 'Legal Notice'
+                url: '/gdpr/legal'
+        protection:
+            en:
+                label: 'Data protection'
+                url: '/gdpr/protection'
+            fr:
+                label: 'Protection des données'
+                url: '/gdpr/protection'
+            de:
+                label: 'Data protection'
+                url: '/gdpr/protection'

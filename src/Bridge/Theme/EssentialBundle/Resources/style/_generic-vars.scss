@@ -1,0 +1,84 @@
+//------------------------------------------------------------------
+// Generic variables
+//------------------------------------------------------------------
+
+//
+// Theme
+//
+
+$icon-set: 'essential';
+
+//
+// Gutters
+//
+
+$gutter-base: 30px;
+$gutter-small: $gutter-base / 2;
+$gutter-large: $gutter-base * 2;
+
+//
+// Breakpoints
+//
+
+$screen-xs-min: 480px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+$container-sm: calc(#{$screen-sm-min} - #{$gutter-base} - 15px);
+$container-md: calc(#{$screen-md-min} - #{$gutter-base} - 20px);
+$container-lg: calc(#{$screen-lg-min} - #{$gutter-base} - 30px);
+
+//
+// Fonts
+//
+
+$font-family-base: 'Montserrat', Arial, sans-serif;
+$font-family-variante: $font-family-base;
+
+$font-size-base: 16px;
+$line-height-base: 1.4;
+
+$font-weight-base: 400;
+$font-weight-light: 300;
+$font-weight-bold: 700;
+
+$headings-font-family: $font-family-variante;
+$headings-font-weight: $font-weight-base;
+$headings-color: $brand-primary;
+
+$font-size-h1: floor(($font-size-base * 2));
+$font-size-h2: floor(($font-size-base * 1.6));
+$font-size-h3: ceil(($font-size-base * 1.4));
+$font-size-h4: $font-size-base;
+$font-size-h5: ceil(($font-size-base * .9));
+$font-size-h6: ceil(($font-size-base * .8));
+
+$font-size-small: ceil(($font-size-base * .8));
+$font-size-small-mobile: ceil(($font-size-base * .85));
+
+//
+// Cursor
+//
+
+$cursor-disabled: default;
+
+//
+// Animations
+//
+
+$transition-time: 320ms;
+$transition-animation: ease-in-out;
+$transition-default: all $transition-time $transition-animation;
+
+//
+// Box Shadow
+//
+
+$box-shadow-color: rgba(darken($brand-primary, 15%), .15);
+$box-shadow-default: 1px 5px 5px $box-shadow-color;
+$box-shadow-large: 3px 8px 10px $box-shadow-color;

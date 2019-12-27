@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="91e1ea675182519a35c5fad9c085cd18" resname="bridge.theme.home.meta.title">
+        <source>bridge.theme.home.meta.title</source>
+        <target>Store locator %brand.name%</target>
+      </trans-unit>
+      <trans-unit id="e718bd668f4febe3efb3fcf5754570d2" resname="bridge.theme.home.meta.description">
+        <source>bridge.theme.home.meta.description</source>
+        <target>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error qui in sapiente saepe similique. Temporibus a consequuntur assumenda magni repudiandae, obcaecati iure aperiam sunt amet fuga quas culpa, perspiciatis ex.</target>
+      </trans-unit>
+      <trans-unit id="1a3f4d00ffb00ea0f78cf89146b1d41d" resname="bridge.theme.home.h1">
+        <source>bridge.theme.home.h1</source>
+        <target>Find the nearest %brand.name% store</target>
+      </trans-unit>
+      <trans-unit id="1c560b8f65fc7d3780108c288c05d260" resname="bridge.theme.home.presentation.title">
+        <source>bridge.theme.home.presentation.title</source>
+        <target>Presentation</target>
+      </trans-unit>
+      <trans-unit id="707e09c0d742c302bf34a8d25bde1e60" resname="bridge.theme.home.presentation.content">
+        <source>bridge.theme.home.presentation.content</source>
+        <target><![CDATA[<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Voluptatibus facilis</strong> impedit expedita vitae ratione neque minus deserunt eum dicta? Eveniet maxime explicabo veritatis dolore sunt est iusto doloribus pariatur accusantium. Magnam commodi odio dicta repellat, officiis cum sint aut sit, accusamus optio animi eius necessitatibus quas explicabo esse! Corrupti corporis culpa architecto quaerat exercitationem rerum cumque inventore repellendus! Quidem, rerum.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed asperiores inventore quibusdam, esse consequatur nihil aliquam <strong>quisquam nemo expedita</strong> itaque, excepturi molestiae deserunt dolore maiores iste minima. A, commodi iure? Deserunt pariatur corporis ab fugit, perferendis nobis, voluptatum laboriosam qui culpa incidunt laborum quaerat iusto doloremque illo illum ducimus fuga, sed molestias officia magnam veritatis mollitia deleniti? <strong>Libero, sapiente perspiciatis?</strong> Laudantium voluptatibus obcaecati explicabore deleniti? Ut quis quae vel facero, earum dole libero. Ut distinctio sequi voluptate laborum deserunt consequuntur, quaerat sit quia inventore earum aliquid. Rerum iure inventore optio?</p>]]></target>
+      </trans-unit>
+      <trans-unit id="d6a364c7717f284aca436bdc9e7173c2" resname="bridge.theme.home.news.title">
+        <source>bridge.theme.home.news.title</source>
+        <target>News</target>
+      </trans-unit>
+      <trans-unit id="3f7897c1388baaeecb8f5686fc59b079" resname="bridge.theme.home.events.title">
+        <source>bridge.theme.home.events.title</source>
+        <target>Events</target>
+      </trans-unit>
+      <trans-unit id="90b25f8d101583d66f9e2c7bd490cb9e" resname="bridge.theme.home.presentation.image_description">
+        <source>bridge.theme.home.presentation.image_description</source>
+        <target>%brand.name%</target>
+      </trans-unit>
+      <trans-unit id="68bd74684c060195bdf8d81e970bb83b" resname="bridge.theme.home.banners.title">
+        <source>bridge.theme.home.banners.title</source>
+        <target>Banner</target>
+      </trans-unit>
+      <trans-unit id="5a7a3cf08968dba05a8fc026af900f08" resname="bridge.theme.home.footer_seo.title">
+        <source>bridge.theme.home.footer_seo.title</source>
+        <target>%brand.name% stores around the world</target>
+      </trans-unit>
+      <trans-unit id="6ae2337521b4e9e007fb5bb93de0b543" resname="bridge.theme.results.geolocation.meta.title">
+        <source>bridge.theme.results.geolocation.meta.title</source>
+        <target>%brand.name% stores near you</target>
+      </trans-unit>
+      <trans-unit id="93bc0e8f50c9c115d5807cc4d44b35e8" resname="bridge.theme.results.query.meta.title">
+        <source>bridge.theme.results.query.meta.title</source>
+        <target>%brand.name% stores for your search</target>
+      </trans-unit>
+      <trans-unit id="e03b4b39d8e17a974efeb0447953b5dc" resname="bridge.theme.results.geolocation.meta.description">
+        <source>bridge.theme.results.geolocation.meta.description</source>
+        <target>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore delectus, in tempora nam vero provident soluta sit natus accusamus repudiandae sint tenetur dolore molestiae possimus, id quae similique. Non, doloribus!</target>
+      </trans-unit>
+      <trans-unit id="0a77d739080fae273e8507a698aca677" resname="bridge.theme.results.query.meta.description">
+        <source>bridge.theme.results.query.meta.description</source>
+        <target>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur pariatur, assumenda distinctio laboriosam maxime ipsam ut beatae accusantium odio ducimus dolorum quae voluptatem exercitationem eveniet at cum quibusdam eum aspernatur.</target>
+      </trans-unit>
+      <trans-unit id="39cc8dd4a7637143d9dade4eadae6d2d" resname="bridge.theme.results.geolocation.h1">
+        <source>bridge.theme.results.geolocation.h1</source>
+        <target><![CDATA[{0} No stores found near <span>your position</span> | {1} One store <span>near your position</span> | [2,Inf[ %total% stores <span>near your position</span>]]></target>
+      </trans-unit>
+      <trans-unit id="3bc7e08938b8b36f4ec61531c6d47acf" resname="bridge.theme.results.query.h1">
+        <source>bridge.theme.results.query.h1</source>
+        <target><![CDATA[{0} No stores found <span>for your search</span> | {1} One store <span>for your search</span> | [2,Inf[ %total% stores <span>for your search</span>]]></target>
+      </trans-unit>
+      <trans-unit id="9f8817b9f52e9e21b865be69802ff84f" resname="bridge.theme.pagination.abstract">
+        <source>bridge.theme.pagination.abstract</source>
+        <target>%pagination.start% - %pagination.end% of %pagination.total% stores</target>
+      </trans-unit>
+      <trans-unit id="49696d840b91e6de9b9227cc52c7ec14" resname="bridge.theme.geo_divisions.meta.pagination">
+        <source>bridge.theme.geo_divisions.meta.pagination</source>
+        <target>Page %pagination.start% of %pagination.end%</target>
+      </trans-unit>
+      <trans-unit id="9b73bac551f21b1fce2993e8d6944d0c" resname="bridge.theme.geo_divisions.country.meta.title">
+        <source>bridge.theme.geo_divisions.country.meta.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="a260d15f98bca7dfa895b6368b13562e" resname="bridge.theme.geo_divisions.country.meta.description">
+        <source>bridge.theme.geo_divisions.country.meta.description</source>
+        <target>%division% custom meta description</target>
+      </trans-unit>
+      <trans-unit id="537158d32253a4f65836e9e28cfb3231" resname="bridge.theme.geo_divisions.country.h1">
+        <source>bridge.theme.geo_divisions.country.h1</source>
+        <target><![CDATA[{1} One store <span>in %division%</span> | [2,Inf[ %total% stores <span>in %division%</span>]]></target>
+      </trans-unit>
+      <trans-unit id="94e9644bb479398a3ab51ff36df5d5f1" resname="bridge.theme.geo_divisions.country.description">
+        <source>bridge.theme.geo_divisions.country.description</source>
+        <target>%division% custom page description</target>
+      </trans-unit>
+      <trans-unit id="862b663189cbf8eba0543bd013779d73" resname="bridge.theme.geo_divisions.division0.h1">
+        <source>bridge.theme.geo_divisions.division0.h1</source>
+        <target><![CDATA[{1} One store <span>in %division%</span> | [2,Inf[ %total% stores <span>in %division%</span>]]></target>
+      </trans-unit>
+      <trans-unit id="edea4808336ee90a73893cf60f0319e9" resname="bridge.theme.geo_divisions.division0.meta.title">
+        <source>bridge.theme.geo_divisions.division0.meta.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="1d7853f0a5f6cd9d415013e5face9cb2" resname="bridge.theme.geo_divisions.division0.meta.description">
+        <source>bridge.theme.geo_divisions.division0.meta.description</source>
+        <target>%division% custom meta description</target>
+      </trans-unit>
+      <trans-unit id="d4eabf873fa4372e08d96a03c4b82cb9" resname="bridge.theme.geo_divisions.division0.description">
+        <source>bridge.theme.geo_divisions.division0.description</source>
+        <target>%division% custom page description</target>
+      </trans-unit>
+      <trans-unit id="58dc8d632cb78b66d2a9aff500908ce0" resname="bridge.theme.geo_divisions.division1.h1">
+        <source>bridge.theme.geo_divisions.division1.h1</source>
+        <target><![CDATA[{1} One store <span>in %division%</span> | [2,Inf[ %total% stores <span>in %division%</span>]]></target>
+      </trans-unit>
+      <trans-unit id="8480bf74f68edf5acd4fa5c587a376d4" resname="bridge.theme.geo_divisions.division1.meta.title">
+        <source>bridge.theme.geo_divisions.division1.meta.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="a4196f59e3a4e7dac4f47b8fb751929a" resname="bridge.theme.geo_divisions.division1.meta.description">
+        <source>bridge.theme.geo_divisions.division1.meta.description</source>
+        <target>%division% custom meta description</target>
+      </trans-unit>
+      <trans-unit id="dbef8f598518840adadf4d332740bd5c" resname="bridge.theme.geo_divisions.division1.description">
+        <source>bridge.theme.geo_divisions.division1.description</source>
+        <target>%division% custom page description</target>
+      </trans-unit>
+      <trans-unit id="2b67888909469b88a6742174591530b4" resname="bridge.theme.geo_divisions.city.h1">
+        <source>bridge.theme.geo_divisions.city.h1</source>
+        <target><![CDATA[{1} One store <span>at %division%</span> | [2,Inf[ %total% stores <span>at %division%</span>]]></target>
+      </trans-unit>
+      <trans-unit id="543555740dbafc31c8730c515c5d0212" resname="bridge.theme.geo_divisions.city.meta.title">
+        <source>bridge.theme.geo_divisions.city.meta.title</source>
+        <target>%brand.name% stores at %division%</target>
+      </trans-unit>
+      <trans-unit id="97bf4ea61d17d87363bef97ea206b6bf" resname="bridge.theme.geo_divisions.city.meta.description">
+        <source>bridge.theme.geo_divisions.city.meta.description</source>
+        <target>%division% custom meta description</target>
+      </trans-unit>
+      <trans-unit id="f0cc486ef5ac182f08d6bfcfb8c552bf" resname="bridge.theme.geo_divisions.city.description">
+        <source>bridge.theme.geo_divisions.city.description</source>
+        <target>%division% custom page description</target>
+      </trans-unit>
+      <trans-unit id="0fc0b2b9e9f2121ccd8ce52832aac7e2" resname="bridge.theme.geo_divisions.footer_seo.division0.title">
+        <source>bridge.theme.geo_divisions.footer_seo.division0.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="f8bdc594daf6ea7e74e99188a4ee288b" resname="bridge.theme.geo_divisions.footer_seo.city.title">
+        <source>bridge.theme.geo_divisions.footer_seo.city.title</source>
+        <target>%brand.name% stores near %division%</target>
+      </trans-unit>
+      <trans-unit id="4b8f39b9e83f71f7c17e5217b9a20fa2" resname="bridge.theme.geo_divisions.footer_seo.division1.title">
+        <source>bridge.theme.geo_divisions.footer_seo.division1.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="0161aa1256b23c5b38f3708b419e1736" resname="bridge.theme.geo_divisions.footer_seo.country.title">
+        <source>bridge.theme.geo_divisions.footer_seo.country.title</source>
+        <target>%brand.name% stores in %division%</target>
+      </trans-unit>
+      <trans-unit id="5a1c69471b360a6e36523e404429ab10" resname="bridge.theme.location.footer_seo.title">
+        <source>bridge.theme.location.footer_seo.title</source>
+        <target>%brand.name% stores near %location.city%</target>
+      </trans-unit>
+      <trans-unit id="b3f4735a69f296bc723e7e3f34b9586e" resname="bridge.theme.location.store-presentation.title">
+        <source>bridge.theme.location.store-presentation.title</source>
+        <target>store presentation</target>
+      </trans-unit>
+      <trans-unit id="aeacd06a52ed1e81a4a7bd0935e10dc4" resname="bridge.theme.location.hours.title">
+        <source>bridge.theme.location.hours.title</source>
+        <target>Store Opening Hours</target>
+      </trans-unit>
+      <trans-unit id="1df4fa538ac3081c115d1b280540601c" resname="bridge.theme.location.meta.title">
+        <source>bridge.theme.location.meta.title</source>
+        <target>%location.name%</target>
+      </trans-unit>
+      <trans-unit id="f660541813b2a318fe5596b32df8e960" resname="bridge.theme.location.meta.description">
+        <source>bridge.theme.location.meta.description</source>
+        <target>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet sint illo, necessitatibus excepturi quia temporibus nam sunt quas laboriosam quisquam voluptatum debitis consequatur, aut fuga possimus nihil animi rem ratione?</target>
+      </trans-unit>
+      <trans-unit id="5a59970fdd56feb0e0b1958191dd8ab7" resname="bridge.theme.results.aria-title">
+        <source>bridge.theme.results.aria-title</source>
+        <target>List of stores</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

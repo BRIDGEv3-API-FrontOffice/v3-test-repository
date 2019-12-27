@@ -1,0 +1,29 @@
+//------------------------------------------------------------------
+// Component PartsFax
+//------------------------------------------------------------------
+
+// Dependencies
+// button-text
+
+.lf-parts-fax {
+    &__button {
+        &.hidden {
+            display: none;
+        }
+
+        @media print {
+            &--number,
+            &--number.hidden {
+                display: initial;
+                background-color: unset;
+                padding: 1px;
+                color: $black;
+            }
+
+            &--button,
+            &--button.hidden {
+                display: none;
+            }
+        }
+    }
+}

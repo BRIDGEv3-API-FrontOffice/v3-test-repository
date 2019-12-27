@@ -1,0 +1,190 @@
+//------------------------------------------------------------------
+// Component PartsOpeningHours
+//------------------------------------------------------------------
+
+@mixin today($direction: 'vertical') {
+    @if $direction == 'vertical' {
+        margin: 0 -4px;
+        padding: $gutter-small ($gutter-small + 4px);
+    }
+
+    @if $direction == 'horizontal' {
+        margin: -4px 0;
+        padding: ($gutter-small + 4px) $gutter-small;
+    }
+
+    border-radius: 4px;
+    background-color: $brand-secondary;
+}
+
+.lf-parts-title-hours {
+    display: none;
+}
+
+.lf-parts-opening-hours {
+    @media print {
+        border: none;
+    }
+
+    border: 1px solid $brand-secondary;
+
+    &__content {
+        @media print {
+            display: flex;
+            flex-flow: column;
+            margin: 0;
+        }
+
+        &__day {
+            @media (min-width: $screen-sm-min) {
+                align-items: center;
+                flex: 1;
+                padding: $gutter-small;
+                max-height: unset;
+
+                &:not(:first-child) {
+                    border-top-width: 1px;
+                }
+            }
+
+            @media print {
+                align-items: left;
+                flex-direction: row;
+                border: none;
+                border-bottom: 1px solid $brand-secondary;
+                padding: $gutter-small / 2;
+                max-height: 100%;
+                color: unset;
+
+                &__name {
+                    font-weight: 800;
+                }
+            }
+
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            transition: $transition-default;
+            border: 0 solid $brand-secondary;
+            padding: 0 $gutter-small;
+            max-height: 0;
+            overflow: hidden;
+            color: $brand-primary;
+
+            &__name {
+                display: block;
+            }
+
+            &__periods {
+                @media (min-width: $screen-sm-min) {
+                    display: block;
+                    align-items: center;
+                    flex-flow: row nowrap;
+                    margin-top: 0;
+                    margin-left: 0;
+                }
+
+                display: flex;
+                flex-direction: row;
+                margin-left: $gutter-small;
+
+                &__time {
+                    text-align: center;
+                }
+
+                &__time + &__time {
+                    &::before {
+                        content: ', ';
+                    }
+                }
+            }
+
+            &__impacted {
+                margin-top: $gutter-small;
+                width: 100%;
+                color: $warning-color;
+
+                @media print {
+                    display: none;
+                }
+            }
+
+            &--today {
+                @media (min-width: $screen-sm-min) {
+                    @include today;
+                }
+
+                @media print {
+                    margin: 0;
+                    border-radius: 0;
+                    background-color: $transparent;
+                    padding: $gutter-small / 2;
+                }
+
+                padding: $gutter-small;
+                max-height: 200px;
+            }
+        }
+    }
+
+    &__expand {
+        @media print {
+            display: none;
+        }
+
+        @media (min-width: $screen-sm-min) {
+            display: none;
+        }
+
+        display: flex;
+        margin: 0 auto $gutter-small;
+        max-width: calc(100% - #{$gutter-small} * 2);
+    }
+
+    @media (max-width: $screen-md-max) {
+        &.expanded & {
+            &__content {
+                &__day {
+                    border-width: 0;
+                    padding: $gutter-small;
+                    max-height: 200px;
+
+                    &--today {
+                        @include today;
+                    }
+
+                    &--today + .lf-parts-opening-hours__content__day {
+                        border-top-width: 0;
+                    }
+
+                    &__periods {
+                        flex-direction: column;
+                        margin-left: 0;
+                        width: 50%;
+                        max-width: 150px;
+
+                        &__time {
+                            &::before {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &:not(:first-child) {
+                        border-top-width: 1px;
+                    }
+                }
+            }
+
+            &__expand {
+                display: none;
+            }
+        }
+    }
+
+    @media print {
+        &.special-periods {
+            width: 100%;
+        }
+    }
+}

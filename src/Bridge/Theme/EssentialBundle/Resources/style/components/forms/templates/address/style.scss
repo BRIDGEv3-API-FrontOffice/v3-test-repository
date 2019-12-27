@@ -1,0 +1,23 @@
+//------------------------------------------------------------------
+// Component FormsTemplatesAddress
+//------------------------------------------------------------------
+
+.lf-forms-address {
+    &__form {
+        &__phone {
+            #location-address-form_bridge-user-phone {
+                padding-left: 50px;
+            }
+
+            #location-address-form_bridge-user-phone_label {
+                top: -.3em;
+                left: $gutter-small / 2;
+                transform: translateY(-14px) scale(.8);
+                transform-origin: 0 0;
+                background-color: $background-color;
+                padding-right: $gutter-small / 2;
+                padding-left: 0;
+            }
+        }
+    }
+}

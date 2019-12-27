@@ -1,0 +1,158 @@
+{% extends '@views/base.html.twig' %}
+
+{% set jsModuleName = 'results' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/results' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script>window.batmapProvider = '{{ map.provider }}'</script>
+    <script src="{{ asset('build/results' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name,
+    '%query%': query,
+    '%total%': locations.total,
+    '%pagination.start%': pagination.hitsStart,
+    '%pagination.end%': pagination.hitsEnd,
+    '%pagination.total%': pagination.hitsTotal,
+    '%pagination.current%': pagination.current
+} %}
+
+{% block title %}
+    {% if locations.isGeolocationSearch() %}
+        <title>{{ 'bridge.theme.results.geolocation.meta.title' | transchoice(locations.total, translationVars, 'seo') | striptags }}</title>
+    {% else %}
+        <title>{{ 'bridge.theme.results.query.meta.title' | transchoice(locations.total, translationVars, 'seo') | striptags }}</title>
+    {% endif %}
+{% endblock %}
+
+{% block additional_meta %}
+    {% if locations.isGeolocationSearch() %}
+        <meta name="description" content="{{ 'bridge.theme.results.geolocation.meta.description' | trans(translationVars, 'seo') | striptags }}"/>
+    {% else %}
+        <meta name="description" content="{{ 'bridge.theme.results.query.meta.description' | trans(translationVars, 'seo') | striptags }}"/>
+    {% endif %}
+    {% if pagination.isPagination %}
+        {% if pagination.current > 1 %}
+            <link rel="prev" href="{{ pagination.prevUrl|https }}">
+        {% endif %}
+        {% if pagination.current < pagination.last %}
+            <link rel="next" href="{{ pagination.nextUrl|https }}">
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <section id="lf-results" class="lf-results" data-lf-results-length="{{ locations.getRows()|length }}">
+        {% block pageTop %}
+            {% embed '@components/topbar/default/template.html.twig' with {
+                'id': 'lf-results-top',
+                'class': 'lf-results__top',
+                'attributes': {'data-lf-search-wrapper': ''},
+                'query': query,
+                'searchSetting': searchSetting,
+                'queryFilters': queryFilters
+            } only %}
+                {% block content %}
+                        {% include '@components/search/default/template.html.twig' with {
+                            'id': 'lf-search',
+                            'class': 'lf-results__top__search',
+                            'query': query,
+                            'searchSetting': searchSetting,
+                            'queryFilters': queryFilters
+                        } only %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+
+        {% block pageMain %}
+            <div id="lf-content">
+                <div id="lf-results-main" class="lf-results__main">
+                    {% if locations.getRows()|length > 0 %}
+                        {# pageResults #}
+                        <main class="lf-results__main__c-block" aria-label="{{ 'bridge.theme.results.aria-title'|trans({}, 'seo') }}">
+                        {% block pageTitle %}
+                            {{ _self.pageTitle(locations, translationVars) }}
+                        {% endblock %}
+                        {% block pageResults %}
+                            <div class="lf-results__main__c-block__results" data-lf-results>
+                                {% block pageLocations %}
+                                    <ul class="lf-results__main__c-block__results__list" data-lf-list>
+                                        {% for location in locations.getRows() %}
+                                            {% block pageLocation %}
+                                                {% include '@components/location/default/template.html.twig' with {
+                                                    'class': 'lf-results__main__c-block__results__list__item',
+                                                    'location': location,
+                                                    'counter': map.showLabel ? loop.index : null,
+                                                    'titleattributes': {'data-e2e-location-name': ''},
+                                                    'attributes': {'data-e2e-result-location': ''}
+                                                } only %}
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endblock %}
+                                {% block pagePagination %}
+                                    <a class='sr-only' href="#lf-search-form-query">'bridge.components.wcag.skip.backToQuery.text'|trans({}, 'components'</a>
+                                    {% include '@components/pagination/default/template.html.twig' with {
+                                        'class': 'lf-results__main__c-block__results__pagination',
+                                        'pagination': pagination,
+                                        'abstract': 'bridge.theme.pagination.abstract'|trans(translationVars, 'seo'),
+                                        'id': 'lf-pagination'
+                                    } only %}
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                        </main>
+                        <aside class="lf-results__main__m-block">
+                        {% block pageMap %}
+                            {% include '@components/map/default/template.html.twig' with {
+                                'class': 'lf-results__main__m-block__map'
+                            } only %}
+                        {% endblock %}
+                        </aside>
+
+                        {% block pageMapToggler %}
+                            {% include '@components/map/toggler/template.html.twig' with {
+                                'class': 'lf-results__main__map-toggler'
+                            } only %}
+                        {% endblock %}
+                        {# end pageResults #}
+                    {% else %}
+                        {# pageNoResults #}
+                            {% block pageNoResults %}
+                                <div class="lf-results__main__no-results">
+                                    {% block pageNoResultsTitle %}
+                                        {{ _self.pageTitle(locations, translationVars) }}
+                                    {% endblock %}
+
+                                    {% block pageNoResultsContent %}
+                                        {% include '@components/exceptions/default/template.html.twig' with {
+                                            'class': 'lf-results__main__no-results__exceptions',
+                                            'message': 'bridge.theme.noresults.message' | trans,
+                                            'labelButton': 'bridge.theme.go_back.label' | trans(translationVars)
+                                        } only %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        {# end pageNoResults #}
+                    {% endif %}
+
+                    {% include '@components/search/overlay/template.html.twig' only %}
+                </div>
+            </div>
+        {% endblock %}
+    </section>
+{% endblock %}
+
+{% macro pageTitle(locations, translationVars) %}
+    {% if locations.isGeolocationSearch() %}
+        {% set title = 'bridge.theme.results.geolocation.h1' | transchoice(locations.total, translationVars, 'seo') %}
+    {% else %}
+        {% set title = 'bridge.theme.results.query.h1' | transchoice(locations.total, translationVars, 'seo') %}
+    {% endif %}
+
+    <h1 class="lf-results__main__c-block__title" data-lf-results-title>{{- title|raw -}}</h1>
+{% endmacro %}

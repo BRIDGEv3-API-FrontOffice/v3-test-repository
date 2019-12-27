@@ -1,0 +1,149 @@
+{# components 'forms-templates-contact' #}
+
+{# @param  string  id           custom id             default('lf-forms-contact')  example('lf-forms-contact') #}
+{# @param  string  class        custom class          default(null)                example('custom-class') #}
+{# @param  string  legalNotice  legal notice content  default(null)                example('Legal notice') #}
+{# @param  object  location     location object       default(null)                example(location) #}
+
+{# @global  object  forms  forms configuration #}
+
+{% set id = id|default('lf-forms-contact') %}
+{% set class = class|default(null) %}
+
+{% if contactForm is defined %}
+    {% embed '@components/forms/default/template.html.twig' with {
+        'class': 'lf-forms-contact ' ~ class,
+        'formView': contactForm|form,
+        'attr': {
+            'id': id,
+            'class': 'lf-forms-contact__form active' ~ (class ? ' ' ~ class ~ '__form' : ''),
+            'data-lf-contact-form': '',
+            'data-lf-tracking': tracking({bind: 'submit', category: 'Contact form', label: tracking_location_label(location)}),
+            'data-lf-msg-success': 'bridge.components.forms.contact_form.success.message'|trans({}, 'forms'),
+            'data-lf-msg-error': 'bridge.components.forms.error.message'|trans({}, 'forms'),
+            'data-lf-modal-id' : modalId
+        },
+        'legalNotice': legalNotice,
+        'location': location
+    } only %}
+        {% block fields %}
+            {% if formView.children['bridge-author-first-name'] is defined %}
+                <div class="lf-forms-contact__form__firstname placeholder-fmk" data-e2e-contact-item>
+                    {{ form_label(formView.children['bridge-author-first-name']) }}
+                    {{ form_widget(formView.children['bridge-author-first-name'], {'attr': {
+                        'class': 'lf-forms-contact__form__firstname__input',
+                        'required': formView.children['bridge-author-first-name'].vars.required,
+                        'data-trigger-custom': 'blur',
+                        'aria-required': 'true',
+                        'aria-invalid': 'false',
+                        'data-fv-notempty-message':'bridge.components.forms.error.first-name.required'|trans({}, 'forms'),
+                        'data-fv-not-empty': "true",
+                        'data-fv-not-empty___message':'bridge.components.forms.error.first-name.required'|trans({}, 'forms'),
+                        'data-e2e-contact-first-name':''
+                    }}) }}
+                    
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-author-last-name'] is defined %}
+                <div class="lf-forms-contact__form__lastname placeholder-fmk" data-e2e-contact-item>
+                    {{ form_label(formView.children['bridge-author-last-name']) }}
+                    {{ form_widget(formView.children['bridge-author-last-name'], {'attr': {
+                        'class': 'lf-forms-contact__form__lastname__input',
+                        'required': formView.children['bridge-author-last-name'].vars.required,
+                        'data-trigger-custom': 'blur',
+                        'aria-required': 'true',
+                        'aria-invalid': 'false',
+                        'data-fv-notempty-message':'bridge.components.forms.error.last-name.required'|trans({}, 'forms'),
+                        'data-fv-not-empty': "true",
+                        'data-fv-not-empty___message':'bridge.components.forms.error.last-name.required'|trans({}, 'forms'),
+                        'data-e2e-contact-last-name':''
+                    }}) }}
+                    
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-email'] is defined %}
+                <div class="lf-forms-contact__form__mail placeholder-fmk" data-e2e-contact-item>
+                    {{ form_label(formView.children['bridge-email']) }}
+                    {{ form_widget(formView.children['bridge-email'], {
+                        'type': 'email',
+                        'attr': {
+                            'class': 'lf-forms-contact__form__mail__input',
+                            'required': true,
+                            'data-trigger-custom': 'blur',
+                            'aria-required': 'true',
+                            'aria-invalid': 'false',
+                            'data-fv-not-empty': "true",
+                            'data-fv-not-empty___message':'bridge.components.forms.error.mail.required'|trans({}, 'forms'),
+                            'data-fv-notempty-message':'bridge.components.forms.error.mail.required'|trans({}, 'forms'),
+                            'data-fv-emailaddress': true,
+                            'data-fv-email-address___message':'bridge.components.forms.error.mail.format'|trans({}, 'forms'),
+                            'data-e2e-contact-email':''
+                        }
+                    }) }}
+                    
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-content'] is defined %}
+                <div class="lf-forms-contact__form__message placeholder-fmk" data-e2e-contact-item>
+                    {{ form_label(formView.children['bridge-content']) }}
+                    {{ form_widget(formView.children['bridge-content'], {'attr': {
+                        'class': 'lf-forms-contact__form__message__input materialize-textarea', 'rows': '5',
+                        'required': 'true',
+                        'data-trigger-custom': 'blur',
+                        'aria-invalid': 'false',
+                        'data-fv-not-empty': "true",
+                        'data-fv-not-empty___message':'bridge.components.forms.error.message.required'|trans({}, 'forms'),
+                        'data-fv-notempty-message':'bridge.components.forms.error.message.required'|trans({}, 'forms'),
+                        'data-e2e-contact-content':''
+                    }}) }}
+                    
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-location'] is defined %}
+                <div class="lf-forms-contact__form__location">
+                    {{ form_widget(formView.children['bridge-location']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['_token'] is defined %}
+                <div class="lf-forms-contact__form__token">
+                    {{ form_widget(formView.children['_token']) }}
+                </div>
+            {% endif %}
+
+            {% if formView.children['bridge-submit'] is defined %}
+                <div class="lf-forms-contact__form__submit placeholder-fmk submit">
+                    {{ form_widget(formView.children['bridge-submit'], {
+                        'attr': {
+                            'class': 'lf-forms-contact__form__submit__button',
+                            'data-e2e-contact-submit':''
+                        },
+                        'label': 'bridge.components.forms.contact_form.submit.label'|trans({}, 'forms')
+                    }) }}
+                </div>
+            {% endif %}
+
+            {% if forms.showAllFields %}
+                <div class="lf-forms-contact__form__rests">
+                    {% for formField in formView.children %}
+                        {% if not formField.isRendered() and formField.vars.block_prefixes.1 != 'hidden' %}
+                        <div class="lf-forms-contact__form__{{ formField.vars.name }} placeholder-fmk">
+                            {{ form_widget(formField, {'attr': {
+                                'class': 'lf-forms-contact__form__'~ formField.vars.name ~'__input', 'rows': '5',
+                                'required': formField.vars.required,
+                                'data-fv-notempty-message': 'bridge.components.forms.error.field.required'|trans({}, 'forms')
+                            }}) }}
+                            {{ form_label(formField) }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    {{ form_rest(formView) }}
+                </div>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endif %}

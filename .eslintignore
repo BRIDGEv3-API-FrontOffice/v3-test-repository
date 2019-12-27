@@ -1,0 +1,5 @@
+# Ignore coverage files
+coverage
+src/Bridge/FrontComponentsBundle/Resources/scripts/services/map/providers
+src/Bridge/FrontComponentsBundle/Resources/scripts/services/map/utils
+src/Bridge/FrontComponentsBundle/Resources/scripts/services/map/Map.js

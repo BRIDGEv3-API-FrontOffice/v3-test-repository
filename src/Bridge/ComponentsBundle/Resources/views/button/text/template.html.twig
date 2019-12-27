@@ -1,0 +1,56 @@
+{# component 'button-text' #}
+
+{# @param  string  id            custom id                                  default(null)      example('custom-id') #}
+{# @param  string  class         custom class                               default(null)      example('custom-class') #}
+{# @param  string  type          type of the button `'button'|'a'|'input'`  default('button')  example('button') #}
+{# @param  string  label         label of the button                        default('Label')   example('Read more') #}
+{# @param  string  srLabel       srLabel of the button                      default('Additional content')   example('Near me') #}
+{# @param  string  href          link url for a type                        default(null)      example('#') #}
+{# @param  string  icon          custom icon class                          default(null)      example('bridge-icon-essential-chevron-right') #}
+{# @param  string  iconPosition  icon position `'left'|'right'`             default('left')    example('right') #}
+{# @param  object  attributes    custom attributes                          default(null)      example({'data-lf-location': 'location_id'}) #}
+{# @param  object  trackingData
+    tracking attributes, merged with `{bind: 'click', category: label, label: label}` if tracking is not needed set an empty value `''|{}|[]`
+    default(null)  example({'category': 'Location'})
+#}
+
+{% set type = type|default('button') %}
+{% set label = label|default('Label') %}
+{% set iconPosition = iconPosition|default('left') %}
+
+<{{ type }} {% if id is defined %}id="{{ id }}"{% endif %}
+
+    class="lf-button-text {{ class|default(null) }}"
+
+    {% if type == 'a' %}
+        href="{{ href|default('#') }}"
+    {% endif %}
+
+    title="{{ label }}"
+
+    {{ htmlAttrs(attributes|default(null)) }}
+
+    {% if trackingData is defined and not trackingData is empty %}
+        {% set trackingData = {category: label, label: label}|merge(trackingData) %}
+        data-lf-tracking="{{ tracking(trackingData) }}"
+    {% endif %}
+
+    >
+
+    {% if icon is defined and iconPosition == 'left' %}
+        <em class="lf-button-text__icon left {{ icon }}" aria-hidden="true"></em>
+    {% endif %}
+
+    <span class="lf-button-text__label">
+        {%- if trackingData is defined -%}
+            {{- label -}}
+            {% if srLabel is defined %}<span class="sr-only">{{ srLabel }}</span>{% endif %}
+        {%- else -%}
+            {{- 'No tracking!' -}}
+        {%- endif -%}
+    </span>
+
+    {% if icon is defined and iconPosition == 'right' %}
+        <em class="lf-button-text__icon right {{ icon }}" aria-hidden="true"></em>
+    {% endif %}
+</{{ type }}>

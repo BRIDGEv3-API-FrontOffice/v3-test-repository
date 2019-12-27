@@ -1,0 +1,156 @@
+{# component 'footer-seo' #}
+
+{# @param  string  id              custom id             default('lf-footer-seo')  example('lf-footer-seo') #}
+{# @param  string  class           custom class          default(null)             example('custom-class') #}
+{# @param  string  title           title text            default(null)             example('Bridge stores around the world') #}
+{# @param  number  hLevel          title hLevel `[1-6]`  default(2)                example(2) #}
+{# @param  object  cities          cities to display     default(null)             example(topCities) #}
+{# @param  string  seoPrefix       routing seo prefix    default(null)             example('search') #}
+
+{# @global  string  icon_set        icon set class prefix #}
+{# @global  string  footerSeoOrder  cities ordering `'name'|'default'` #}
+
+{% set id = id|default('lf-footer-seo') %}
+{% set hLevel = hLevel|default(2) %}
+{% set footerSeoOrder = footerSeoOrder|default('default') %}
+
+{% if cities is defined %}
+    {% if footerSeoOrder == 'name' %}
+        {% if cities.type is defined and cities.citiesGroup is defined %}
+            {# TopCities object #}
+            {% set sorted = {} %}
+
+                {% for key, citiesGroup in cities.citiesGroup %}
+            {% set sorted = sorted|merge({(key): citiesGroup|sortBy('slug')}) %}
+            {% endfor %}
+
+            {% set cities = {
+                citiesGroup: sorted|ksort,
+                type: cities.type
+            } %}
+        {% else %}
+            {# ClosestCities object #}
+            {% set cities = cities|ksort %}
+        {% endif %}
+    {% endif %}
+
+    {% set expand = false %}
+    {% if (cities.type is defined and cities.citiesGroup is defined and cities.type == 'city')
+        or (cities.type is not defined and cities.citiesGroup is not defined) %}
+        {% set itemsLength = cities|length %}
+
+        {% if cities.citiesGroup is defined %}
+            {% set itemsLength = cities.citiesGroup[0]|length %}
+        {% endif %}
+
+        {% if itemsLength > 5 %}
+            {% set expand = true %}
+        {% endif %}
+    {% endif %}
+
+    <div id="{{ id }}" class="lf-footer-seo {{ class|default(null) }}">
+        <div class="lf-footer-seo__container">
+            {% if title is defined %}
+                <h{{hLevel}} class="lf-footer-seo__container__title">
+                    {{- title|striptags -}}
+                </h{{hLevel}}>
+            {% endif %}
+
+            <div class="lf-footer-seo__container__grid {% if expand %}expand hidden{% endif %}" {% if expand %} data-lf-grid {% endif %}>
+                {% if cities.type is defined and cities.citiesGroup is defined %}
+                    {# TopCities object #}
+                    {% for key, citiesGroup in cities.citiesGroup %}
+                        {% if cities.type != 'city' %}
+                            <div class="lf-footer-seo__container__group">
+                                {{ _self.divisionLink(cities.type|striptags, citiesGroup, hLevel + 1) }}
+                                <div class="lf-footer-seo__container__group__list">
+                                {% endif %}
+
+                                {% for city in citiesGroup %}
+                                    <div class="lf-footer-seo__container__item" data-e2e-footer-seo-item>
+                                        {{ _self.cityLink(city.name|striptags, city.country.code, city.slug, seoPrefix, cities.type != 'city' ? hLevel + 2 : hLevel + 1) }}
+                                    </div>
+                                {% endfor %}
+
+                                {% if cities.type != 'city' %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {# ClosestCities object #}
+                    {% for key, location in cities %}
+                        <div class="lf-footer-seo__container__item" data-e2e-footer-seo-item>
+                            {{ _self.cityLink(location.localisation.city.name|striptags, location.localisation.country.code, location.localisation.city.slug, seoPrefix, hLevel + 1) }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {% if expand %}
+                {% include '@components/button/default/template.html.twig' with {
+                    'class': 'lf-footer-seo__container__toggle',
+                    'label': 'bridge.components.show-more'|trans({}, 'components'),
+                    'srLabel': 'bridge.components.show-more.srLabel'|trans({'%client.name%': client.name}, 'components'),
+                    'style': 'secondary',
+                    'icon': 'bridge-icon-' ~ icon_set ~ '-chevron-down',
+                    'iconPosition': 'right',
+                    'attributes': {
+                        'data-lf-toggle': '[data-lf-grid]',
+                        'data-lf-show-label': 'bridge.components.show-more'|trans({}, 'components'),
+                        'data-lf-show-icon': 'bridge-icon-' ~ icon_set ~ '-chevron-down',
+                        'data-lf-hide-label': 'bridge.components.show-less'|trans({}, 'components'),
+                        'data-lf-hide-icon': 'bridge-icon-' ~ icon_set ~ '-chevron-up'
+                    },
+                    'trackingData': {category: 'Footer Seo'}
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{# Display a geo divisions link #}
+{% macro divisionLink(type, citiesGroup, hLevel) %}
+    {% set params = {countryCode: citiesGroup[0].country.code|lower} %}
+    {% set citiesGroupName = citiesGroup[0].country.name %}
+
+    {% if type == 'division0' or type == 'division1' %}
+        {% set params = params|merge({division0: citiesGroup[0].division0.slug}) %}
+        {% set citiesGroupName = citiesGroup[0].division0.name|default(citiesGroupName) %}
+    {% endif %}
+
+    {% if type == 'division1' %}
+        {% set params = params|merge({division1: citiesGroup[0].division1.slug}) %}
+        {% set citiesGroupName = citiesGroup[0].division1.name|default(citiesGroupName) %}
+    {% endif %}
+
+    <h{{hLevel}} class="lf-footer-seo__container__group__title">
+        <a
+            class="lf-footer-seo__container__group__title__link"
+            href="{{ path('geo_divisions', params) }}"
+            data-lf-tracking="{{ tracking({category: 'Footer seo', label: citiesGroupName }) }}"
+        >
+            {{- citiesGroupName|lower -}}
+        </a>
+    </h{{hLevel}}>
+{% endmacro %}
+
+{# Display a geo cities link #}
+{% macro cityLink(cityName, countryCode, citySlug, seoPrefix, hLevel) %}
+    {% set params = {
+        seoPrefix: seoPrefix,
+        countryCode: countryCode|lower,
+        cityName: citySlug
+    } %}
+
+    <h{{hLevel}} class="lf-footer-seo__container__item__title">
+        <a
+            class="lf-footer-seo__container__item__title__link"
+            href="{{ path('geo_cities', params) }}"
+            data-lf-tracking="{{ tracking({category: 'Footer seo', label: cityName }) }}"
+        >
+           {{- cityName|lower -}}
+            <em class="bridge-icon-{{ icon_set }}-chevron-right"></em>
+        </a>
+    </h{{hLevel}}>
+{% endmacro %}

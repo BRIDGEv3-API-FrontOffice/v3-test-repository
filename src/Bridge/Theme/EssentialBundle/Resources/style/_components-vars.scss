@@ -1,0 +1,51 @@
+//------------------------------------------------------------------
+// Components variables
+//------------------------------------------------------------------
+
+//
+// Forms
+//
+
+$input-height-base: 40px;
+$input-horizontal-padding-base: ceil($input-height-base / 2);
+$input-border-radius-base: 0;
+
+$input-height-small: 32px;
+$input-horizontal-padding-small: ceil($input-height-small / 2);
+$input-border-radius-small: 0;
+
+$input-height-large: 46px;
+$input-horizontal-padding-large: ceil($input-height-large / 2);
+$input-border-radius-large: 0;
+
+//
+// Buttons
+//
+
+$button-primary-bg: $brand-primary;
+$button-primary-color: $on-brand-primary;
+$button-primary-outlined: false;
+
+$button-secondary-bg: $brand-secondary;
+$button-secondary-color: $on-brand-secondary;
+$button-secondary-outlined: false;
+
+$button-border-width: 0;
+
+$button-height-base: $input-height-base;
+$button-horizontal-padding-base: $input-horizontal-padding-base;
+$button-border-radius-base: $input-border-radius-base;
+
+$button-height-small: $input-height-small;
+$button-horizontal-padding-small: $input-horizontal-padding-small;
+$button-border-radius-small: $input-border-radius-small;
+
+$button-height-large: $input-height-large;
+$button-horizontal-padding-large: $input-horizontal-padding-large;
+$button-border-radius-large: $input-border-radius-large;
+
+//
+// Design
+//
+
+$search-z-index: 2;

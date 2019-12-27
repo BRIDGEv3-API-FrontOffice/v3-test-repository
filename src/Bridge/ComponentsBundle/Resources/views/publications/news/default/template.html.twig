@@ -1,0 +1,124 @@
+{# component 'publications-news-default' #}
+
+{# @param  string  id        custom id           default('lf-publications-news')  example('lf-publications-news') #}
+{# @param  string  class     custom class        default(null)                    example('custom-class') #}
+{# @param  string  title     block title         default(null)                    example('News') #}
+{# @param  string  zoneSlug  zone slug           default('news')                  example('news') #}
+{# @param  object  zones     publications zones  default(null)                    example(zones) #}
+{# @param  object  location  location object     default(null)                    example(location) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+{# @global  object  brand     brand config #}
+
+{% set id = id|default('lf-publications-news') %}
+{% set zoneSlug = zoneSlug|default('news') %}
+
+{% if zones is defined and zones[zoneSlug] is defined and zones[zoneSlug].total is defined and zones[zoneSlug].total > 0 %}
+    <div aria-labelledby="{{ id }}-title" id="{{ id }}"
+        class="lf-publications-news-default {{ class|default(null) }}" data-e2e-news>
+        {% if title is defined %}
+            <h2 id="{{ id }}-title" class="lf-publications-news-default__title">
+                {{- title -}}
+            </h2>
+        {% endif %}
+
+        {% embed '@components/slider/swiper/template.html.twig' with {
+            'id': id ~ '-slider',
+            'class': 'lf-publications-news-default__slider',
+            'slides': zones[zoneSlug].publications,
+            'zoneSlug': zoneSlug,
+            'outerPagination': true,
+            'location': location|default(null),
+            'idModal': idModal|default('false')
+        } only %}
+            {% block slide %}
+                <article class="lf-publications-news-default__item" data-e2e-news-item>
+                    {% block image %}
+                        {% set media = slide.zoneMedia|extract_zone_formats(zoneSlug, 'image')|extract_format_image('default') %}
+                        <div class="lf-publications-news-default__item__illustration">
+                            {% if media %}
+                                <img class="lf-publications-news-default__item__illustration__image img-responsive lazy blur"
+                                    src="{{ media.host }}/100x/{{ media.path }}"
+                                    data-src="{{ media.host }}/1140x/{{ media.path }}"
+                                    data-srcset="{{ media.host }}/340x/{{ media.path }} 340w,
+                                                 {{ media.host }}/750x/{{ media.path }} 750w,
+                                                 {{ media.host }}/940x/{{ media.path }} 940w,
+                                                 {{ media.host }}/1200x/{{ media.path }} 1200w"
+                                    alt="{{ location.name|default(brand.name|default(zoneSlug)) }} - {{ slide.title }}">
+                            {% else %}
+                                <div class="lf-publications-news-default__item__illustration__img-wrapper light"></div>
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+
+                    {% block body %}
+                        <div class="lf-publications-news-default__item__body">
+                            {% block period %}
+                                {% if slide.period is not empty %}
+                                    <div class="lf-publications-news-default__item__body__period">
+                                        {% set startDate = slide.period.start.date|localizeddate('long', 'none', app.request.locale, null) %}
+                                        {% set endDate = slide.period.end.date|localizeddate('long', 'none', app.request.locale, null) %}
+                                        <small>
+                                            {{- 'bridge.components.publications.period'|trans({'%start_date%': startDate, '%end_date%': endDate}, 'components') -}}
+                                        </small>
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block title %}
+                                {% if slide.title is not empty %}
+                                    <h3 class="lf-publications-news-default__item__body__title" data-e2e-news-item-title>
+                                        {{- slide.title|striptags -}}
+                                    </h3>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block content %}
+                                {% if slide.content is not empty %}
+                                    <div class="lf-publications-news-default__item__body__content" data-e2e-news-item-content>
+                                        {{- slide.content|raw|nl2br -}}
+                                    </div>
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block link %}
+                                {% if slide.dedicatedPageUrl %}
+                                    {% include '@components/socialShare/template.html.twig' with {
+                                        'socialShareLink': slide.dedicatedPageUrl,
+                                        'socialShareTitle': slide.title|default('')
+                                    } %}
+                                    {% include '@components/button/default/template.html.twig' with {
+                                        'class': 'lf-publications-news-default__item__body__link',
+                                        'type': 'a',
+                                        'href': slide.dedicatedPageUrl,
+                                        'label': 'bridge.components.publications.button_link.label'|trans({}, 'components'),
+                                        'srLabel': 'bridge.components.publications.button_link.srLabel'|trans({'%publiTitle%': slide.title}, 'components'),
+                                        'style': 'secondary',
+                                        'attributes': {target: '_blank'},
+                                        'trackingData': {category: zoneSlug|capitalize ~ ' link', label: tracking_publication_label(slide, location|default(null))}
+                                    } only %}
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block attachments %}
+                                {% if slide.attachments|length > 0 %}
+                                    {% include '@components/button/text/template.html.twig' with {
+                                        'class': 'lf-publications-news-default__item__body__attachments',
+                                        'type': 'a',
+                                        'href': slide.attachments[0].url,
+                                        'label': 'bridge.components.publications.button_attachments.label'|trans({}, 'components'),
+                                        'srLabel': 'bridge.components.publications.button_attachments.srLabel'|trans({'%publiTitle%': slide.title}, 'components'),
+                                        'style': 'secondary',
+                                        'icon': 'bridge-icon-' ~ icon_set ~ '-download',
+                                        'attributes': {target: '_blank'},
+                                        'trackingData': {category: zoneSlug|capitalize ~ ' attachments', label: tracking_publication_label(slide, location|default(null))}
+                                    } only %}
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </article>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endif %}

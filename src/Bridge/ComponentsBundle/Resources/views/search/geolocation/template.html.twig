@@ -1,0 +1,28 @@
+{# component 'search-geolocation' #}
+
+{# @param  string   id             custom id                   default('lf-search-geolocation')  example('lf-search-geolocation') #}
+{# @param  string   class          custom class                default(null)                     example('custom-class') #}
+{# @param  string   style          button style                default('secondary')              example('secondary') #}
+{# @param  boolean  isLabelSrOnly  apply sr-only on the label  default(false)                    example(false) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% include '@components/button/default/template.html.twig' with {
+    'id': id|default('lf-search-geolocation'),
+    'class': 'lf-search-geolocation ' ~ class|default(null),
+    'label': 'bridge.components.search.geolocation.label'|trans({}, 'components'),
+    'srLabel': 'bridge.components.search.geolocation.srLabel'|trans({'%brand.name%': brand.name}, 'components'),
+    'style': style|default('secondary'),
+    'icon': 'bridge-icon-' ~ icon_set ~ '-geolocation',
+    'isLabelSrOnly': isLabelSrOnly|default(false),
+    'attributes': {
+        'data-lf-geolocation-button': '',
+        'data-lf-search-geolocation-status': false,
+        'data-lf-msg-title':'bridge.components.search.geolocation.title' | trans({},'components'),
+        'data-lf-msg-error':'bridge.components.search.geolocation.error' | trans({},'components'),
+        'data-lf-msg-warning':'bridge.components.search.geolocation.warning' | trans({}, 'components'),
+        'data-lf-msg-timeout':'bridge.components.search.geolocation.timeout' | trans({}, 'components'),
+        'type': 'button'
+    },
+    'trackingData': {category: 'Search', label: 'bridge.components.search.geolocation.label'|trans({}, 'components')}
+} only %}

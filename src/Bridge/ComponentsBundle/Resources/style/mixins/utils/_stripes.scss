@@ -1,0 +1,24 @@
+@mixin stripes($direction, $first-color, $first-width: $gutter-small, $second-color: lighten($first-color, 5%), $second-width: $first-width) {
+    background-image:
+        repeating-linear-gradient(
+            $direction,
+            $first-color,
+            $first-color $first-width,
+            $second-color $first-width,
+            $second-color ($first-width + $second-width)
+        );
+}
+
+@mixin stripes-over($direction, $color, $first-width, $second-width: $first-width) {
+    $first-color: rgba($color, 0);
+    $second-color: rgba($color, .8);
+
+    background-image:
+        repeating-linear-gradient(
+            $direction,
+            $first-color,
+            $first-color $first-width,
+            $second-color $first-width,
+            $second-color ($first-width + $second-width)
+        );
+}

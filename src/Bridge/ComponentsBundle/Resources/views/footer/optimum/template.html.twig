@@ -1,0 +1,172 @@
+{# component 'footer-optimum' #}
+
+{# @global object footer footer options #}
+
+{% if footer[app.request.locale] is defined %}
+    {% set displayLinks = footer.options.displayLinks | default('columns') %}
+    {% set footerData = footer[app.request.locale] %}
+
+    <div class="lf-footer-optimum">
+        {% if footer.options.showServices and footerData.services is defined %}
+            <div class="lf-footer-optimum__rassurance">
+                <div class="lf-footer-optimum__rassurance__container">
+                    {% for item in footerData.services %}
+                        {% if item.url is defined and item.url is not empty %}
+                            <a class="lf-footer-optimum__rassurance__container__item lf-footer-optimum__rassurance__container__item--link"
+                                href="{{ item.url }}"
+                                target="_blank"
+                                aria-label="{{ item.title|default('') }}"
+                                data-lf-tracking='{{ tracking({bind: 'click', category: 'Footer rassurance', label: item.title }) }}'>
+                        {% else %}
+                            <div class="lf-footer-optimum__rassurance__container__item">
+                        {% endif %}
+
+                        {% if item.pathImg is defined and item.pathImg is not empty %}
+                            <img class="lf-footer-optimum__rassurance__container__item__media"
+                                src="{{ asset("assets/images/footer/#{item.pathImg}") }}"
+                                alt="{{ item.title }}">
+                        {% endif %}
+
+                        {% if item.title is defined and item.title is not empty %}
+                            <div class="lf-footer-optimum__rassurance__container__item__title">
+                                {{- item.title -}}
+                            </div>
+                        {% endif %}
+
+                        {% if item.content is defined and item.content is not empty %}
+                            <div class="lf-footer-optimum__rassurance__container__item__text">
+                                {{- item.content -}}
+                            </div>
+                        {% endif %}
+
+                        {% if item.url is defined and item.url is not empty %}
+                            </a>
+                        {% else %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if footer.options.showSlogan and footerData.slogan is defined %}
+            <div class="lf-footer-optimum__slogan">
+                <div class="lf-footer-optimum__slogan__container">
+                    {% if footerData.slogan.title is defined and footerData.slogan.title is not empty %}
+                        <div class="lf-footer-optimum__slogan__container__title">
+                            {{- footerData.slogan.title -}}
+                        </div>
+                    {% endif %}
+
+                    {% if footerData.slogan.title is defined and footerData.slogan.title is not empty %}
+                        <div class="lf-footer-optimum__slogan__container__text">
+                            {{- footerData.slogan.content|raw -}}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% set output = '' %}
+
+        {% if footer.options.showLinks and footerData.links is defined %}
+            <div class="lf-footer-optimum__links">
+                {% for section in footerData.links %}
+                    <div class="lf-footer-optimum__links__{{ displayLinks }}">
+                        {% for link in section %}
+                            {% if link.title is defined and loop.first == false %}
+                                </ul>
+                            {% endif %}
+
+                            {% if link.title is defined %}
+                                <div class="lf-footer-optimum__links__{{ displayLinks }}__title">
+                                    {{- link.title -}}
+                                </div>
+                            {% endif %}
+
+                            {% if loop.first or link.title is defined %}
+                                {% set output = output ~ '<ul>' %}
+                                <ul class="lf-footer-optimum__links__{{ displayLinks }}__list">
+                            {% endif %}
+
+                            {% if link.label is defined %}
+                                <li class="lf-footer-optimum__links__{{ displayLinks }}__list__item">
+                                    <a class="lf-footer-optimum__links__{{ displayLinks }}__list__item__link"
+                                        href="{{ link.url }}"
+                                        target="_blank"
+                                        data-lf-tracking='{{ tracking({bind: 'click', category: 'Footer External Links', label: link.label }) }}'>
+                                        {{- link.label -}}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if footer.options.showApplication and footerData.application is defined %}
+            <ul class="lf-footer-optimum__application">
+                {% for application in footerData.application %}
+                    {% if application.pathImg is defined and application.pathImg is not empty %}
+                        <li class="lf-footer-optimum__application__item">
+                            <a class="lf-footer-optimum__application__item__link"
+                                href="{{ application.url }}"
+                                target="_blank"
+                            data-lf-tracking='{{ tracking({bind: 'click', category: 'Applications', label: application.label }) }}'>
+                                <img class="lf-footer-optimum__application__item__link__media"
+                                    src="{{ asset("assets/images/footer/#{application.pathImg}") }}"
+                                    alt="{{ 'bridge.components.footer.optimum.application-download'|trans({'%app_store%': application.label}, 'components') }}">
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="lf-footer-optimum__endline">
+            <div class="lf-footer-optimum__endline__container">
+                {% if footer.options.showLegalLinks and footerData.legalLinks is defined %}
+                    <ul class="lf-footer-optimum__endline__container__list">
+                        {% for link in footerData.legalLinks %}
+                            <li class="lf-footer-optimum__endline__container__list__item">
+                                <a class="lf-footer-optimum__endline__container__list__item__link"
+                                    href="{{ link.url }}"
+                                    target="_blank"
+                            data-lf-tracking='{{ tracking({bind: 'click', category: 'Footer External Links', label: link.label }) }}'>
+                                    {{- link.label -}}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        {% if footer.options.showCopyright %}
+                            <li class="lf-footer-optimum__endline__container__list__item">
+                                <span class="lf-footer-optimum__endline__container__list__item__copyright">
+                                    &copy;{{ 'now'|date('Y') }} {{ brand.name|default('') }}
+                                </span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+
+                {% if footer.options.showSocialLinks and footerData.socialLinks is defined %}
+                    <ul class="lf-footer-optimum__endline__container__social">
+                        {% for link in footerData.socialLinks %}
+                            <li class="lf-footer-optimum__endline__container__social__item">
+                                <a class="lf-footer-optimum__endline__container__social__item__link lf-footer-optimum__endline__container__social__item__link--{{link.label}}"
+                                    href="{{ link.url }}"
+                                    target="_blank"
+                                    aria-label="{{ link.label }}"
+                                data-lf-tracking='{{ tracking({bind: 'click', category: 'Footer Social Links', label: link.label }) }}'>
+                                <span class="sr-only">{{ 'bridge.components.footer.socialMedia.srLabel' | trans({'%socialMedia%': link.label}, 'components') }}</span>
+                                <em class="lf-footer-optimum__endline__container__social__item__link__icon {{ link.icon }}" aria-hidden="true"></em>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

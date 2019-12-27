@@ -1,0 +1,59 @@
+// Mixin Button Text
+
+@mixin button-text($color) {
+    display: inline-flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    transition: opacity $transition-time $transition-animation;
+    opacity: .7;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    background-color: $transparent;
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    color: $color;
+    font-size: inherit;
+
+    > span {
+        display: inline-block;
+        text-decoration: underline;
+    }
+
+    > em {
+        line-height: 1.1;
+        font-size: $font-size-base;
+
+        &.left {
+            margin-right: 10px;
+        }
+
+        &.right {
+            margin-left: 10px;
+        }
+
+        &.bridge-icon {
+            &-arrow-back,
+            &-chevron-right {
+                font-size: 12px;
+            }
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        opacity: 1;
+        background-color: $transparent;
+        text-decoration: none;
+        color: $color;
+
+        & > span {
+            text-decoration: underline;
+        }
+    }
+}

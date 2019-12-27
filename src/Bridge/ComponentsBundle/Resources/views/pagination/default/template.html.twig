@@ -1,0 +1,78 @@
+{# component 'pagination-default' #}
+
+{# @param  string  id          custom id          default(null)  example('custom-id') #}
+{# @param  string  class       custom class       default(null)  example('custom-class') #}
+{# @param  string  abstract    abstract text      default(null)  example('21 - 40 of 92') #}
+{# @param  object  pagination  pagination object  default(null)  example(pagination) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% if pagination is defined and pagination.isPagination is defined and pagination.isPagination %}
+    <section {% if id is defined %}id="{{ id }}"{% endif %} class="lf-pagination-default {{ class|default(null) }}"  aria-label="{{ 'bridge.components.pagination.aria-label'|trans({}, 'components') }}">
+        {% if abstract is defined %}
+            <h4 class="lf-pagination-default__abstract">
+                {{- abstract -}}
+            </h4>
+        {% endif %}
+        <nav role="navigation">
+            <ul class="lf-pagination-default__list">
+                <li class="lf-pagination-default__list__item prev">
+                    <a class="lf-pagination-default__list__item__link"
+                        {% if pagination.prevUrl %}
+                            rel="prev"
+                            href="{{ pagination.prevUrl }}"
+                            data-lf-tracking="{{ tracking({category: 'Pagination', label: 'bridge.components.pagination.previous_page'|trans({}, 'components')}) }}"
+                        {% else %}
+                            disabled
+                        {% endif %}
+                        >
+                        <em class="bridge-icon-{{ icon_set }}-arrow-back" role="img"></em>
+                        <span class="sr-only">{{ 'bridge.components.pagination.previous_page'|trans({}, 'components') }}</span>
+                    </a>
+                </li>
+
+                {% for page, url in pagination.links %}
+                    <li class="lf-pagination-default__list__item">
+                        <a class="lf-pagination-default__list__item__link {{ pagination.current == page ? 'active' : '' }}"
+                            {% if pagination.current != page %}
+                                href="{{ url }}"
+                                data-lf-tracking="{{ tracking({category: 'Pagination', label: 'bridge.components.pagination.page_number'|trans({'%page%': page}, 'components')}) }}"
+                                >
+                                {{- page -}}
+                                <span class="sr-only" id="lf-pagination-default__list__item__link-{{- pagination.current -}}">
+                                    {{ 'bridge.components.pagination.current_page_number'|trans({'%current%': pagination.current, '%last%': pagination.last}, 'components') }}, 
+                                    {{ 'bridge.components.pagination.page.accessibility'|trans({'%page%': page, '%last%': pagination.last}, 'components') }}
+                                </span>
+                            
+                            {% else %}
+                                disabled
+                                aria-current="true"
+                                >
+                                {{- page -}}
+                                <span class="sr-only">{{ 'bridge.components.pagination.current_page_number'|trans({'%current%': page, '%last%': pagination.last}, 'components') }}</span>
+                            
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                <li class="lf-pagination-default__list__item next">
+                    <a class="lf-pagination-default__list__item__link"
+                        {% if pagination.nextUrl %}
+                            rel="next"
+                            href="{{ pagination.nextUrl }}"
+                            data-lf-tracking="{{ tracking({category: 'Pagination', label: 'bridge.components.pagination.next_page'|trans({}, 'components')}) }}"
+                        {% else %}
+                            disabled
+                        {% endif %}
+                        >
+                        <span class="sr-only">
+                        {{ 'bridge.components.pagination.next_page.accessibility'|trans({}, 'components') }}
+                    </span>
+                        <em class="bridge-icon-{{ icon_set }}-arrow-back" role="img"></em>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+{% endif %}

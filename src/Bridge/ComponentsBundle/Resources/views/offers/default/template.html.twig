@@ -1,0 +1,119 @@
+{# component 'offers-default' #}
+
+{# @param  string  id                   custom id                     default(null)  example('custom-id') #}
+{# @param  string  class                custom class                  default(null)  example('custom-class') #}
+{# @param  object  availableOfferRange  available offer range object  default(null)  example(availableOfferRange) #}
+{# @param  object  location             location object               default(null)  example(location) #}
+{# @param  object  attributes           html attributes               default(null)  example({}) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% if availableOfferRange is defined
+    and availableOfferRange.offerRange is defined
+    and availableOfferRange.availableOffers is defined
+    and availableOfferRange.availableOffers|length > 0
+    and location is defined %}
+
+    {% set availableOffers = [] %}
+    {% for offer in availableOfferRange.availableOffers %}
+        {% if offer.name is not empty %}
+            {% set availableOffers = availableOffers|merge([offer]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if availableOffers|length > 0 %}
+        <div {% if id is defined %}id="{{ id }}"{% endif %}
+            class="lf-offers-default {{ class|default(null) }}"
+            {{ htmlAttrs(attributes|default(null)) }}>
+            {% block title %}
+                <h2 class="lf-offers-default__title" {{ htmlAttrs(titleattributes|default(null)) }}>
+                    {{- availableOfferRange.offerRange.name|default('')|striptags -}}
+                </h2>
+            {% endblock %}
+
+            {% block list %}
+                <div class="lf-offers-default__list" data-lf-list>
+                    {% for offer in availableOffers %}
+                        {% block offer %}
+                            <div class="lf-offers-default__list__offer" data-lf-offer data-e2e-offer-item>
+                                {% block offerIllustration %}
+                                    {% if offer.image is defined and offer.image.host is defined and offer.image.path is defined %}
+                                        <div class="lf-offers-default__list__offer__illustration">
+                                            <img class="lf-offers-default__list__offer__illustration__image"
+                                                data-e2e-offer-img
+                                                src="{{ offer.image.host }}/150x/{{ offer.image.path }}"
+                                                srcset="{{ offer.image.host }}/150x/{{ offer.image.path }} 1x,
+                                                        {{ offer.image.host }}/300x/{{ offer.image.path }} 2x"
+                                                alt="{{ location.name }} - {{ offer.name }}" />
+                                        </div>
+                                    {% endif %}
+                                {% endblock %}
+
+                                {% block offerBody %}
+                                    <div class="lf-offers-default__list__offer__body">
+                                        {% block offerBodyTitle %}
+                                            {% if offer.name is not empty %}
+                                                <h3 class="lf-offers-default__list__offer__body__title" data-e2e-offer-item-title>
+                                                    {{- offer.name|striptags -}}
+                                                </h3>
+                                            {% endif %}
+                                        {% endblock %}
+
+                                        {% block offerBodyContent %}
+                                            {% if offer.description is not empty %}
+                                                <div class="lf-offers-default__list__offer__body__content" data-e2e-offer-item-content>
+                                                    {{- offer.description|nl2br|raw -}}
+                                                </div>
+                                            {% endif %}
+                                        {% endblock %}
+
+                                        {% block OfferBodyLink %}
+                                            {% if offer.link is not empty %}
+                                                {% set trackingCategory = 'Offer link' %}
+                                                {% set trackingLabel = availableOfferRange.offerRange.name ~ ' | ' ~  offer.name ~ ' | ' ~ tracking_location_label(location) %}
+                                                {% include '@components/button/text/template.html.twig' with {
+                                                    'class': 'lf-offers-default__list__offer__body__link',
+                                                    'type': 'a',
+                                                    'href': offer.link,
+                                                    'icon': 'bridge-icon-' ~ icon_set ~ '-chevron-right',
+                                                    'iconPosition': 'right',
+                                                    'label': 'bridge.components.offers.link.label'|trans({}, 'components'),
+                                                    'attributes': {target: '_blank', 'data-e2e-offer-link': ''},
+                                                    'trackingData': {category: trackingCategory, label: trackingLabel}
+                                                } only %}
+                                            {% endif %}
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    {% endfor %}
+                </div>
+            {% endblock %}
+
+            {% block toggler %}
+                {% if availableOffers|length > 2 %}
+                    {% set togglerTrackingCategory = 'Offers expand' %}
+                    {% set togglerTrackingLabel = availableOfferRange.offerRange.name ~ ' | ' ~ tracking_location_label(location) %}
+                    {% set togglerShowAll = 'bridge.components.show-all'|trans({'%total%': availableOffers|length}, 'components') %}
+                    {% set togglerShowLess = 'bridge.components.show-less'|trans({}, 'components') %}
+
+                    {% include '@components/button/default/template.html.twig' with {
+                        'class': 'lf-offers-default__toggler lf-offers-default__toggler',
+                        'label': togglerShowAll,
+                        'srLabel': 'srLabel',
+                        'style': 'secondary',
+                        'attributes': {
+                            'data-lf-toggler': '',
+                            'aria-expanded': 'false',
+                            'data-lf-show-all': togglerShowAll,
+                            'data-lf-show-less': togglerShowLess,
+                            'data-e2e-offers-toggler': ''
+                        },
+                        'trackingData': {category: togglerTrackingCategory, label: togglerTrackingLabel}
+                    } only %}
+                {% endif %}
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endif %}

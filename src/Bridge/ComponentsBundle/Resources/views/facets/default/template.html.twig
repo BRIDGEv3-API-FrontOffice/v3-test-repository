@@ -1,0 +1,86 @@
+{# component 'facets-default' #}
+
+{# @param  string  id         custom id                 default('lf-facets-default')  example('lf-facets-default') #}
+{# @param  string  class      custom class              default(null)                 example('custom-class') #}
+{# @param  string  division   page disivion name        default('countries')          example('division0') #}
+{# @param  string  seoPrefix  seo prefix                default(null)                 example('search') #}
+{# @param  object  facets     facets object to display  default(null)                 example(facets) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set division = division|default('countries') %}
+{% set divisionId = 0 %}
+{% set backUrl = null %}
+{% set parentDivisionName = null %}
+
+{% if division == 'division0' %}
+    {% set divisionId = 1 %}
+    {% set backUrl = path('geo_divisions', {countryCode: localisation.country.code|lower}) %}
+    {% set parentDivisionName = localisation.country.name %}
+{% endif %}
+
+{% if division == 'division1' %}
+    {% set divisionId = 2 %}
+    {% set backUrl = path('geo_divisions', {countryCode: localisation.country.code|lower, division0: localisation.division0.slug}) %}
+    {% set parentDivisionName = localisation.division0.name %}
+{% endif %}
+
+{% if division == 'cities' %}
+    {% set divisionId = 3 %}
+    {% set backUrl = path('geo_divisions', {countryCode: localisation.country.code|lower, division0: localisation.division0.slug, division1: localisation.division1.slug}) %}
+    {% set parentDivisionName = localisation.division1.name %}
+{% endif %}
+
+<div id="{{ id|default('lf-facets-default') }}" class="lf-facets-default {{ class|default(null) }}">
+    <button class="lf-facets-default__title lf-facets-default__title--button" data-lf-facets-toggler>
+        <span class="lf-facets-default__title__span">
+            {{- 'bridge.components.facets.title'|transchoice(divisionId, {}, 'components') -}}
+        </span>
+        <em class="lf-facets-default__title__icon bridge-icon-{{ icon_set }}-chevron-down"></em>
+    </button>
+
+    <div class="lf-facets-default__title lf-facets-default__title--div">
+        {{- 'bridge.components.facets.title'|transchoice(divisionId, {}, 'components') -}}
+    </div>
+
+    <ul class="lf-facets-default__list" data-lf-facets-list>
+        {% for facet, count in facets|default(null) %}
+            {% set facetLink = path('geo_cities', {seoPrefix: seoPrefix, countryCode: localisation.country.code|lower, cityName: facet}) %}
+
+            {% if division == 'countries' %}
+                {% set facetLink = path('geo_divisions', {countryCode: localisation.country.code|lower, division0: facet}) %}
+            {% endif %}
+
+            {% if division == 'division0' %}
+                {% set facetLink = path('geo_divisions', {countryCode: localisation.country.code|lower, division0: localisation.division0.slug, division1: facet}) %}
+            {% endif %}
+
+            {% block facet %}
+                <li class="lf-facets-default__list__item">
+                    <a class="lf-facets-default__list__item__link"
+                        href="{{ facetLink }}"
+                        data-lf-tracking="{{ tracking({ category: 'Geo Division', label: facet }) }}">
+                        {{- facet -}}
+                    </a>
+                </li>
+            {% endblock %}
+        {% endfor %}
+
+        {% if backUrl and parentDivisionName %}
+            {% block backLink %}
+                {% set label = 'bridge.components.facets.back.label'|trans({'%division.parent%': parentDivisionName}, 'components') %}
+                <li class="lf-facets-default__list__item">
+                    {% include '@components/button/text/template.html.twig' with {
+                        'class': 'lf-facets-default__list__item__back-link',
+                        'type': 'a',
+                        'label': label,
+                        'href': backUrl,
+                        'icon': 'bridge-icon-' ~ icon_set ~ '-arrow-back',
+                        'iconPosition': 'left',
+                        'trackingData': {category: 'Geo Division', label: label}
+                    } only %}
+                </li>
+            {% endblock %}
+        {% endif %}
+    </ul>
+</div>

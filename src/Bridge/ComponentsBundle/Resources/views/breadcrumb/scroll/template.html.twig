@@ -1,0 +1,54 @@
+{# partial 'breadcrumb-scroll' #}
+
+{# @param  string  id           custom id           default('lf-breadcrumb-scroll')        example('lf-breadcrumb-scroll') #}
+{# @param  string  class        custom class        default(null)                          example('custom-class') #}
+{# @param  string  homeLabel    custom home label   default('Home')                        example('Home') #}
+{# @param  array   breadcrumbs  breadcrumb links    default(null)                          example([{'url': '#', 'text': 'Home'}, {'url': '#', 'text': 'Category'}, {'url': '#', 'text': 'Page'}]) #}
+{# @param  string  homeIcon     icon for home link  default('bridge-icon-[theme]-home')  example('bridge-icon-essential-home') #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set homeLabel = homeLabel|default('bridge.components.breadcrumb.home.label'|trans({}, 'components')) %}
+{% set homeIcon = homeIcon|default('bridge-icon-' ~ icon_set ~ '-home') %}
+
+<div id="{{ id|default('lf-breadcrumb-scroll') }}"
+    class="lf-breadcrumb-scroll {{ class|default(null) }}">
+    <nav class="lf-breadcrumb-scroll__container" data-lf-breadcrumb-container aria-label="{{ 'bridge.theme.location.breadcrumb'|trans({}, 'components') }}">
+        <ol class="lf-breadcrumb-scroll__container__list" data-lf-breadcrumb-list>
+            {% for item in breadcrumbs %}
+                {% if loop.first %}
+                    <li class="lf-breadcrumb-scroll__container__list__item">
+                        <a class="lf-breadcrumb-scroll__container__list__item__link"
+                            href="{{ item.url }}"
+                            title="{{ homeLabel }}"
+                            data-lf-tracking='{{ tracking({category: 'Breadcrumb', label: homeLabel }) }}'>
+                            <span class="lf-breadcrumb-scroll__container__list__item__link__label sr-only">
+                                {{ homeLabel }}
+                            </span>
+                            <em class="lf-breadcrumb-scroll__container__list__item__link__icon {{ homeIcon }}"></em>
+                        </a>
+                    </li>
+                {% elseif loop.last %}
+                    <li class="lf-breadcrumb-scroll__container__list__item">
+                        <span class="lf-breadcrumb-scroll__container__list__item__label" aria-current="page">
+                            {{ item.text|striptags }}
+                        </span>
+                    </li>
+                {% elseif item.url %}
+                    <li class="lf-breadcrumb-scroll__container__list__item">
+                        <a class="lf-breadcrumb-scroll__container__list__item__link"
+                            href="{{ item.url }}"
+                            data-lf-tracking='{{ tracking({category: 'Breadcrumb', label: item.text }) }}'>
+                            <span class="lf-breadcrumb-scroll__container__list__item__link__label">
+                                {{ item.text|striptags }}
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+    <div class="lf-breadcrumb-scroll__overlay" data-lf-breadcrumb-overlay></div>
+</div>
+
+{% include '@components/breadcrumb/jsonLd/template.html.twig' only %}

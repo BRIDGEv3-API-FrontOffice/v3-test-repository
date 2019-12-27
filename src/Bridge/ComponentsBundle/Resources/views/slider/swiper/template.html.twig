@@ -1,0 +1,28 @@
+{# component 'slider-swiper' #}
+
+{# @param  string   id               custom id                              default('lf-slider-swiper')  example('lf-slider-swiper') #}
+{# @param  boolean  isModal          define if slider is in a modal         default('false')             example('lf-slider-swiper') #}
+{# @param  string   class            custom class                           default(null)                example('custom-class') #}
+{# @param  array    slides           list of objects to dispay              default(null)                example(null) #}
+{# @param  boolean  outerPagination  display pagination outside the slider  default(false)               example(false) #}
+
+{% set id = id|default('lf-slider-swiper') %}
+{% set outerPagination = outerPagination|default(false) %}
+
+{% if slides is defined and slides|length > 0 %}
+    <div id="{{ id }}"
+        class="lf-slider-swiper swiper-container {{ class|default(null) }} {% if outerPagination %}swiper-outer-pagination{% endif %}"
+        data-lf-idmodal="{{ idModal | default('false') }}"
+        data-lf-bullets-label="{{ 'bridge.components.swiper.bullets.label'|trans({}, 'components') }}">
+
+        <ol class="lf-slider-swiper__pagination swiper-pagination" role="tablist"></ol>
+        
+        <div class="lf-slider-swiper__wrapper swiper-wrapper">
+            {% for slide in slides %}
+                <div class="lf-slider-swiper__wrapper__slide swiper-slide">
+                    {% block slide %}{% endblock %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

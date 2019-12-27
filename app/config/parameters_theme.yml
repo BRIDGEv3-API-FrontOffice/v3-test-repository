@@ -1,0 +1,51 @@
+# Theme parameters
+parameters:
+    ## Colors
+    ### NOTE: not implemented yet
+    ### set client colors in `src/Bridge/Theme/[ThemeBundle]/Resources/style/_colors-vars.scss`
+    bridge_front_theme.colors:
+        primary: '#333333'
+        secondary: '#eeeeee'
+        tertiary: '#a1aeb7'
+
+    ## Buttons
+    ### NOTE: not implemented yet
+    ### set button shape in `src/Bridge/Theme/[ThemeBundle]/Resources/style/_components-vars.scss`
+    bridge_front_theme.buttons.shape: 'squared' # 'squared'|'rounded'|'capsule'
+    bridge_front_theme.buttons.outlined: false # true|false
+
+    ## Map markers
+    bridge_front_theme.map.markers.icons:
+        default:
+            url: '/build/assets/images/markers/marker-default.svg'
+            width: 32
+            height: 43
+        hover:
+            url: '/build/assets/images/markers/marker-location.svg'
+            width: 32
+            height: 43
+        active:
+            url: '/build/assets/images/markers/marker-location.svg'
+            width: 32
+            height: 43
+        location:
+            url: '/build/assets/images/markers/marker-location.svg'
+            width: 32
+            height: 43
+        user:
+            url: '/build/assets/images/markers/marker-user.svg'
+            width: 21
+            height: 21
+        cluster:
+            url: '/build/assets/images/markers/marker-cluster.svg'
+            width: 44
+            height: 44
+            label:
+                origin: [22, 22]
+                size: 12
+    bridge_front_theme.map.markers.labels:
+        origin: [16, 16]
+        color: 'white'
+        font: '"Montserrat", Arial, sans-serif'
+        size: '12px'
+        weight: 'normal'

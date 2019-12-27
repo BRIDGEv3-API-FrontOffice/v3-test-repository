@@ -1,0 +1,163 @@
+//------------------------------------------------------------------
+// Component SearchFilters
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+.lf-search-filters {
+    transition: $transition-default;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: $box-shadow-default;
+    background-color: $background-color;
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &__top,
+    &__filters,
+    &__bottom {
+        padding: $gutter-small;
+    }
+
+    &__top {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: $input-height-base;
+
+        &__close,
+        &__reset {
+            @include button-reset;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: inherit;
+                color: $brand-primary;
+            }
+        }
+
+        &__reset {
+            color: $text-color;
+        }
+    }
+
+    &__filters {
+        border-top: 1px solid $brand-secondary;
+        border-bottom: 1px solid $brand-secondary;
+
+        &__filter {
+            &:not(:first-child) {
+                margin-top: $gutter-small;
+            }
+
+            &__title {
+                @media (max-width: $screen-xs-min) {
+                    font-size: ceil($font-size-base * 1.2);
+                }
+
+                color: $brand-primary;
+                font-size: ceil($font-size-base * 1.1);
+            }
+
+            &__fields {
+                margin: 0;
+                padding: 10px 0 0;
+                list-style-type: none;
+
+                &__field {
+                    @media (max-width: $screen-xs-min) {
+                        margin-top: ceil($font-size-base * 1.3);
+                    }
+
+                    > input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        width: 0;
+                        height: 0;
+
+                        &:focus + label,
+                        &:hover + label {
+                            background-color: $brand-secondary;
+                        }
+
+                        &:checked + label > em {
+                            @include bridge-icon('check-on');
+
+                            color: $brand-primary;
+                        }
+                    }
+
+                    > label {
+                        @media (max-width: $screen-xs-min) {
+                            display: flex;
+                            align-items: center;
+                            font-size: ceil($font-size-base * 1.1);
+                        }
+
+                        display: block;
+                        transition: $transition-default;
+                        cursor: pointer;
+                        padding: 10px;
+
+                        &:hover,
+                        &:focus,
+                        &:active {
+                            color: $brand-primary;
+                        }
+
+                        > em {
+                            @include bridge-icon('check-off');
+
+                            margin-right: 5px;
+                            vertical-align: middle;
+                            color: $brand-secondary;
+
+                            @media (max-width: $screen-xs-min) {
+                                font-size: ceil($font-size-base * 1.2);
+                            }
+
+                            &::before {
+                                position: relative;
+                                z-index: 2;
+                                color: $brand-tertiary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+
+        &__submit,
+        &__reset {
+            align-items: center;
+            flex-flow: row nowrap;
+        }
+
+        &__reset {
+            color: $text-color;
+
+            @include button-reset;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: inherit;
+                color: $brand-primary;
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+imports:
+    - { resource: config.yml }
+
+services:
+    monolog.formatter.line_formatter:
+        class: Monolog\Formatter\LineFormatter
+        arguments:
+            - "[%%datetime%%] [symfony.%%channel%%:%%level_name%%] [request %%extra.request_id%%] %%message%% %%context%% %%extra%%\n"
+            - "D M j H:i:s.u Y"
+
+    monolog.processor.request_id_processor:
+        class: Bridge\FrontBundle\Logger\RequestIdProcessor
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: monolog.processor, handler: stderr }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      stderr
+        console:
+            type:  console
+        stderr: # gets caught by FPM process and forwarded to docker log deamon
+            type:     stream
+            path:     "php://stderr"
+            level:    "%bridge.logs.level%"
+            channels: ["!event"]
+            formatter: monolog.formatter.line_formatter

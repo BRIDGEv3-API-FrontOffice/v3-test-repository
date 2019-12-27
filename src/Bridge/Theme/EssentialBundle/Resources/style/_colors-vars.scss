@@ -1,0 +1,65 @@
+//------------------------------------------------------------------
+// Colors variables
+//------------------------------------------------------------------
+
+$black: #000;
+$white: #fff;
+$transparent: transparent;
+
+$blue-lochmara: #4b6de5;
+$green-forest: #0b8043;
+$orange-web: #b65d00;
+$red-monza: #c30612;
+
+$grey-mine-shaft: #333;
+$pale-sky: #6e7881;
+$grey-gallery: #eee;
+
+//
+// Main colors
+//
+
+$text-color: $pale-sky;
+$background-color: $white;
+
+//
+// Brand colors
+//
+
+$brand-primary: $grey-mine-shaft;
+$on-brand-primary: $white;
+
+$brand-secondary: $grey-gallery;
+$on-brand-secondary: $grey-mine-shaft;
+
+$brand-tertiary: $pale-sky;
+$on-brand-tertiary: $white;
+
+//
+// Status
+//
+
+$info-color: $blue-lochmara;
+$success-color: $green-forest;
+$warning-color: $orange-web;
+$danger-color: $red-monza;
+
+//
+// Types
+//
+
+$link-color: inherit;
+$link-hover-color: inherit;
+$link-hover-decoration: none;
+
+$hr-border-color: $grey-gallery;
+
+$blockquote-border-color: $grey-gallery;
+
+//
+// Social
+//
+
+$facebook: #3b5998;
+$twitter: #00acee;
+$linkedin: #0e76a8;

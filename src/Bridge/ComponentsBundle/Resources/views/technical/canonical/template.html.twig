@@ -1,0 +1,6 @@
+{# component 'technical-canonical' #}
+
+{% if '?' in app.request.requestUri and not app.request.get('page') %}
+    {% set canonicalUrl = app.request.requestUri|split('?')[0] %}
+    <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ canonicalUrl }}">
+{% endif %}

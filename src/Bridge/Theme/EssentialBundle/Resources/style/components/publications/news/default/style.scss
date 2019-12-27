@@ -1,0 +1,82 @@
+//------------------------------------------------------------------
+// Component PublicationsNewsDefault
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+// button-text
+
+.lf-publications-news-default {
+    @media print {
+        display: none;
+    }
+
+    &__title {
+        margin-bottom: $gutter-small;
+    }
+
+    &__item {
+        border: 1px solid $brand-secondary;
+        height: 100%;
+
+        &__illustration {
+            overflow: hidden;
+
+            &__img-wrapper {
+                display: block;
+                background-color: $brand-secondary;
+                padding-top: 37.15%;
+                width: 100%;
+                height: 0;
+
+                &.dark {
+                    @include stripes-over(-45deg, $black, $gutter-small);
+                }
+
+                &.light {
+                    @include stripes-over(-45deg, $white, $gutter-small);
+                }
+            }
+        }
+
+        &__body {
+            padding: $gutter-small;
+
+            & > *:first-child {
+                margin-top: 0;
+            }
+
+            &__period,
+            &__title {
+                margin-top: $gutter-small;
+            }
+
+            &__title {
+                @media (min-width: $screen-lg-min) {
+                    font-size: $font-size-base;
+                }
+            }
+
+            &__content {
+                @media (min-width: $screen-lg-min) {
+                    font-size: floor($font-size-base * .9);
+                }
+
+                margin-top: ceil($gutter-small / 3);
+            }
+
+            &__link,
+            &__attachments {
+                margin-top: $gutter-base;
+            }
+
+            &__link {
+                display: flex;
+                margin-right: auto;
+                margin-left: auto;
+                width: 100%;
+                max-width: 220px;
+            }
+        }
+    }
+}

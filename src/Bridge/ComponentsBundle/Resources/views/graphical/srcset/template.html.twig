@@ -1,0 +1,72 @@
+{# component 'graphical-srcset' #}
+
+{# @param  string   id          custom id                   default(null)  example('custom-id') #}
+{# @param  string   class       custom class                default(null)  example('custom-class') #}
+{# @param  boolean  responsive  apply img-responsive class  default(true)  example(true) #}
+{# @param  boolean  lazyload    apply lazy loading class    default(true)  example(false) #}
+{# @param  string   sizes       sizes attribute value       default(null)  example('(min-width: 992px) 30vw, (min-width: 768px) 50vw, 100vw') #}
+{# @param  string   alt         alternative text            default(null)  example('Custom alternative text') #}
+{# @param  object   sources
+    alternative sources for each size with descriptor (w or x) `{'650w': 'path/to/image-650.jpg'}`
+    default(null)  example({'320x': 'http://via.placeholder.com/320x110', '640x': 'http://via.placeholder.com/640x220', '1200x': 'http://via.placeholder.com/1200x640'}) #}
+
+{% if responsive is not defined %}
+    {% set responsive = true %}
+{% endif %}
+
+{% if lazyload is not defined %}
+    {% set lazyload = true %}
+{% endif %}
+
+{% if sources is defined and sources|length > 0 %}
+    {% set prefix = lazyload ? 'data-' : '' %}
+
+    {% set classes = lazyload ? 'lazy blur' : '' %}
+    {% set classes = responsive ? classes ~ ' img-responsive' : classes %}
+
+    {% set minSrc = '' %}
+    {% set maxSrc = '' %}
+    {% set srcset = '' %}
+
+    {% for size, src in sources|sort %}
+        {% set srcset = srcset ~ src ~ ' ' ~ size %}
+
+        {% if loop.first %}
+            {% set minSrc = src %}
+        {% endif %}
+
+        {% if loop.last %}
+            {% set maxSrc = src %}
+        {% endif %}
+
+        {% if not loop.last %}
+            {% set srcset = srcset ~ ', ' %}
+        {% endif %}
+    {% endfor %}
+
+    <img class="lf-graphical-srcset {{ classes }} {{ class|default(null) }}"
+        {% if lazyload %}
+            src="{{ minSrc }}"
+        {% endif %}
+
+        {{ prefix }}src="{{ maxSrc }}"
+
+        {{ prefix }}srcset="{{ srcset }}"
+
+        {% if sizes is defined and sizes is not empty %}
+            {{ prefix }}sizes="{{ sizes }}"
+        {% endif %}
+
+        {% if alt is defined %}
+            
+            alt="{{ alt }}"
+            
+            {% if alt is empty %}
+                
+                alt=""
+                
+            {% endif %}
+
+        {% endif %}
+    >
+{% endif %}

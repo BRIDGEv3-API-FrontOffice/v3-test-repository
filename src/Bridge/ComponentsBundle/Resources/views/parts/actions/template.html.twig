@@ -1,0 +1,34 @@
+{# component 'parts-actions' #}
+
+{# @param  string  id        custom id        default(null)  example('custom-id') #}
+{# @param  string  class     custom class     default(null)  example('custom-class') #}
+{# @param  object  location  location object  default(null)  example(location) #}
+
+{% if location is defined %}
+    <div {% if id is defined %}id="{{ id }}"{% endif %} class="lf-parts-actions {{ class|default(null) }}"
+        data-lf-actions="{{ location._id }}">
+        {% block actionsList %}
+            {% block goToStore %}
+                {% if location.hasStoreLocatorPage %}
+                    <a class="lf-parts-actions__item"
+                        href="{{ path('locations', {seoId: location.seoId, slug: location.slug}) }}"
+                        data-lf-tracking="{{ tracking({category: 'Go to store', label: tracking_location_label(location)}) }}">
+                        {{- 'bridge.component.parts.actions.go_to_store'|trans({}, 'components') -}}
+                    </a>
+                {% endif %}
+            {% endblock %}
+
+            {% block customActions %}{% endblock %}
+
+            {% block contactFrom %}
+                {% if location.useContactForm %}
+                    <a class="lf-parts-actions__item"
+                        href="{{ path('locations', {seoId: location.seoId, slug: location.slug}) }}?contact=true"
+                        data-lf-tracking="{{ tracking({category: 'Go to contact form', label: tracking_location_label(location)}) }}">
+                        {{- 'bridge.component.parts.actions.contact_us'|trans({}, 'components') -}}
+                    </a>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endif %}

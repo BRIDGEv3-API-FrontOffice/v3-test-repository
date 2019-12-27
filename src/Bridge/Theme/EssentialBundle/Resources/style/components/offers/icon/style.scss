@@ -1,0 +1,119 @@
+//------------------------------------------------------------------
+// Component OffersIcon
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+// button-text
+
+.lf-offers-icon {
+    @media print {
+        display: none;
+    }
+
+    position: relative;
+
+    &__title {
+        margin-bottom: $gutter-small;
+    }
+
+    &__toggler {
+        @media (min-width: $screen-sm-min) {
+            @include button-text($brand-primary);
+
+            position: absolute;
+            top: 5px;
+            right: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            text-transform: inherit;
+        }
+
+        display: flex;
+        margin: 15px auto 0;
+        text-decoration: none;
+    }
+
+    &__list {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        transition: height $transition-time $transition-animation;
+        overflow: hidden;
+
+        &__offer {
+            @media (min-width: $screen-sm-min) {
+                margin-left: $gutter-small;
+                width: calc((100% - #{$gutter-base}) / 3);
+            }
+
+            display: flex;
+            align-items: center;
+            margin: 0 0 $gutter-small 0;
+            width: 100%;
+
+            &--link:hover & {
+                &__body {
+                    &__title {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &.hidden {
+                visibility: hidden;
+                margin: 0;
+                padding: 0;
+                height: 0;
+            }
+
+            &:nth-child(3n + 1) {
+                @media (min-width: $screen-sm-min) {
+                    margin-left: 0;
+                }
+            }
+
+            &__illustration {
+                border-radius: 50%;
+                background-color: $brand-tertiary;
+                padding: 10px;
+
+                &__image {
+                    @include img-responsive;
+
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            &__body {
+                flex: 1;
+
+                &__title {
+                    @media (min-width: $screen-lg-min) {
+                        font-size: $font-size-base;
+                    }
+
+                    margin-top: $gutter-small;
+                }
+
+                &__content {
+                    @media (min-width: $screen-lg-min) {
+                        font-size: floor($font-size-base * .9);
+                    }
+
+                    margin-top: ceil($gutter-small / 3);
+                }
+
+                & > *:first-child {
+                    margin-top: 0;
+                }
+            }
+
+            &__illustration + &__body {
+                padding-left: $gutter-small;
+            }
+        }
+    }
+}

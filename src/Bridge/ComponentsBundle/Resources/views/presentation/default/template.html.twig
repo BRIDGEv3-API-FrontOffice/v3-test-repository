@@ -1,0 +1,53 @@
+{# component 'presentation-default' #}
+
+{# @param  string   id        custom id                  default('lf-presentation-default')  example('lf-presentation-default') #}
+{# @param  string   class     custom class               default(null)                       example('custom-class') #}
+{# @param  string   title     title text                 default(null)                       example('Presentation') #}
+{# @param  string   content   presentation text content  default(null)                       example('Lorem ipsum dolor sit amet consectetur adipisicing elit...') #}
+{# @param  boolean  ellipsis  apply ellipsis on content  default(false)                      example(false) #}
+{# @param  string   imageSrc  image src url to display   default(null)                       example('https://via.placeholder.com/650x400') #}
+{# @param  string   imageAlt  image alternative text     default(null)                       example('Placeholder') #}
+{# @param  string   titleattributes  data-attributes for title     default(null)
+
+{# @global  string  icon_set  icon set class prefix #}
+
+<div id="{{ id|default('lf-presentation-default') }}"
+    class="lf-presentation-default {{ class|default(null) }}">
+    {% block title %}
+        <h2 class="lf-presentation-default__title" {{ htmlAttrs(titleattributes|default(null)) }}>
+            {{- title|default(null) -}}
+        </h2>
+    {% endblock %}
+
+    {% block content %}
+        <div class="lf-presentation-default__content">
+            {% block image %}
+                {% if imageSrc is defined and imageAlt is defined %}
+                    <img class="lf-presentation-default__content__image"
+                        src="{{ imageSrc }}"
+                        alt="{{ imageAlt }}">
+                {% endif %}
+            {% endblock %}
+
+            {% block description %}
+                <div class="lf-presentation-default__content__description">
+                    <div class="lf-presentation-default__content__description__text {% if ellipsis is defined %}ellipsis{% endif %}"
+                        data-lf-content {{ htmlAttrs(contentattributes|default(null)) }}>
+                        {{- content|default(null)|raw|nl2br -}}
+                    </div>
+
+                    {% if ellipsis is defined %}
+                        {% include '@components/button/text/template.html.twig' with {
+                            'class': 'lf-presentation-default__content__description__expand',
+                            'label': 'bridge.components.show-more'|trans({}, 'components'),
+                            'icon': 'bridge-icon-' ~ icon_set ~ '-chevron-right',
+                            'iconPosition': 'right',
+                            'attributes': {'data-lf-expand': ''},
+                            'trackingData': {}
+                        } only %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>

@@ -1,0 +1,90 @@
+//------------------------------------------------------------------
+// Component BreadcrumbScroll
+//------------------------------------------------------------------
+
+.lf-breadcrumb-scroll {
+    @include container;
+
+    @media print {
+        display: none;
+    }
+
+    position: relative;
+    padding-top: 6px;
+    overflow: hidden;
+
+    &__container {
+        @media (min-width: $screen-sm-min) {
+            direction: ltr;
+        }
+
+        overflow-x: auto;
+        white-space: nowrap;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &__list {
+            display: inline-block;
+            margin: 0;
+            padding: 5px 0;
+            overflow-x: hidden;
+            list-style: none;
+            direction: ltr;
+
+            &__item {
+                display: inline-block;
+                position: relative;
+
+                &:not(:last-child)::after {
+                    @include bridge-icon;
+
+                    display: inline;
+                    position: relative;
+                    top: -1px;
+                    padding: 0 5px;
+                    font-size: .5em;
+                    content: '\e904';
+                }
+
+                &__link {
+                    @media (min-width: $screen-sm-min) {
+                        transition: $transition-default;
+                        opacity: .7;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        opacity: 1;
+                    }
+
+                    &__label {
+                        text-transform: capitalize;
+                    }
+                }
+
+                &__label {
+                    text-transform: capitalize;
+                    font-weight: $font-weight-bold;
+                }
+            }
+        }
+    }
+
+    &__overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(to right, rgba($background-color, 1), rgba($background-color, 0));
+        width: 80px;
+        pointer-events: none;
+
+        &.show {
+            display: block;
+        }
+    }
+}

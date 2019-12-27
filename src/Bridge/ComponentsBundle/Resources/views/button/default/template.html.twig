@@ -1,0 +1,98 @@
+{# component 'button-default' #}
+
+{# @param  string   id              custom id                                           default(null)                   example('custom-id') #}
+{# @param  string   class           custom class                                        default(null)                   example('custom-class') #}
+{# @param  string   type            type of the button `'button'|'a'|'input'`           default('button')               example('button') #}
+{# @param  string   label           label of the button                                 default('Label')                example('Near me') #}
+{# @param  string   srLabel         srLabel of the button                               default('Additional content')   example('Near me') #}
+{# @param  string   role            accessibility WAI-ARIA Role                         default(null)                   example('button') #}
+{# @param  string   popup           accessibility WAI-ARIA haspopup                     default(null)                   example(true) #}
+{# @param  string   href            link url for a type                                 default(null)                   example('#') #}
+{# @param  string   icon            custom icon class                                   default(null)                   example('bridge-icon-geolocation') #}
+{# @param  string   style           primary or secondary style `'primary'|'secondary'`  default('primary')              example('primary') #}
+{# @param  string   size            button size `'small'|'medium'|'large'`              default('medium')               example('medium') #}
+{# @param  boolean  isMiniOnMobile  the mobile button style                             default(false)                  example(false) #}
+{# @param  boolean  isLabelSrOnly   apply sr-only on the label                          default(false)                  example(false) #}
+{# @param  object   attributes      custom attributes                                   default(null)                   example({'data-lf-location': 'location_id'}) #}
+{# @param  object   trackingData
+    tracking attributes, merged with `{bind: 'click', category: label, label: label}` if tracking is not needed set an empty value `''|{}|[]`
+    default(null)  example({'category': 'Location'})
+#}
+
+{% set type = type|default('button') %}
+{% set classBase = 'lf-button-default' %}
+{% set style = classBase ~ '--' ~ style|default('primary') %}
+{% set size = classBase ~ '--' ~ size|default('medium') %}
+{% set label = label|default('Label') %}
+{% set role = role|default(null) %}
+{% set ariapopup = ariapopup|default(null) %}
+{% set ariaHidden = ariaHidden|default(null) %}
+{% set iconPosition = iconPosition|default('left') %}
+
+{% set miniClass = '' %}
+{% if isMiniOnMobile|default(false) and type != 'input' %}
+    {% set miniClass = classBase ~ '--mini-mobile' %}
+{% endif %}
+
+{% set labelClass = '' %}
+{% if isLabelSrOnly|default(false) %}
+    {% set labelClass = classBase ~ '--icon' %}
+{% endif %}
+
+<{{ type }} {% if id is defined %}id="{{ id }}"{% endif %}
+
+    class="{{ classBase }} {{ style }} {{ size }} {{ miniClass }} {{ labelClass }} {{ class|default(null) }}"
+
+    {% if type == 'a' %}
+        href="{{ href|default('#') }}"
+    {% endif %}
+
+    {% if role is not empty %}
+        role="{{ role }}"
+    {% endif %}
+
+    {% if ariapopup %}
+        aria-haspopup="true"
+    {% endif %}
+
+    {% if ariaHidden %}
+        aria-hidden="true"
+    {% endif %}
+
+    {% if type == 'input' %}
+        type="submit"
+        value="{% if trackingData is defined %}{{ label }}{% else %}No tracking!{% endif %}"
+    {% else %}
+        title="{{ label }}"
+    {% endif %}
+
+    {{ htmlAttrs(attributes|default(null)) }}
+
+    {% if trackingData is defined and not trackingData is empty %}
+        {% set trackingData = {category: label, label: label}|merge(trackingData) %}
+        data-lf-tracking="{{ tracking(trackingData) }}"
+    {% endif %}
+
+    >
+
+{% block content %}
+    {% if type != 'input' %}
+        {% if icon is defined and iconPosition == 'left' %}
+            <em class="lf-button-default__icon left {{ icon }}" aria-hidden="true"></em>
+        {% endif %}
+
+        <span class="lf-button-default__label {{ isLabelSrOnly|default(false) ? 'sr-only' : '' }}">
+            {%- if trackingData is defined -%}
+                {{- label -}}
+                {% if srLabel is defined %}<span class="sr-only">{{ srLabel }}</span>{% endif %}
+            {%- else -%}
+                {{- 'No tracking!' -}}
+            {%- endif -%}
+        </span>
+
+        {% if icon is defined and iconPosition == 'right' %}
+            <em class="lf-button-default__icon right {{ icon }}" aria-hidden="true"></em>
+        {% endif %}
+        </{{ type }}>
+    {% endif %}
+{% endblock %}

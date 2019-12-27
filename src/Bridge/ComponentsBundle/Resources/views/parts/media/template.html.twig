@@ -1,0 +1,47 @@
+{# component 'parts-media' #}
+
+{# @param  string  id        custom id        default('lf-parts-media')  example('lf-parts-media') #}
+{# @param  string  class     custom class     default(null)              example('custom-class') #}
+{# @param  object  location  location object  default(null)              example(location) #}
+
+{% set id = id|default('lf-parts-media') %}
+{% set media = [] %}
+
+{% if location is defined and location.media is defined %}
+    {% set media = location.media|media_of_type('location', false) %}
+{% endif %}
+
+{% if media and media|length > 0 %}
+    <div id="{{ id }}" class="lf-parts-media {{ class|default(null) }}">
+        {% if media|length > 1 %}
+            {% embed '@components/slider/swiper/template.html.twig' with {
+                'id': id ~ '-slider',
+                'class': 'lf-parts-media__slider',
+                'slides': media,
+                'location': location
+            } only %}
+                {% block slide %}
+                    {% import "@components/parts/media/template.html.twig" as self %}
+                    {{ self.displayMedia(slide, location.name ~ ' ' ~ loop.index) }}
+                {% endblock %}
+            {% endembed %}
+        {% else %}
+            {{ _self.displayMedia(media|first, location.name) }}
+        {% endif %}
+    </div>
+{% endif %}
+
+{% macro displayMedia(media, alt) %}
+    {% include '@components/graphical/srcset/template.html.twig' with {
+        'class': 'lf-parts-media__slider__slide',
+        'responsive': true,
+        'lazyload': true,
+        'sizes': '(min-width: 992px) 30vw, (min-width: 768px) 50vw, 100vw',
+        'alt': alt,
+        'sources': {
+            '320w': media|image_url({'size':'x320'}),
+            '640w': media|image_url({'size':'x640'}),
+            '960w': media|image_url({'size':'x960'})
+        }
+    } only %}
+{% endmacro %}

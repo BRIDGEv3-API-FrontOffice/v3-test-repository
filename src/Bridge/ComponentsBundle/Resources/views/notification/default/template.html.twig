@@ -1,0 +1,28 @@
+{# component 'notification-default' #}
+
+{#
+    in javascript update service function
+        const title = form.getAttribute('data-lf-title-success');
+        const message = form.getAttribute('data-lf-msg-success');
+        notificationService.display(title, message, 'success');
+
+    in HTML update form view
+        {{ form_start(formView, {'attr': {
+            ...
+            'data-lf-title-success': 'bridge.front_bundle.views.pages.location.contact.success.title' | trans,
+            'data-lf-msg-success': 'bridge.front_bundle.views.pages.location.contact.success.message' | trans,
+            'data-lf-title-error': 'bridge.front_bundle.views.pages.location.contact.error.title' | trans,
+            'data-lf-msg-error': 'bridge.front_bundle.views.pages.location.contact.error.message' | trans
+        }}) }}
+#}
+
+{# @param  string  id     custom id     default(null)  example('custom-id') #}
+{# @param  string  class  custom class  default(null)  example('custom-class') #}
+
+<div aria-live="assertive" aria-labelledby="title-notification" aria-describedby="description-notification" role="alert" {% if id is defined %}id="{{ id }}"{% endif %}
+    class="lf-notification-default inactive{{ class|default(null) }}"
+    data-lf-notification>
+    <em class="lf-notification-default__icon" data-lf-notification-icon role="img"></em>
+    <p id="title-notification" class="lf-notification-default__title" data-lf-notification-title></p>
+    <p id="description-notification" class="lf-notification-default__message" data-lf-notification-msg></p>
+</div>

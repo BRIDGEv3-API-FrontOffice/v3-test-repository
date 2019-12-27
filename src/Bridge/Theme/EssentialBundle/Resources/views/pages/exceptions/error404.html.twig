@@ -1,0 +1,24 @@
+{% extends '@pages/exceptions/error.html.twig' %}
+
+{% block title %}
+    <title>
+        {{- 'bridge.theme.exceptions.error_404.title' | trans(translationVars, 'messages') | striptags -}}
+    </title>
+{% endblock %}
+
+{% block additional_meta %}
+    <meta name="robots" content="noindex">
+    <meta name="description" content="{{ 'bridge.theme.exceptions.error_404.title' | trans(translationVars, 'messages') | striptags }}"/>
+{% endblock %}
+
+{% block pageMain %}
+    <div id="lf-content">
+        {% with {
+            title: 'bridge.theme.exceptions.error_404.title'|trans(translationVars, 'messages'),
+            message: 'bridge.theme.exceptions.error_404.message'|trans(translationVars, 'messages'),
+            illustration: '404'
+        } %}
+            {{ parent() }}
+        {% endwith %}
+    </div>
+{% endblock %}

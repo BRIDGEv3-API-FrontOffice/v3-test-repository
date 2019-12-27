@@ -1,0 +1,20 @@
+<ul class="lf-skip-content">
+    {% spaceless %}
+    {% if app.request.get('_route') != null and app.request.get('_route') != 'gdpr' %}
+        <li class="lf-skip-content__item">
+            <a class="lf-skip-content__item__link" href="#lf-search">{{ 'bridge.components.wcag.skip.search.text'|trans({}, 'components') }}</a>
+        </li>
+    {% endif %}
+    <li class="lf-skip-content__item">
+        <a class="lf-skip-content__item__link" href="#lf-content">{{ 'bridge.components.wcag.skip.content.text'|trans({}, 'components') }}</a>
+    </li>
+    {% if pagination is not empty %}
+    <li class="lf-skip-content__item">
+        <a class="lf-skip-content__item__link" href="#lf-pagination">{{ 'bridge.components.wcag.skip.pagination.text'|trans({}, 'components') }}</a>
+    </li>
+    {% endif %}
+    <li class="lf-skip-content__item">
+        <a class="lf-skip-content__item__link" href="#lf-footer">{{ 'bridge.components.wcag.skip.footer.text'|trans({}, 'components') }}</a>
+    </li>
+    {% endspaceless %}
+</ul>

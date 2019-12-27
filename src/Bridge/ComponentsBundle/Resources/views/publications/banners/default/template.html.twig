@@ -1,0 +1,104 @@
+{# component 'publications-banners-default' #}
+
+{# @param  string  id          custom id           default('lf-publications-banners')  example('lf-publications-banners') #}
+{# @param  string  class       custom class        default(null)                       example('custom-class') #}
+{# @param  string  title       block title         default(null)                       example('Banners') #}
+{# @param  string  zonePrefix  zone slug prefix    default('banners')                  example('') #}
+{# @param  object  zones       publications zones  default(null)                       example(zones) #}
+{# @param  object  location    location object     default(null)                       example(location) #}
+
+{# @global  object  brand  brand config #}
+
+{% set id = id|default('lf-publications-banners') %}
+{% set zonePrefix = zonePrefix|default('banners') %}
+{% set mobileZone = zonePrefix ~ '-mobile' %}
+{% set desktopZone = zonePrefix ~ '-desktop' %}
+{% set location = location|default(null) %}
+
+{% if zones is defined
+and ((zones[desktopZone] is defined and zones[desktopZone].total is defined and zones[desktopZone].total > 0)
+or (zones[mobileZone] is defined and zones[mobileZone].total is defined and zones[mobileZone].total > 0)) %}
+    <div id="{{ id }}"
+        class="lf-publications-banners-default {{ class|default(null) }}" aria-labelledby="{{ id }}-title">
+        {% if title is defined %}
+            <h2 id="{{ id }}-title" class="lf-publications-banners-default__title sr-only">
+                {{- title -}}
+            </h2>
+        {% endif %}
+
+        {% if zones[desktopZone].total > 1 or zones[mobileZone].total > 1 %}
+            {% embed '@components/slider/swiper/template.html.twig' with {
+                'id': id ~ '-slider',
+                'class': 'lf-publications-banners-default__slider',
+                'slides': zones[desktopZone].publications,
+                'mobileZone': mobileZone,
+                'desktopZone': desktopZone,
+                'outerPagination': true,
+                'zonePrefix': zonePrefix,
+                'location': location
+            } only %}
+                {% block slide %}
+                    {% import "@components/publications/banners/default/template.html.twig" as self %}
+                    {{ self.displayItem(slide, zonePrefix, mobileZone, desktopZone, location) }}
+                {% endblock %}
+            {% endembed %}
+        {% else %}
+            {{ _self.displayItem(zones[desktopZone].publications|first, zonePrefix, mobileZone, desktopZone, location) }}
+        {% endif %}
+    </div>
+{% endif %}
+
+{% macro displayItem(item, zonePrefix, mobileZone, desktopZone, location) %}
+    <article class="lf-publications-banners-default__item">
+        {% if item.dedicatedPageUrl %}
+            <a href="{{ item.dedicatedPageUrl }}"
+                target="_blank"
+                aria-label="{{ 'bridge.components.publications.button_link.label'|trans({}, 'components') }}"
+                data-lf-tracking="{{ tracking({category: 'Banner link', label: tracking_publication_label(item, location)}) }}">
+        {% endif %}
+
+        {% set mediaMobile = item.zoneMedia|extract_zone_formats(mobileZone, 'image')|extract_format_image('default') %}
+        {% set mediaDesktop = item.zoneMedia|extract_zone_formats(desktopZone, 'image')|extract_format_image('default') %}
+        {% if mediaDesktop %}
+            {% if not mediaMobile %}
+                {% set mediaMobile = mediaDesktop %}
+            {% endif %}
+                <h2 class="sr-only">{{ item.title }}</h2>
+                <picture>
+                    <source media="(min-width: 768px)"
+                            srcset="{{ mediaDesktop.host }}/940x/{{ mediaDesktop.path }} 940w,
+                                    {{ mediaDesktop.host }}/1200x/{{ mediaDesktop.path }} 1200w">
+                    <source srcset="{{ mediaMobile.host }}/340x/{{ mediaMobile.path }} 340w,
+                                    {{ mediaMobile.host }}/750x/{{ mediaMobile.path }} 750w">
+                    <img class="lf-publications-banners-default__item__image lazy blur"
+                        src="{{ mediaDesktop.host }}/100x/{{ mediaDesktop.path }}"
+                        data-src="{{ mediaDesktop.host }}/1200x/{{ mediaDesktop.path }}"
+                        data-srcset="{{ mediaMobile.host }}/340x/{{ mediaMobile.path }} 340w,
+                                        {{ mediaMobile.host }}/750x/{{ mediaMobile.path }} 750w,
+                                        {{ mediaDesktop.host }}/940x/{{ mediaDesktop.path }} 940w,
+                                        {{ mediaDesktop.host }}/1200x/{{ mediaDesktop.path }} 1200w"
+                        alt="{{ location.name|default(brand.name|default(zonePrefix)) }} - {{ item.title }}">
+                </picture>
+        {% else %}
+            <div class="lf-publications-banners-default__item__img-wrapper light"></div>
+        {% endif %}
+
+        {% if item.dedicatedPageUrl %}
+            </a>
+        {% endif %}
+
+        {% if item.attachments|length > 0 %}
+            {% include '@components/button/default/template.html.twig' with {
+                'class': 'lf-publications-banners-default__item__attachments',
+                'type': 'a',
+                'href': item.attachments[0].url,
+                'label': 'bridge.components.publications.button_attachments.label'|trans({}, 'components'),
+                'srLabel': 'bridge.components.publications.button_attachments.srLabel'|trans({'%publiTitle%': item.title}, 'components'),
+                'style': 'secondary',
+                'size': 'small',
+                'attributes': {target: '_blank'},
+                'trackingData': {category: 'Banner attachments', label: tracking_publication_label(item, location)}
+            } only %}
+        {% endif %}
+    </article>
+{% endmacro %}

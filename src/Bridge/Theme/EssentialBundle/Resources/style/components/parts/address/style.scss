@@ -1,0 +1,22 @@
+//------------------------------------------------------------------
+// Component PartsAddress
+//------------------------------------------------------------------
+
+.lf-parts-address {
+    text-transform: capitalize;
+
+    &__title {
+        @media print {
+            display: block;
+            font-size: $font-size-h2;
+        }
+
+        display: none;
+    }
+
+    &__city {
+        @media print {
+            margin-bottom: $gutter-small;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{# component 'button-fab' #}
+
+{# @param  string  id          custom id                                           default(null)       example('custom-id') #}
+{# @param  string  class       custom class                                        default(null)       example('custom-class') #}
+{# @param  string  type        type of the button `'button'|'a'|'input'`           default('button')   example('button') #}
+{# @param  string  label       label of the button                                 default('Label')    example('Share this') #}
+{# @param  string  href        link url for a type                                 default(null)       example('#') #}
+{# @param  string  icon        custom icon class                                   default(null)       example('bridge-icon-essential-home') #}
+{# @param  string  style       primary or secondary style `'primary'|'secondary'`  default('primary')  example('primary') #}
+{# @param  object  attributes  custom attributes                                   default(null)       example({'data-lf-location': 'location_id'}) #}
+{# @param  object  trackingData
+    tracking attributes, merged with `{bind: 'click', category: label, label: label}` if tracking is not needed set an empty value `''|{}|[]`
+    default(null)  example({'category': 'Location'})
+#}
+
+{% set type = type|default('button') %}
+{% set style = style|default('primary') %}
+{% set label = label|default('Label') %}
+{% set icon = icon|default('bridge-icon-essential-home') %}
+
+<{{ type }} {% if id is defined %}id="{{ id }}"{% endif %}
+
+    class="lf-button-fab lf-button-fab--{{ style }} {{ class|default(null) }}"
+
+    {% if type == 'a' %}
+        href="{{ href|default('#') }}"
+    {% endif %}
+
+    title="{{ label }}"
+
+    {{ htmlAttrs(attributes|default(null)) }}
+
+    {% if trackingData is defined and not trackingData is empty %}
+        {% set trackingData = {category: label, label: label}|merge(trackingData) %}
+        data-lf-tracking="{{ tracking(trackingData) }}"
+    {% endif %}
+
+    >
+
+    <em class="lf-button-fab__icon {{ icon }}"></em>
+    <span class="lf-button-fab__label">
+        {%- if trackingData is defined -%}
+            {{- label -}}
+        {%- else -%}
+            {{- 'No tracking!' -}}
+        {%- endif -%}
+    </span>
+
+</{{ type }}>

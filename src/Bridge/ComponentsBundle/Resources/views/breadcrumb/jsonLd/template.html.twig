@@ -1,0 +1,23 @@
+{# partial 'breadcrumb-jsonLd' #}
+
+{# @param  array  breadcrumbs  breadcrumb links  default(null)  example([{'url': '#', 'text': 'Home'}, {'url': '#', 'text': 'Category'}, {'url': '#', 'text': 'Page'}]) #}
+
+{% set breadcrumbItems %}
+    {% for item in breadcrumbs %}
+        {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "item": {
+                "@id": "{{ item.url }}",
+                "name": "{% if loop.first %}Home{% else %}{{ item.text }}{% endif %}"
+            }
+        }{% if not loop.last %},{% endif %}
+    {% endfor %}
+{% endset %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{{ breadcrumbItems }}]
+}
+</script>

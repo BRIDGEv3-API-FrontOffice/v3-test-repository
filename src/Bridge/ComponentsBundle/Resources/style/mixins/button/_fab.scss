@@ -1,0 +1,86 @@
+// Mixin Button Fab
+
+@mixin button-fab($background-color, $color) {
+    @media (min-width: $screen-sm-min) {
+        bottom: 100px;
+    }
+
+    @media (min-width: $screen-md-min) {
+        right: 0;
+        bottom: 150px;
+        border-radius: $button-height-large / 2 0 0 $button-height-large / 2;
+    }
+
+    display: flex;
+    position: fixed;
+    right: $gutter-small;
+    bottom: $gutter-small;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
+    transition: $transition-default;
+    z-index: 100;
+    margin: 0;
+    border: $button-border-width solid $background-color;
+    border-radius: 50%;
+    box-shadow: none;
+    background-color: $background-color;
+    cursor: pointer;
+    padding: 0 12px;
+    // width: $button-height-large;
+    width: max-content;
+    height: $button-height-large;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    color: $color;
+    font-size: 20px;
+
+    & > span {
+        @media (min-width: $screen-md-min) {
+            display: initial;
+            transition: max-width $transition-time .1s $transition-animation, opacity $transition-time 0s $transition-animation;
+        }
+
+        display: none;
+        opacity: 0;
+        margin-top: 2px;
+        max-width: 0;
+        text-transform: uppercase;
+        white-space: nowrap;
+        font-size: 12px;
+    }
+
+    & > em {
+        @media (min-width: $screen-md-min) {
+            transition: margin-right $transition-time .1s $transition-animation;
+            margin-right: 0;
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        background-color: darken($background-color, 5%);
+        text-decoration: none;
+        color: $color;
+    }
+
+    &:hover {
+        & > span {
+            @media (min-width: $screen-md-min) {
+                transition: max-width $transition-time 0s $transition-animation, opacity $transition-time .1s $transition-animation;
+                opacity: 1;
+                max-width: 300px;
+            }
+        }
+
+        & > em {
+            @media (min-width: $screen-md-min) {
+                transition: margin-right $transition-time 0s $transition-animation;
+                margin-right: 10px;
+            }
+        }
+    }
+}

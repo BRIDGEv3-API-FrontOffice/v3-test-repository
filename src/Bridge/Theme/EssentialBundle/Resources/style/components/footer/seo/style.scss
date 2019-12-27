@@ -1,0 +1,219 @@
+//------------------------------------------------------------------
+// Component FooterSeo
+//------------------------------------------------------------------
+
+// Dependencies
+// button-default
+
+$component-footer-seo-columns-mobile: 1;
+$component-footer-seo-columns-gutter-mobile: 0;
+$component-footer-seo-columns-tablet: 2;
+$component-footer-seo-columns-gutter-tablet: 25%;
+$component-footer-seo-columns-desktop: 3;
+$component-footer-seo-columns-gutter-desktop: 16.66%;
+
+.lf-footer-seo {
+    @media print {
+        display: none;
+    }
+
+    @media (min-width: $screen-sm-min) {
+        padding-top: $gutter-large;
+        padding-bottom: $gutter-large;
+    }
+
+    background-color: $brand-primary;
+    padding-top: $gutter-base;
+    padding-bottom: $gutter-base;
+    color: $on-brand-primary;
+
+    &__container {
+        @include container;
+
+        &__title {
+            margin-bottom: $gutter-base;
+            color: $on-brand-primary;
+            font-weight: $font-weight-bold;
+        }
+
+        &__grid {
+            @media (min-width: $screen-sm-min) {
+                height: auto !important;
+                overflow: visible;
+            }
+
+            @media (min-width: $screen-md-min) {
+                line-height: 2em;
+            }
+
+            display: flex;
+            flex-wrap: wrap;
+            transition: $transition-default;
+            transition-property: height;
+            margin: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 3em;
+
+            &.expand,
+            &.hidden {
+                height: calc((3em + 1px) * 5 + 1px);
+            }
+        }
+
+        &__group {
+            @media (min-width: $screen-sm-min) {
+                margin-top: $gutter-small;
+                width: calc((100% - #{$component-footer-seo-columns-gutter-tablet}) / 2 - .01px);
+
+                &:nth-child(-n+#{$component-footer-seo-columns-tablet}) {
+                    margin-top: 0;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-tablet}n + 1) {
+                    margin-right: $component-footer-seo-columns-gutter-tablet;
+                }
+            }
+
+            @media (min-width: $screen-md-min) {
+                margin-top: $gutter-small;
+                width: calc((100% - (#{$component-footer-seo-columns-gutter-desktop} * 2)) / 3 - .01px);
+
+                &:nth-child(-n+#{$component-footer-seo-columns-desktop}) {
+                    margin-top: 0;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-tablet}n + 1) {
+                    margin-right: 0;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-desktop}n + 1),
+                &:nth-child(#{$component-footer-seo-columns-desktop}n + 2) {
+                    margin-right: $component-footer-seo-columns-gutter-desktop;
+                }
+            }
+
+            &:nth-child(-n+#{$component-footer-seo-columns-mobile}) {
+                margin-top: 0;
+            }
+
+            margin-top: $gutter-small;
+            width: 100%;
+
+            &__title {
+                text-transform: uppercase;
+                color: $on-brand-primary;
+                font-size: 1em;
+
+                &__link {
+                    transition: $transition-default;
+                    opacity: .6;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        opacity: .8;
+                    }
+                }
+            }
+        }
+
+        &__item {
+            @media (min-width: $screen-sm-min) {
+                border-top-width: 0;
+                width: calc((100% - #{$component-footer-seo-columns-gutter-tablet}) / 2 - .01px);
+
+                &:nth-child(-n+#{$component-footer-seo-columns-tablet}) {
+                    border-top-width: 1px;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-tablet}n + 1) {
+                    margin-right: $component-footer-seo-columns-gutter-tablet;
+                }
+            }
+
+            @media (min-width: $screen-md-min) {
+                border-top-width: 0;
+                width: calc((100% - (#{$component-footer-seo-columns-gutter-desktop} * 2)) / 3 - .01px);
+
+                &:nth-child(-n+#{$component-footer-seo-columns-desktop}) {
+                    border-top-width: 1px;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-tablet}n + 1) {
+                    margin-right: 0;
+                }
+
+                &:nth-child(#{$component-footer-seo-columns-desktop}n + 1),
+                &:nth-child(#{$component-footer-seo-columns-desktop}n + 2) {
+                    margin-right: $component-footer-seo-columns-gutter-desktop;
+                }
+            }
+
+            transition: $transition-default;
+            border: 0 solid lighten($brand-primary, 15%);
+            border-bottom-width: 1px;
+            width: 100%;
+
+            &:nth-child(-n+#{$component-footer-seo-columns-mobile}) {
+                border-top-width: 1px;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                border-left-width: $gutter-small / 3;
+                padding-left: $gutter-small;
+
+                em {
+                    opacity: 1;
+                }
+            }
+
+            &__title {
+                text-transform: capitalize;
+                color: $on-brand-primary;
+                font-size: 1em;
+
+                &__link {
+                    display: flex;
+                    align-items: center;
+                    flex-flow: row nowrap;
+                    justify-content: space-between;
+
+                    em {
+                        transition: $transition-default;
+                        opacity: .5;
+                        font-size: .8em;
+                    }
+                }
+            }
+        }
+
+        &__group & {
+            &__item {
+                margin-right: 0;
+                border-top-width: 0;
+                width: 100%;
+
+                &:first-child {
+                    border-top-width: 1px;
+                }
+            }
+        }
+
+        &__toggle {
+            @media (min-width: $screen-sm-min) {
+                display: none;
+            }
+
+            display: flex;
+            margin: $gutter-base auto 0;
+
+            em {
+                position: relative;
+                top: -1px;
+            }
+        }
+    }
+}

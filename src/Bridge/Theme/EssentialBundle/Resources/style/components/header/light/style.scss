@@ -1,0 +1,258 @@
+//------------------------------------------------------------------
+// Component HeaderLight
+//------------------------------------------------------------------
+
+$component-header-light-height: 50px;
+
+.lf-header-light {
+    @media print {
+        display: none;
+    }
+
+    position: relative;
+    z-index: 100;
+    border-bottom: 1px solid darken($brand-primary, 15%);
+    background-color: $brand-primary;
+    color: $on-brand-primary;
+
+    &__navbar {
+        @include container;
+
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        height: $component-header-light-height;
+
+        &__brand {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            height: 100%;
+            max-height: $component-header-light-height - $gutter-base;
+
+            &:hover,
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
+
+            &__logo {
+                width: auto;
+                height: 100%;
+            }
+
+            &__logo + &__name {
+                margin-left: $gutter-small;
+            }
+        }
+
+        &__toggler {
+            display: block;
+            position: relative;
+            transition: $transition-default;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 18px;
+            appearance: none;
+            user-select: none;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background: none;
+            }
+
+            &__bar {
+                display: block;
+                position: absolute;
+                transition: $transition-default;
+                border-radius: 2px;
+                background-color: $on-brand-primary;
+                width: 100%;
+                height: 2px;
+
+                &.top {
+                    top: 0;
+                }
+
+                &.middle {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &.bottom {
+                    bottom: 0;
+                }
+            }
+
+            &:hover & {
+                &__bar {
+                    background-color: lighten($brand-primary, 15%);
+                }
+            }
+        }
+
+        &__collapse {
+            display: flex;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 100%;
+            left: 0;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            transition: $transition-default;
+            transition-delay: $transition-time;
+            visibility: hidden;
+            z-index: 10;
+            background-color: rgba($brand-primary, .95);
+            padding: 0;
+            overflow: hidden;
+            font-size: $font-size-base * 2;
+
+            &__list {
+                @include list-unstyled;
+
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                transition: $transition-default;
+                transition-delay: 0s;
+                opacity: 0;
+
+                &__item {
+                    @media (min-width: $screen-md-min) {
+                        margin: 10px 0;
+                    }
+
+                    margin: 5px 0;
+
+                    &__link {
+                        display: block;
+                        position: relative;
+                        padding: 5px;
+
+                        &::after {
+                            position: absolute;
+                            right: 100%;
+                            bottom: 0;
+                            left: 0;
+                            transition: $transition-default;
+                            background-color: $on-brand-primary;
+                            height: 2px;
+                            content: "";
+                        }
+
+                        &:hover,
+                        &:focus,
+                        &:active {
+                            text-decoration: none;
+
+                            &::after {
+                                right: 0;
+                            }
+                        }
+                    }
+                }
+
+                &--socials {
+                    flex-flow: row wrap;
+                }
+
+                &--socials & {
+                    &__item {
+                        @media (min-width: $screen-md-min) {
+                            margin: 0 10px;
+                        }
+
+                        margin: 0 5px;
+
+                        &__link {
+                            transition: $transition-default;
+                            border-radius: 50%;
+                            padding: 8px;
+                            text-align: center;
+
+                            > em {
+                                display: block;
+                                margin-top: 1px;
+                                font-size: $font-size-base * 1.8;
+                            }
+
+                            &::after {
+                                display: none;
+                            }
+
+                            &:hover {
+                                background-color: $on-brand-primary;
+                                color: $brand-primary;
+                            }
+                        }
+                    }
+                }
+
+                & + &--socials {
+                    margin-top: $gutter-large;
+                    border-top: 1px solid lighten($brand-primary, 15%);
+                    padding-top: $gutter-small;
+                }
+            }
+        }
+    }
+
+    &.open {
+        z-index: 102;
+    }
+
+    &.open & {
+        &__navbar {
+            z-index: 3;
+            background-color: $brand-primary;
+
+            &__brand {
+                z-index: 1;
+            }
+
+            &__toggler {
+                transform: rotate(-180deg);
+                z-index: 11;
+
+                &__bar {
+                    &.top {
+                        top: 50%;
+                        transform: translateY(-50%) rotate(-45deg);
+                    }
+
+                    &.middle {
+                        opacity: 0;
+                    }
+
+                    &.bottom {
+                        bottom: 50%;
+                        transform: translateY(50%) rotate(45deg);
+                    }
+                }
+            }
+
+            &__collapse {
+                bottom: 0;
+                transition-delay: 0s;
+                visibility: visible;
+                padding: $gutter-small;
+                overflow: visible;
+
+                &__list {
+                    transition-delay: $transition-time;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

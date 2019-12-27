@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="pl" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+        <trans-unit id="150a2a5b7c99a0442c0337a78b4e8f3e" resname="bridge.core_bundle.twig.form.submit">
+           <source>Envoyer</source>
+           <target>Wyślij</target>
+        </trans-unit>
+        <trans-unit id="b38a065cc8943c49aeaee5393581a934" resname="bridge.core_bundle.twig.days.monday">
+            <source>Lundi</source>
+            <target>Poniedziałek</target>
+        </trans-unit>
+        <trans-unit id="86e0dbbf60b7a9cc89758eb3752285c4" resname="bridge.core_bundle.twig.days.tuesday">
+            <source>Mardi</source>
+            <target>Wtorek</target>
+        </trans-unit>
+        <trans-unit id="60f0d88d88ead33f3266825b4a4c0af5" resname="bridge.core_bundle.twig.days.wednesday">
+            <source>Mercredi</source>
+            <target>Środa</target>
+        </trans-unit>
+        <trans-unit id="327a43ec2653821414cdc0d696b66d00" resname="bridge.core_bundle.twig.days.thursday">
+            <source>Jeudi</source>
+            <target>Czwartek</target>
+        </trans-unit>
+        <trans-unit id="20889092a0d04ec497ebe9fcf8bd0e62" resname="bridge.core_bundle.twig.days.friday">
+            <source>Vendredi</source>
+            <target>Piątek</target>
+        </trans-unit>
+        <trans-unit id="621d3eb3a9113c01b5ccefbdac320e20" resname="bridge.core_bundle.twig.days.saturday">
+            <source>Samedi</source>
+            <target>Sobota</target>
+        </trans-unit>
+        <trans-unit id="541fab693c823614fa25bf61e0123ff6" resname="bridge.core_bundle.twig.days.sunday">
+            <source>Dimanche</source>
+            <target>Niedziela</target>
+        </trans-unit>
+        <trans-unit id="c80467eae6b15917f1febb77e173232d" resname="bridge.core_bundle.twig.form.file.error.mimeTypesMessage">
+            <source>Le type de fichier n'est pas autorisé.</source>
+            <target>Typ pliku jest niedozwolony.</target>
+        </trans-unit>
+        <trans-unit id="f3c13640306f4f16638a528de9cbf762" resname="bridge.core_bundle.twig.form.file.error.maxSizeMessage">
+            <source>Le fichier dépasse la taille maximale autorisée (max 10Mo).</source>
+            <target>Plik przekracza maksymalny dozwolony rozmiar (maks. 10Mo).</target>
+        </trans-unit>
+        <trans-unit id="226af91aa0f842244358f18be29fbf96" resname="bridge.core_bundle.twig.form.file.error.uploadErrorMessage">
+            <source>Une erreur est survenue durant le téléchargement du fichier.</source>
+            <target>Podczas pobierania pliku wystąpił błąd.</target>
+        </trans-unit>
+        <trans-unit id="cf6d9301dea31e3035e65a661a817072" resname="bridge.core_bundle.twig.form.file.error.postSizeMessage">
+            <source>Le fichier dépasse la taille maximale autorisée (max 10Mo).</source>
+            <target>Plik przekracza maksymalny dozwolony rozmiar (maks. 10Mo).</target>
+        </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,150 @@
+// Mixin Button Default
+
+@mixin button($background-color, $color, $outlined: false, $size: 'base') {
+    @include button-variant($background-color, $color, $outlined);
+    @include button-size($size);
+
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    transition: $transition-default;
+    margin: 0;
+    box-shadow: none;
+    cursor: pointer;
+    width: auto;
+    overflow: hidden;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: $font-family-base;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        text-decoration: none;
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        opacity: .5;
+        cursor: $cursor-disabled;
+    }
+
+    & > em {
+        font-size: $font-size-base;
+
+        &.left {
+            margin-right: 10px;
+        }
+
+        &.right {
+            margin-left: 10px;
+        }
+
+        &.bridge-icon {
+            &-arrow-back,
+            &-chevron-right {
+                font-size: 12px;
+            }
+        }
+    }
+
+    & > span {
+        display: inline-block;
+        line-height: 1;
+    }
+}
+
+@mixin button-size($size: 'base') {
+    @if $size == 'small' {
+        border-radius: $button-border-radius-small;
+        padding: 0 $button-horizontal-padding-small;
+        height: $button-height-small;
+        font-size: ceil($font-size-base * .6);
+
+        & > span {
+            padding: 0;
+        }
+    }
+
+    @if $size == 'base' {
+        border-radius: $button-border-radius-base;
+        padding: 0 $button-horizontal-padding-base;
+        height: $button-height-base;
+        font-size: ceil($font-size-base * .8);
+
+        & > span {
+            padding: 0;
+        }
+    }
+
+    @if $size == 'large' {
+        border-radius: $button-border-radius-large;
+        padding: 0 $button-horizontal-padding-large;
+        height: $button-height-large;
+        font-size: $font-size-base;
+
+        & > span {
+            padding: 0;
+        }
+    }
+}
+
+@mixin button-variant($background-color, $color, $outlined: false) {
+    @if $outlined {
+        border: $button-border-width solid $background-color;
+        background-color: $transparent;
+        color: $background-color;
+    } @else { // stylelint-disable-line block-closing-brace-newline-after, at-rule-empty-line-before
+        border: $button-border-width solid $background-color;
+        background-color: $background-color;
+        color: $color;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        @if $outlined {
+            background-color: $background-color;
+            color: $color;
+        } @else { // stylelint-disable-line block-closing-brace-newline-after, at-rule-empty-line-before
+            background-color: darken($background-color, 5%);
+            color: $color;
+        }
+
+        &.disabled,
+        &[disabled],
+        fieldset[disabled] & {
+            background-color: $background-color;
+            color: $color;
+        }
+    }
+}
+
+@mixin button-hover($background-color, $color, $outlined: false) {
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        @if $outlined {
+            background-color: $background-color;
+            color: $color;
+        } @else { // stylelint-disable-line block-closing-brace-newline-after, at-rule-empty-line-before
+            background-color: darken($background-color, 5%);
+            color: $color;
+        }
+
+        &.disabled,
+        &[disabled],
+        fieldset[disabled] & {
+            background-color: $background-color;
+            color: $color;
+        }
+    }
+}

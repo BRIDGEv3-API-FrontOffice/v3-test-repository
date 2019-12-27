@@ -1,0 +1,190 @@
+//------------------------------------------------------------------
+// Bridge Icons
+//------------------------------------------------------------------
+
+$icon-set: 'essential' !default;
+
+@font-face {
+    font-family: 'Bridge';
+    font-weight: normal;
+    font-style: normal;
+    src: url('~web/assets/fonts/Bridge/bridge.woff?h38l1t') format('woff');
+}
+
+@mixin bridge-icon($name: false, $set: $icon-set) {
+    @if $set and $name {
+        @extend .bridge-icon-#{$set}-#{$name};
+    }
+
+    text-transform: none;
+    line-height: 1;
+    font-family: 'Bridge';
+    font-weight: normal;
+
+    // Better Font Rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant: normal;
+    font-style: normal;
+    speak: none;
+}
+
+[class^='bridge-icon-'],
+[class*=' bridge-icon-'] {
+    @include bridge-icon;
+}
+
+// Copy the Icomoon icons under this line (don't touch above code)
+.bridge-icon {
+    &-essential {
+        &-arrow-back::before {
+            content: '\e900';
+        }
+
+        &-check-off::before {
+            content: '\e906';
+        }
+
+        &-check-on::before {
+            content: '\e907';
+        }
+
+        &-chevron-down::before {
+            content: '\e902';
+        }
+
+        &-chevron-left::before {
+            content: '\e903';
+        }
+
+        &-chevron-right::before {
+            content: '\e904';
+        }
+
+        &-chevron-up::before {
+            content: '\e905';
+        }
+
+        &-city::before {
+            content: '\e908';
+        }
+
+        &-close::before {
+            content: '\e909';
+        }
+
+        &-contact::before {
+            content: '\e90a';
+        }
+
+        &-correct::before {
+            content: '\e91a';
+        }
+
+        &-danger::before {
+            content: '\e90b';
+        }
+
+        &-download::before {
+            content: '\e90c';
+        }
+
+        &-filters::before {
+            content: '\e90d';
+        }
+
+        &-geolocation::before {
+            content: '\e90e';
+        }
+
+        &-home::before {
+            content: '\e90f';
+        }
+
+        &-info::before {
+            content: '\e919';
+        }
+
+        &-itinerary::before {
+            content: '\e910';
+        }
+
+        &-list::before {
+            content: '\e911';
+        }
+
+        &-map::before {
+            content: '\e912';
+        }
+
+        &-options::before {
+            content: '\e913';
+        }
+
+        &-phone::before {
+            content: '\e914';
+        }
+
+        &-radio-off::before {
+            content: '\e915';
+        }
+
+        &-radio-on::before {
+            content: '\e916';
+        }
+
+        &-remove::before {
+            content: '\e91b';
+        }
+
+        &-search::before {
+            content: '\e917';
+        }
+
+        &-store::before {
+            content: '\e918';
+        }
+    }
+
+    &-brand {
+        &-bridge::before {
+            content: '\e901';
+        }
+
+        &-email::before {
+            content: '\e91c';
+        }
+
+        &-facebook::before {
+            content: '\ea90';
+        }
+
+        &-instagram::before {
+            content: '\ea92';
+        }
+
+        &-linkedin::before {
+            content: '\eaca';
+        }
+
+        &-pinterest::before {
+            content: '\ead1';
+        }
+
+        &-skype::before {
+            content: '\eac5';
+        }
+
+        &-twitter::before {
+            content: '\ea96';
+        }
+
+        &-whatsapp::before {
+            content: '\ea93';
+        }
+
+        &-youtube::before {
+            content: '\ea9d';
+        }
+    }
+}

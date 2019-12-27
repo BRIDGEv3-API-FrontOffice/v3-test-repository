@@ -1,0 +1,58 @@
+{% extends '@views/pages/geo-divisions/base.html.twig' %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name,
+    '%division%': localisation.division1.name,
+    '%pagination.start%': pagination.hitsStart,
+    '%pagination.end%': pagination.hitsEnd,
+    '%pagination.total%': pagination.hitsTotal,
+    '%total%': search.total
+} %}
+
+{% set breadcrumbs = breadcrumbs|slice(0, 4) %}
+
+{% block title %}
+    <title>
+        {{- 'bridge.theme.geo_divisions.division1.meta.title' | trans(translationVars, 'seo') | striptags -}}
+        {%- if pagination is defined and pagination.isPagination and pagination.current > 1 -%}
+            {{- 'bridge.theme.geo_divisions.meta.pagination' | trans(translationVars, 'seo') | striptags -}}
+        {%- endif -%}
+    </title>
+{% endblock %}
+
+{% block additional_meta %}
+    {% set metaDescription = 'bridge.theme.geo_divisions.division1.meta.description' | trans(translationVars, 'seo') %}
+    {%- if pagination is defined and pagination.isPagination and pagination.current > 1 -%}
+        {% set metaDescription = metaDescription ~ 'bridge.theme.geo_divisions.meta.pagination' | trans(translationVars, 'seo') %}
+    {%- endif -%}
+    <meta name="description" content="{{ metaDescription | striptags }}"/>
+
+    {% if pagination is defined and pagination.isPagination %}
+        {% if pagination.current > 1 %}
+            <link rel="prev" href="{{ pagination.prevUrl }}">
+        {% endif %}
+        {% if pagination.current < pagination.last %}
+            <link rel="next" href="{{ pagination.nextUrl }}">
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block pageTitle %}
+    <h1 class="lf-geo-divisions__main__title">
+        {{- 'bridge.theme.geo_divisions.division1.h1' | transchoice(search.total, translationVars, 'seo')|raw -}}
+    </h1>
+{% endblock %}
+
+{% block pageDescription %}
+    <div class="lf-geo-divisions__main__description">
+        {{- 'bridge.theme.geo_divisions.division1.description' | trans(translationVars, 'seo')|raw -}}
+    </div>
+{% endblock %}
+
+{% block pageFooter %}
+    {% include '@components/footer/seo/template.html.twig' with {
+        'title': 'bridge.theme.geo_divisions.footer_seo.division1.title'|trans(translationVars, 'seo'),
+        'cities': topCities,
+        'seoPrefix': seoPrefix
+    } only %}
+{% endblock %}

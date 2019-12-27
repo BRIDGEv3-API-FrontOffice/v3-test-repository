@@ -1,0 +1,27 @@
+parameters:
+    ##
+    ## Kubernetes values
+    ## Please, don't touch nor update these values
+    ##
+    bridge_front_core.environment: '%bridge.deployment.environment%'
+    # CDN base url
+    bridge_front_starter_kit.cdn_base_url: '%bridge.cdn_base_url%'
+    # Algolia parameters
+    bridge_front_api.services.algolia.index_name_prefix: '%bridge_front_core.environment%_clients_%bridge_front_api.services.api.client_id%_%bridge_front_api.services.api.lts_version%'
+    bridge_front_api.services.media.image.url: '' # Need to be delete (update core first !)
+    # MultiLangue
+    bridge_front_starter_kit.internal_domain_pattern: '%bridge.app_hostname_pattern%'
+
+    ##
+    ## APIs URLS
+    ## Needs to be set on local env
+    ##
+    ## Please, don't touch nor update these values
+    ##
+    bridge_front_api.services.api.default_url: '%bridge.api.url%'
+    bridge_front_api.services.api.forms: 'lead'
+    bridge_front_api.services.api.front_offices: 'front-office'
+    bridge_front_api.services.api.geocoding: 'geoproxy'
+    bridge_front_api.services.api.locations: 'location'
+    bridge_front_api.services.api.medium: 'media'
+    bridge_front_api.services.api.publications: 'publication'

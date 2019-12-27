@@ -1,0 +1,69 @@
+//------------------------------------------------------------------
+// Component PaginationDefault
+//------------------------------------------------------------------
+
+.lf-pagination-default {
+    &__abstract {
+        margin-bottom: $gutter-small / 3;
+        text-align: center;
+    }
+
+    &__list {
+        @include list-unstyled;
+
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: center;
+        padding: 0 $gutter-base;
+
+        &__item {
+            &__link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: $transition-default;
+                width: $button-height-small;
+                height: $button-height-small;
+
+                &.active {
+                    background-color: $brand-primary;
+                    color: $on-brand-primary;
+                }
+
+                &[disabled] {
+                    cursor: default;
+                    pointer-events: none;
+                }
+
+                &:hover:not([disabled]),
+                &:focus:not([disabled]),
+                &:active:not([disabled]) {
+                    background-color: $brand-secondary;
+                    color: $on-brand-secondary;
+                }
+            }
+
+            &.prev {
+                margin-right: $gutter-small;
+            }
+
+            &.next {
+                transform: rotate(180deg);
+                margin-left: $gutter-small;
+            }
+
+            &.next &,
+            &.prev & {
+                &__link {
+                    border-radius: 50%;
+                    padding: 0;
+
+                    &[disabled] {
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+    }
+}

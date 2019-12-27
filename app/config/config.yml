@@ -1,0 +1,48 @@
+imports:
+    - { resource: parameters_common.yml }
+    - { resource: parameters.yml }
+    - { resource: parameters_front.yml }
+    - { resource: parameters_header.yml }
+    - { resource: parameters_footer.yml }
+    - { resource: parameters_theme.yml }
+    - { resource: services.yml }
+
+parameters:
+    locale: "%bridge_front_starter_kit.default_locale%"
+
+framework:
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    session:
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    serializer:
+        enabled: true
+
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    exception_controller:  "bridge.front_bundle.exception_controller:showAction"
+    paths:
+        # Use these aliases in TWIG and PHP files (ie: @alias/...)
+        '%kernel.project_dir%/src/Bridge/Theme/%bridge_front_starter_kit.front_theme%Bundle/Resources/views': views
+        '%kernel.project_dir%/src/Bridge/Theme/%bridge_front_starter_kit.front_theme%Bundle/Resources/views/pages': pages
+        '%kernel.project_dir%/src/Bridge/Theme/%bridge_front_starter_kit.front_theme%Bundle/Resources/views/components': components
+        '%kernel.project_dir%/src/Bridge/ComponentsBundle/Resources/views': components
+    form_themes: ['@components/forms/layout/form_lf_layout.html.twig']
+
+bridge_front_core: ~
+bridge_front_api: ~

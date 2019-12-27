@@ -1,0 +1,24 @@
+//------------------------------------------------------------------
+// Component WidgetsCritizr
+//------------------------------------------------------------------
+
+.lf-widgets-critizr {
+    &__notation,
+    &__reviews,
+    &__button-feedback,
+    &__custom {
+        @include container;
+
+        @media print {
+            display: none;
+        }
+    }
+
+    &__custom {
+        text-align: center;
+
+        & > a {
+            @include button($brand-primary, $white);
+        }
+    }
+}

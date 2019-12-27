@@ -1,0 +1,51 @@
+{# component 'publications-jsonLd' #}
+
+{# @param  object  event      event to track                     default(null)     example(event) #}
+{# @param  string  eventType  type of the event                  default('Event')  example('Event') #}
+{# @param  object  location   location object                    default(null)     example(location) #}
+{# @param  string  zoneSlug   slug name of the publication zone  default(null)     example('news') #}
+
+{% if event.zoneMedia is defined %}
+    {% set media = event.zoneMedia|extract_zone_formats(zoneSlug, 'image')|extract_format_image('default') %}
+{% endif %}
+
+<script type="application/ld+json">
+{
+    "@context":"http://schema.org",
+    "@type":"{{ eventType|default('Event') }}",
+    {% if media and media.host is defined and media.path is defined %}
+        "image":"{{ media.host }}{% if size is defined %}/{{ size }}{% endif %}/{{ media.path }}",
+    {% endif %}
+    "location": {
+        "@type" : "Place",
+        "url" : "{{ location | url }}",
+        "name" : "{{ location.name }}",
+        "address" : {
+            "@type":"PostalAddress",
+            "streetAddress":"{{ location.localisation.address1 }}",
+            {% if location.localisation.city is defined and location.localisation.city.name is defined %}
+            "addressLocality":"{{ location.localisation.city.name }}",
+            {% endif %}
+            {% if location.localisation.postalCode is defined %}
+            "postalCode":"{{ location.localisation.postalCode }}",
+            {% endif %}
+            {% if location.localisation.country is defined and location.localisation.country.code is defined %}
+            "addressCountry": "{{ location.localisation.country.code }}"
+            {% endif %}
+        }
+    },
+    {% if event.content is defined and event.content | length > 0 %}
+    "description":"{{ event.content| replace({"\n":""}) }}",
+    {% endif %}
+    {% if event.period.start is defined %}
+    "startDate":"{{ event.period.start | date("c") }}",
+    {% endif %}
+    {% if event.period.end is defined %}
+    "endDate":"{{ event.period.end | date("c") }}",
+    {% endif %}
+    {% if event.dedicatedPageUrl is defined and event.dedicatedPageUrl | length > 0 %}
+    "url":"{{ event.dedicatedPageUrl }}",
+    {% endif %}
+    "name":"{{ event.title }}"
+}
+</script>

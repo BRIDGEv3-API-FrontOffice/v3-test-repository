@@ -1,0 +1,62 @@
+{% set listLinks = [] %}
+{% set listLinks = listLinks | merge([{'url': '/', 'label' : 'Merevo Ldt' }]) %}
+{% set listLinks = listLinks | merge([{'url': '/', 'label' : 'Products' }]) %}
+{% set listLinks = listLinks | merge([{'url': '/', 'label' : 'Services' }]) %}
+{% set listLinks = listLinks | merge([{'url': '/', 'label' : 'Contact Us' }]) %}
+
+{# partial 'header/light' #}
+{# var textMenu: display text menu [Bolean/'false'] #}
+{# var socialMedia: display socialMedia [Bolean/'false'] #}
+{# var twoRows: display nav in two rows [Bolean/'false'] #}
+{% set textMenu = textMenu | default(false) %}
+{% set classTwoRows = '' %}
+{% if twoRows is defined and twoRows %}
+    {% set classTwoRows = ' lf-header-optimum-tworows' %}
+{% endif %}
+
+<div id="header-optimum" class="lf-header-optimum">
+    <div class="lf-header-optimum__navbar{{classTwoRows}}" data-lf-nav>
+        <div class="lf-header-optimum__navbar__header" data-lf-logo>
+            {% if brand.logo is defined and brand.name is defined %}
+            <a class="lf-header-optimum__navbar__header__logo" href="{{ path('home') }}">
+                <img class="lf-header-optimum__navbar__header__logo__image"
+                src="{{ brand.logo }}"
+                alt="{{ brand.name }}">
+            </a>
+            {% endif %}
+            <div class="lf-header-optimum__navbar__header__menu" data-lf-expand-header="true">
+                {% if textMenu %}
+                    <div class="lf-header-optimum__navbar__header__menu__text">Menu</div>
+                {% endif %}
+
+                <div class="lf-header-optimum__navbar__header__menu__hamburger" role="button"
+                aria-haspopup="true"
+                aria-hidden="true"
+                aria-expanded="false"
+                data-lf-hamburger>
+                    <div class="lf-header-optimum__navbar__header__menu__hamburger__bar bar-mid">
+                        <div class="lf-header-optimum__navbar__header__menu__hamburger__bar bar-top"></div>
+                        <div class="lf-header-optimum__navbar__header__menu__hamburger__bar bar-bottom"></div>
+                    </div>
+                    <span class="lf-header-optimum__navbar__header__menu__hamburger__sr-only">
+                        {{ 'bridge.components.header.navigation_toggle' | trans({}, 'components') }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <nav class="lf-header-optimum__navbar__menu" data-lf-mobile-content>
+            <ul class="lf-header-optimum__navbar__menu__links" data-lf-desktop-items role="menu">
+                {% for link in listLinks %}
+                <li class="lf-header-optimum__navbar__menu__links__item">
+                    <a class="lf-header-optimum__navbar__menu__links__item__link"
+                        href="{{ link.url }}"
+                        role="menuitem"
+                        data-lf-tracking='{{ tracking({bind: 'click', category: 'Header External Links', label: link.label }) }}'>
+                        {{ link.label }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+{% set minAssets = app.environment == 'dev' ? '' : '.min' %}
+
+<!DOCTYPE html>
+<html lang="{{ app.request.defaultLocale }}" {% if app.request.defaultLocale == 'ar' %}dir="rtl"{% endif %}>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-site-verification" content="{{ webmastertools }}">
+        {% block title %}<title>BRIDGE Demo Retail</title>{% endblock %}
+        {% block additional_meta %}{% endblock %}
+        <link rel="author" href="{{ asset('humans.txt') }}">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/app' ~ minAssets ~ '.css') }}">
+        {% endblock %}
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        {% include '@components/technical/canonical/template.html.twig' only %}
+        {% include '@components/technical/gdpr/template.html.twig' with {
+            'cookietitle': 'bridge.theme.components.technical.gdpr.cookietitle'|trans({}, 'gdpr'),
+            'message': 'bridge.theme.components.technical.gdpr.message'|trans({}, 'gdpr'),
+            'dismiss': 'bridge.theme.components.technical.gdpr.dismiss'|trans({}, 'gdpr'),
+            'allow': 'bridge.theme.components.technical.gdpr.allow'|trans({}, 'gdpr'),
+            'link': 'bridge.theme.components.technical.gdpr.link'|trans({}, 'gdpr'),
+            'href': gdprLinks.cookies[app.request.locale].url|default(null)
+        } only %}
+        {% include '@components/technical/tracking/template.html.twig' only %}
+        <!-- Google Tag Manager for bridge dashboard -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NG79HLS');</script>
+        <!-- End Google Tag Manager -->
+        {% include '@components/technical/toybox/template.html.twig' with {
+            'token': toybox_token|default(null)
+        } only %}
+    </head>
+    <body id="lf-body"
+        data-bridge-tracking-client-id="{{ client._id }}"
+        data-bridge-tracking-front-office-id="{{ front_office_id }}"
+        data-bridge-tracking-location-id="{{ location._id|default('') }}"
+        data-bridge-tracking-locale="{{ app.request.locale }}"
+        data-bridge-tracking-env="{{ deployment_namespace }}">
+
+        <!-- Google Tag Manager for bridge dashboard -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NG79HLS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager for bridge dashboard -->
+
+        <!-- Google Tag Manager for client GTM -->
+        {% include '@components/technical/noscript/template.html.twig' only %}
+        <!-- End Google Tag Manager for client GTM -->
+
+        {% set linkPagination = '' %}
+        {% if app.request.get('_route') == 'search' and pagination.isPagination is defined and pagination.isPagination %}
+            {% set linkPagination = pagination %}
+        {% endif %}
+        {% include '@components/wcag/skipContent/template.html.twig' with {
+            'pagination': linkPagination
+        } only %}
+
+        {% include '@components/notification/default/template.html.twig' only %}
+
+        <header data-lf-header>
+            {% include '@components/header/light/template.html.twig' only %}
+        </header>
+
+        <div id="lf-body-wrapper">
+            <div class="lf">
+                {% block content %}{% endblock %}
+            </div>
+            <footer data-lf-footer id="lf-footer">
+            {% include '@components/footer/optimum/template.html.twig' %}
+            {% include '@components/footer/gdpr/template.html.twig' %}
+            </footer>
+        </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('build/app' ~ minAssets ~ '.js') }}"></script>
+        {% endblock %}
+
+        {% block jsBootstrap %}
+            <script>
+                (function() {
+                    window.bridge.bootstrap('{{ jsModuleName|default(app.request.get('_route')) }}', {{ bridgeJsConfig|default({})|json_encode()|raw }});
+                })()
+            </script>
+        {% endblock %}
+
+        {% block heap %}
+            <script>
+                window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+                heap.load("2847445827");
+            </script>
+        {% endblock %}
+    </body>
+</html>

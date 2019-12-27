@@ -1,0 +1,31 @@
+//------------------------------------------------------------------
+// Component PartsAccessibility
+//------------------------------------------------------------------
+
+.lf-parts-accessibility {
+    &__title-access {
+        font-size: $font-size-base;
+
+        @media print {
+            margin-bottom: 0;
+            font-size: $font-size-h2;
+        }
+    }
+
+    &__title-park {
+        font-size: $font-size-base;
+
+        @media print {
+            margin-bottom: 0;
+            font-size: $font-size-h2;
+        }
+    }
+
+    &__list {
+        @include list-unstyled;
+    }
+
+    &__list + &__title-park {
+        margin-top: $gutter-small;
+    }
+}

@@ -1,0 +1,40 @@
+parameters:
+    ##
+    ## Change this for your stack name if you want to code locally in a dev stack.
+    ## Example: 'core' or 'support', ...
+    ## If you keep production, you environment will be plug in the production environment.
+    ##
+    bridge_front_starter_kit.local_development_stack: 'production'
+    bridge_front_starter_kit.deployment_namespace: '%bridge.deployment.namespace%'
+
+    ## Bridge
+    bridge_front_api.services.api.lts_version: 2
+    bridge_front_api.services.api.client_id: '%bridge.api.client.id%'
+    bridge_front_api.services.api.front_office_id: '%bridge.api.front_office.id%'
+    bridge_front_api.services.api.bearer: '%bridge.api.bearer%'
+
+    ## Algolia
+    bridge_front_api.services.algolia.application_id: '%algolia.application_id%'
+    bridge_front_api.services.algolia.api_key: '%algolia.api_key%'
+    bridge_front_api.services.algolia.search_facet: slug
+
+    ## Locales
+    bridge_front_starter_kit.locales:
+        - en
+        - fr
+        - de
+
+    ## Domains
+    bridge_front_starter_kit.external_domains:
+        -
+            host: shop.merevo.com
+            locale: en
+        -
+            host: magasin.merevo.com
+            locale: fr
+        -
+            host: geschaft.merevo.com
+            locale: de
+
+    ## Symfony secret
+    secret: 'Please_Modify_Me_123456789ABCDEFGHIJKLMN' # Set at least 40 random alphanumeric characters

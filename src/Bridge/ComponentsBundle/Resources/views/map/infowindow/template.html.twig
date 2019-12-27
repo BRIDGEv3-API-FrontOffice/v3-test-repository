@@ -1,0 +1,41 @@
+{# component 'map-infowindow' #}
+
+{# @param  object  location  location object  default(null)  example(location) #}
+
+<div class="lf-map-infowindow">
+    {% if location.media is defined and location.media|media_of_type('location', true) %}
+        {% set media = location.media|media_of_type('location', true) %}
+        {% include '@components/graphical/srcset/template.html.twig' with {
+            'class': 'lf-map-infowindow__media',
+            'alt': location.name,
+            'lazyload': false,
+            'sources': {
+                '1x': media|image_url({size: '320x'}),
+                '2x': media|image_url({size: '640x'})
+            }
+        } only %}
+    {% endif %}
+
+    <div class="lf-map-infowindow__infos">
+        <div class="lf-map-infowindow__infos__title">
+            {{ location.name }}
+        </div>
+
+        {% include '@components/parts/address/template.html.twig' with {
+            'class': 'lf-map-infowindow__infos__address',
+            'location': location
+        } %}
+
+        {% include '@components/button/default/template.html.twig' with {
+            'class': 'lf-map-infowindow__infos__cta',
+            'type': 'a',
+            'label': 'bridge.component.parts.actions.go_to_store' | trans({}, 'components'),
+            'srLabel': 'bridge.component.parts.actions.go_to_store.srLabel' | trans({'%location.name%': location.name}, 'components'),
+            'href': path('locations', {seoId: location.seoId, slug: location.slug}),
+            'style': 'secondary',
+            'size': 'small',
+            'attributes': {'data-lf-location-button': ''},
+            'trackingData': {category: 'Go to store', label: tracking_location_label(location)}
+        } only %}
+    </div>
+</div>

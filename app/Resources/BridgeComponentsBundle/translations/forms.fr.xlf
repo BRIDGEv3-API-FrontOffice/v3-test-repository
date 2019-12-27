@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="b43698be9ef8c28761b7881e887d8fd4" resname="bridge.components.forms.error.first-name.required">
+        <source>bridge.components.forms.error.first-name.required</source>
+        <target>Le prénom est requis</target>
+      </trans-unit>
+      <trans-unit id="3abb37a4263b84821632ba0ee4ff255b" resname="bridge.components.forms.error.last-name.required">
+        <source>bridge.components.forms.error.last-name.required</source>
+        <target>Le nom est requis</target>
+      </trans-unit>
+      <trans-unit id="885f7c219c6184e2d3ab09fdd70cdf40" resname="bridge.components.forms.error.mail.required">
+        <source>bridge.components.forms.error.mail.required</source>
+        <target>L'email est requis</target>
+      </trans-unit>
+      <trans-unit id="cc2dd7fa3f560b37c22415c037af03d7" resname="bridge.components.forms.error.mail.format">
+        <source>bridge.components.forms.error.mail.format</source>
+        <target>Le format de l'email est invalide</target>
+      </trans-unit>
+      <trans-unit id="48940632235cfb68923ef295da88ed70" resname="bridge.components.forms.error.message.required">
+        <source>bridge.components.forms.error.message.required</source>
+        <target>Le message est requis</target>
+      </trans-unit>
+      <trans-unit id="b796fc90d44f957ac087c2e95b348155" resname="bridge.components.forms.contact_form.submit.label">
+        <source>bridge.components.forms.contact_form.submit.label</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="6e3bfc5299302eeb5c425c40e639cca4" resname="bridge.components.forms.error.field.required">
+        <source>bridge.components.forms.error.field.required</source>
+        <target>Le champ est requis</target>
+      </trans-unit>
+      <trans-unit id="12eca3575d37dc1fc8b743772b861645" resname="bridge.components.forms.contact_form.success.message">
+        <source>bridge.components.forms.contact_form.success.message</source>
+        <target>Votre message a été envoyé</target>
+      </trans-unit>
+      <trans-unit id="4f3b0c7dd06b927b6e46c1c93bb68a78" resname="bridge.components.forms.error.message">
+        <source>bridge.components.forms.error.message</source>
+        <target>Une erreur est survenue, merci de réessayer</target>
+      </trans-unit>
+      <trans-unit id="32966a5fe0b39fdc054aabab8d8076d5" resname="bridge.components.forms.address_form.mail.label">
+        <source>bridge.components.forms.address_form.mail.label</source>
+        <target>Par mail</target>
+      </trans-unit>
+      <trans-unit id="a6f2fafb08e4ab1e8bc17eb7f3b86d88" resname="bridge.components.forms.error.phone.format">
+        <source>bridge.components.forms.error.phone.format</source>
+        <target>Le format du numéro de téléphone n'est pas valide</target>
+      </trans-unit>
+      <trans-unit id="5196b8fd4a75f4b7a6ce0a4104276393" resname="bridge.components.forms.address_form.phone.label">
+        <source>bridge.components.forms.address_form.phone.label</source>
+        <target>Par SMS</target>
+      </trans-unit>
+      <trans-unit id="3307d0c0948fd95d278361c2b677012d" resname="bridge.components.forms.address_form.submit.label">
+        <source>bridge.components.forms.address_form.submit.label</source>
+        <target>Envoyer la demande</target>
+      </trans-unit>
+      <trans-unit id="b64cb368d0e161e59fdfa4930ee2f94a" resname="bridge.components.forms.address_form.success.message">
+        <source>bridge.components.forms.address_form.success.message</source>
+        <target>Vous allez recevoir les informations demandées</target>
+      </trans-unit>
+      <trans-unit id="ad265aa758b6ac0a364f0e5111d47281" resname="bridge.components.forms.newsletter_form.mail.label">
+        <source>bridge.components.forms.newsletter_form.mail.label</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="8a98fb12477b76175b7e618ab6784aa0" resname="bridge.components.forms.newsletter_form.submit.label">
+        <source>bridge.components.forms.newsletter_form.submit.label</source>
+        <target>Souscrire</target>
+      </trans-unit>
+      <trans-unit id="fe8d8c3ed0b8c8f04b205492195c1573" resname="bridge.components.forms.newsletter_form.success.message">
+        <source>bridge.components.forms.newsletter_form.success.message</source>
+        <target>Vous êtes bien inscrit à la newsletter</target>
+      </trans-unit>
+      <trans-unit id="55edac592aa7a7c75b1132d4351e9c6c" resname="bridge.components.forms.error.mail.require.one">
+        <source>bridge.components.forms.error.mail.require.one</source>
+        <target>Vous devez remplir au moins un des champs</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

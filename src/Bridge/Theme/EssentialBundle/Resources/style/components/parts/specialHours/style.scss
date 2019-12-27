@@ -1,0 +1,105 @@
+//------------------------------------------------------------------
+// Component PartsOpeningHours
+//------------------------------------------------------------------
+
+.lf-parts-special-hours {
+    border: 1px solid $brand-secondary;
+
+    &__header {
+        @media print {
+            background: none;
+            padding: $gutter-small / 2;
+        }
+
+        background-color: $brand-secondary;
+        padding: $gutter-small;
+
+        &__title {
+            color: $on-brand-secondary;
+        }
+
+        > em {
+            margin-right: 5px;
+            color: $on-brand-secondary;
+        }
+    }
+
+    &__content {
+        @media print {
+            padding: $gutter-small / 2;
+        }
+
+        padding: $gutter-small;
+
+        &__item {
+            position: relative;
+            padding-left: $gutter-small;
+
+            &::before {
+                @media print {
+                    top: .4em;
+                    width: .5em;
+                    height: .5em;
+                }
+
+                display: block;
+                position: absolute;
+                top: .3em;
+                left: 0;
+                margin-right: .5em;
+                border-radius: 50%;
+                width: .7em;
+                height: .7em;
+                content: '';
+            }
+
+            &--open {
+                &::before {
+                    background-color: $success-color;
+                }
+            }
+
+            &--open & {
+                &__time {
+                    color: $success-color;
+                }
+            }
+
+            &--closed {
+                color: $danger-color;
+
+                &::before {
+                    background-color: $danger-color;
+                }
+            }
+
+            &--closed & {
+                &__time {
+                    color: $danger-color;
+                }
+            }
+
+            &--open,
+            &--closed {
+                &::before {
+                    @media print {
+                        background-color: $black;
+                    }
+                }
+            }
+
+            &--open &,
+            &--closed & {
+                &__time {
+                    @media print {
+                        color: $black;
+                    }
+                }
+            }
+        }
+
+        &__item + &__item {
+            margin-top: .5em;
+        }
+    }
+}

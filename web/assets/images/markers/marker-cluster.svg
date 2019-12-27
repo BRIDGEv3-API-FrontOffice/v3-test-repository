@@ -1,0 +1,18 @@
+<svg id="f774dd92-2c5d-4dc1-a880-9e743d9032f5" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs>
+    <style>
+      .bf05caca-32e5-4a6f-b689-c6e1adbe1983, .f3e6eb96-dcb3-4943-a8eb-e1f56194cec4 {
+        fill: #697d8b;
+      }
+
+      .bf05caca-32e5-4a6f-b689-c6e1adbe1983 {
+        opacity: 0.5;
+      }
+    </style>
+  </defs>
+  <title>marker-cluster</title>
+  <g id="a4fa92df-5792-4e85-90a6-2290fd6a21bd" data-name="cluster">
+    <circle class="bf05caca-32e5-4a6f-b689-c6e1adbe1983" cx="22" cy="22" r="21"/>
+    <circle class="f3e6eb96-dcb3-4943-a8eb-e1f56194cec4" cx="22" cy="22" r="14.63"/>
+  </g>
+</svg>

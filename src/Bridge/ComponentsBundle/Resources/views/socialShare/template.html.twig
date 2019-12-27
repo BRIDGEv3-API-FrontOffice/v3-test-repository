@@ -1,0 +1,48 @@
+{# component 'socialShare' #}
+
+{# @param  socialShareLink   string   example('https://www.magasin.merevo.fr/publication') #}
+{# @param  socialShareTitle   string   example('Titre de la publication') #}
+{# @param  class string  default(empty)  example('lf-publication__share') #}
+{# @param  iconSet string  default(bridge-icon-brand-)  example('bridge-icon-essential') #}
+
+{% set iconSet = iconSet|default('bridge-icon-brand-') %}
+{% set messengerAppId = '' %}
+
+{% if socialShareLink is defined and socialShareLink is not empty %}
+    {% set class = class|default('') %}
+    {% if class is not empty %}
+        {% set class = ' ' ~ class %}
+    {% endif %}
+
+    {% set socialShareLink = socialShareLink|url_encode %}
+    {% set socialShareTitle = socialShareTitle|url_encode %}
+    {# Facebook #}
+    {% set facebookShareLink = 'https://facebook.com/sharer/sharer.php?u=' ~ socialShareLink %}
+    {# Twitter #}
+    {% set twitterShareLink = 'https://twitter.com/intent/tweet/?text=' ~ socialShareTitle ~ '&url=' ~ socialShareLink %}
+    {# Linkedin #}
+    {% set linkedinShareLink = 'https://www.linkedin.com/shareArticle?mini=true&url=' ~ socialShareLink ~ '&title=' ~ socialShareTitle ~ '&summary=' ~ socialShareTitle %}
+    {# Mail #}
+    {% set emailShareLink = 'mailto:?subject=' ~ socialShareTitle ~ '&body=' ~ socialShareLink %}
+
+    {% set listSocial = { 
+        'facebook': facebookShareLink, 
+        'twitter': twitterShareLink, 
+        'linkedin': linkedinShareLink, 
+        'email': emailShareLink } 
+    %}
+
+    <div class="lf-social-share{{class}}">
+        <span class="lf-social-share__label">{{ 'bridge.components.social-share.label' | trans({}, 'components') }}</span>
+        {% for social, link in listSocial %}
+            <a href="{{ link }}"
+                class="lf-social-share__link lf-social-share__link--{{social}}"
+                data-lf-tracking="{{ tracking({category: 'socialShare', label: social}) }}" 
+                target="_blank"
+                aria-label="{{ social }}">
+                <span class="sr-only">{{ 'bridge.components.social-share.link.label' | trans({}, 'components') }}{{' ' ~ social}}</span>
+                <em class="lf-social-share__link__icon {{iconSet ~ social }}"></em>
+            </a>
+        {% endfor %}
+    </div>
+{% endif %} 

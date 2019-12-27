@@ -1,0 +1,39 @@
+//------------------------------------------------------------------
+// Component PartsActions
+//------------------------------------------------------------------
+
+.lf-parts-actions {
+    display: flex;
+    flex-direction: column;
+    transition: $transition-default;
+    opacity: 1;
+    z-index: 10;
+    border: 1px solid $brand-secondary;
+    box-shadow: $box-shadow-default;
+    background-color: $white;
+    min-width: 150px;
+    pointer-events: auto;
+
+    &.hidden {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &__item {
+        @include button-reset;
+
+        padding: $gutter-small;
+        text-align: left;
+        color: $brand-primary;
+
+        &:not(:first-child) {
+            border-top: 1px solid $brand-secondary;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: lighten($brand-primary, 15%);
+        }
+    }
+}

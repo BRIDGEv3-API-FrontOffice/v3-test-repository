@@ -1,0 +1,46 @@
+{% extends '@views/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/exceptions' ~ minAssets ~ '.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/exceptions' ~ minAssets ~ '.js') }}"></script>
+{% endblock %}
+
+{% set translationVars = {
+    '%brand.name%': brand.name,
+    '%status.code%': status_code,
+    '%status.text%': status_text
+} %}
+
+{% block title %}
+    <title>
+        {{- 'bridge.theme.exceptions.error.title' | trans(translationVars, 'messages') | striptags -}}
+    </title>
+{% endblock %}
+
+{% block additional_meta %}
+    <meta name="robots" content="noindex">
+    <meta name="description" content="{{ 'bridge.theme.exceptions.error.title' | trans(translationVars, 'messages') | striptags }}"/>
+{% endblock %}
+
+{% block content %}
+    {% set title = 'bridge.theme.exceptions.error.title'|trans(translationVars, 'messages') %}
+    {% set message = 'bridge.theme.exceptions.error.message'|trans(translationVars, 'messages') %}
+    {% set illustration = 'cactus' %}
+
+    {% block pageMain %}
+        <div id="lf-content">
+            <div class="lf-exceptions">
+                {% include '@components/exceptions/default/template.html.twig' with {
+                    'class': 'lf-exceptions__main',
+                    'title': title,
+                    'message': message,
+                    'illustration': illustration|default('cactus'),
+                    'labelButton': 'bridge.theme.go_back.label' | trans(translationVars)
+                } only %}
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

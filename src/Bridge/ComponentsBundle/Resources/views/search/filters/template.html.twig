@@ -1,0 +1,99 @@
+{# component 'search-filters' #}
+
+{# @param  string  id             custom id                 default('lf-search-filters')  example('lf-search-filters') #}
+{# @param  string  class          custom class              default(null)                 example('custom-class') #}
+{# @param  object  searchSetting  available search filters  default(null)                 example(searchSetting) #}
+{# @param  object  queryFilters   selected filters          default(null)                 example(queryFilters) #}
+
+{# @global  string  icon_set  icon set class prefix #}
+
+{% set id = id|default('lf-search-filters') %}
+{% set filters = [] %}
+{% set actives = [] %}
+
+{% if searchSetting is defined %}
+    {% set filters = extract_search_parameters(searchSetting) %}
+{% endif %}
+
+{% if queryFilters is defined %}
+    {% for filter in queryFilters %}
+        {% for key, id in filter %}
+            {% set actives = actives|merge([id]) %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% if filters is not empty %}
+    <div id="{{ id }}" class="lf-search-filters {{ class|default(null) }}">
+
+        {% block filters %}
+            <div class="lf-search-filters__filters" aria-label="{{ 'bridge.components.search.filters.accessibility'|trans({}, 'components') }}">
+                {% for name, fields in filters %}
+                    {% if fields is not empty %}
+                        {% block filter %}
+                            <div class="lf-search-filters__filters__filter">
+                                {% block filterTitle %}
+                                    <h4 class="lf-search-filters__filters__filter__title">
+                                        {{- name -}}
+                                    </h4>
+                                {% endblock %}
+
+                                {% block filterFields %}
+                                    <ul class="lf-search-filters__filters__filter__fields">
+                                        {% for id, label in fields %}
+                                            {% block filterField %}
+                                                <li class="lf-search-filters__filters__filter__fields__field" role="option">
+                                                    <input
+                                                        id="{{ id }}"
+                                                        type="checkbox"
+                                                        name="{{ 'filters[' ~ name ~ '][]' }}"
+                                                        value="{{ id }}"
+                                                        {% if id in actives %}
+                                                            checked
+                                                        {% endif %}
+                                                        data-lf-filters-input
+                                                    />
+
+                                                    <label for="{{ id }}" data-lf-filters-label>
+                                                        <em role="img"></em>
+                                                        {{- label -}}
+                                                    </label>
+                                                </li>
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endblock %}
+
+        {% block bottom %}
+            <div class="lf-search-filters__bottom">
+                {% block submit %}
+                    {% include '@components/button/default/template.html.twig' with {
+                        'class': 'lf-search-filters__bottom__submit',
+                        'type': 'button',
+                        'label': 'bridge.components.search.filters.submit.label'|trans({}, 'components'),
+                        'srLabel': 'bridge.components.search.filters.submit.srLabel'|trans({}, 'components'),
+                        'style': 'primary',
+                        'attributes': {'type': 'button', 'data-lf-filters-submit': ''},
+                        'trackingData': {}
+                    } only %}
+                {% endblock %}
+
+                {% block reset %}
+                    <button type="button" class="lf-search-filters__bottom__reset" data-lf-filters-reset>
+                        <span>
+                            {{- 'bridge.components.search.filters.reset.label'|trans({}, 'components') -}}
+                        </span>
+                        <span class="sr-only">{{- 'bridge.components.search.filters.reset.srLabel'|trans({}, 'components') -}}</span>
+                    </button>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+    </div>
+{% endif %}

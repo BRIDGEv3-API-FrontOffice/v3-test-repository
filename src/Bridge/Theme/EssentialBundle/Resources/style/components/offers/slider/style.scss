@@ -1,0 +1,28 @@
+//------------------------------------------------------------------
+// Component OffersSlider
+//------------------------------------------------------------------
+
+// Dependencies
+// slider-swiper
+
+.lf-offers-slider {
+    @media print {
+        display: none;
+    }
+
+    &__title {
+        margin-bottom: $gutter-small;
+    }
+
+    &__slider {
+        &__slide {
+            &__link {
+                display: block;
+            }
+
+            &__image {
+                @include img-responsive;
+            }
+        }
+    }
+}

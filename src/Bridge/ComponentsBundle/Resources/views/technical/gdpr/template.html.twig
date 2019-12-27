@@ -1,0 +1,51 @@
+{# component 'technical-gdpr' #}
+
+{# @param  string  cookietitle  container cookie title default('Cookie Consent')               example('Cookie Consent') #}
+{# @param  string  message  info cookies message     default('Lorem ipsum dolor sit amet...')  example('Lorem ipsum dolor sit amet...') #}
+{# @param  string  dismiss  dismiss button label     default('Reject')                         example('Reject') #}
+{# @param  string  allow    allow button label       default('Accept cookies')                 example('Accept cookies') #}
+{# @param  string  link     info cookies link label  default('More info')                      example('More info') #}
+{# @param  string  href     info cookies page url    default('http://cookiesandyou.com')       example('http://cookiesandyou.com') #}
+
+{% set cookietitle = cookietitle|default('Cookie Consent') %}
+{% set message = message|default('Lorem ipsum dolor sit amet...') %}
+{% set dismiss = dismiss|default('Reject') %}
+{% set allow = allow|default('Accept cookies') %}
+{% set link = link|default('More info') %}
+{% set href = href|default('http://cookiesandyou.com') %}
+
+{# <link rel="stylesheet" type="text/css" href="//d1w2o2psuslm7b.cloudfront.net/production/current/cookieconsent.min.css"> #}
+<script type="text/javascript" src="//d1w2o2psuslm7b.cloudfront.net/production/current/cookieconsent.min.js"></script>
+
+<script>
+    window.cookieconsent = window.cookieconsent || {};
+    window.cookieconsent.onCookiesEnabled = window.cookieconsent.onCookiesEnabled || [];
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            allowOnNavigation: true,
+            // default color palette
+            palette: {
+                popup: {
+                    background: '#333333',
+                    text: '#ffffff'
+                },
+                button: {
+                    background: '#ffffff',
+                    text: '#333333'
+                }
+            },
+            "content": {
+                "message": "{{ message }}",
+                "dismiss": "{{ dismiss }}",
+                "allow": "{{ allow }}",
+                "link": "{{ link }}",
+                "href": "{{ href }}",
+                "target": "_blank" // or "_self"
+            },
+            cookie: {
+                expiryDays: 395 // 13 Months
+            }
+        });
+    });
+
+</script>

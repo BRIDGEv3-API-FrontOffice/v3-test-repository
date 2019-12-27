@@ -1,0 +1,505 @@
+# Footer functionnal parameters
+parameters:
+    bridge_front_starter_kit.footer:
+        options:
+            showServices: true
+            showSlogan: true
+            showLinks: true
+            showApplication: true
+            showLegalLinks: true
+            showCopyright: true
+            showSocialLinks: true
+            displayLinks: 'columns'
+        en:
+            services:
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Satisfied or refunded'
+                    content: 'Donec blandit nulla sit amet purus facilisis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Delivery in 48h'
+                    content: 'Sed pulvinar aliquet leo'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Secure payment'
+                    content: 'Congue lectus eu fringilla iaculis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: '1 year warranty'
+                    content: 'Congue lectus eu fringilla iaculis'
+            slogan:
+                title: 'Aliquam vitae'
+                content: 'Phasellus congue lectus eu fringilla iaculis. Morbi condimentum efficitur mauris sit amet feugiat. Sed pulvinar aliquet leo, a efficitur tortor cursus non. Nam efficitur libero ac purus vestibulum tincidunt. <strong>In interdum suscipit ex</strong>, nec euismod velit semper eu. Mauris tortor nulla, molestie non dignissim luctus, porttitor elementum nisl. Donec blandit nulla sit amet purus facilisis, id mollis diam fringilla.'
+            application:
+                appStore:
+                    url: 'https://magasin.merevo.com'
+                    label: 'App Store'
+                    pathImg: 'app-store.svg'
+                googlePlay:
+                    url: 'https://magasin.merevo.com'
+                    label: 'Google Play'
+                    pathImg: 'google-play.svg'
+            legalLinks:
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGU'
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGV'
+            socialLinks:
+                facebook:
+                    url: 'https://magasin.merevo.com'
+                    label: 'facebook'
+                    icon: 'bridge-icon-brand-facebook'
+                twitter:
+                    url: 'https://magasin.merevo.com'
+                    label: 'twitter'
+                    icon: 'bridge-icon-brand-twitter'
+                youtube:
+                    url: 'https://magasin.merevo.com'
+                    label: 'youtube'
+                    icon: 'bridge-icon-brand-youtube'
+                instagram:
+                    url: 'https://magasin.merevo.com'
+                    label: 'instagram'
+                    icon: 'bridge-icon-brand-instagram'
+                pinterest:
+                    url: 'https://magasin.merevo.com'
+                    label: 'pinterest'
+                    icon: 'bridge-icon-brand-pinterest'
+            links:
+                firstSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt with long name'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                secondSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                thirdSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                fourthSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+        fr:
+            services:
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Satisfait ou remboursé'
+                    content: 'Donec blandit nulla sit amet purus facilisis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Livraison en 48h'
+                    content: 'Sed pulvinar aliquet leo'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Paiement sécurisé'
+                    content: 'Congue lectus eu fringilla iaculis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Garantie 1 an'
+                    content: 'Congue lectus eu fringilla iaculis'
+            slogan:
+                title: 'Aliquam vitae'
+                content: 'Phasellus congue lectus eu fringilla iaculis. Morbi condimentum efficitur mauris sit amet feugiat. Sed pulvinar aliquet leo, a efficitur tortor cursus non. Nam efficitur libero ac purus vestibulum tincidunt. In interdum suscipit ex, nec euismod velit semper eu. Mauris tortor nulla, molestie non dignissim luctus, porttitor elementum nisl. Donec blandit nulla sit amet purus facilisis, id mollis diam fringilla.'
+            application:
+                appStore:
+                    url: 'https://magasin.merevo.com'
+                    label: 'App Store'
+                    pathImg: 'app-store.svg'
+                googlePlay:
+                    url: 'https://magasin.merevo.com'
+                    label: 'Google Play'
+                    pathImg: 'google-play.svg'
+            legalLinks:
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'Mentions légales'
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGU'
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGV'
+            socialLinks:
+                facebook:
+                    url: 'https://magasin.merevo.com'
+                    label: 'facebook'
+                    icon: 'bridge-icon-brand-facebook'
+                twitter:
+                    url: 'https://magasin.merevo.com'
+                    label: 'twitter'
+                    icon: 'bridge-icon-brand-twitter'
+                youtube:
+                    url: 'https://magasin.merevo.com'
+                    label: 'youtube'
+                    icon: 'bridge-icon-brand-youtube'
+                instagram:
+                    url: 'https://magasin.merevo.com'
+                    label: 'instagram'
+                    icon: 'bridge-icon-brand-instagram'
+                pinterest:
+                    url: 'https://magasin.merevo.com'
+                    label: 'pinterest'
+                    icon: 'bridge-icon-brand-pinterest'
+            links:
+                firstSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt with long name'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                secondSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                thirdSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                fourthSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+
+        de:
+            services:
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Satisfied or refunded'
+                    content: 'Donec blandit nulla sit amet purus facilisis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Delivery in 48h'
+                    content: 'Sed pulvinar aliquet leo'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: 'Secure payment'
+                    content: 'Congue lectus eu fringilla iaculis'
+                -
+                    pathImg: 'rassurance.svg'
+                    url: 'https://magasin.merevo.com'
+                    title: '1 year warranty'
+                    content: 'Congue lectus eu fringilla iaculis'
+            slogan:
+                title: 'Aliquam vitae'
+                content: 'Phasellus congue lectus eu fringilla iaculis. Morbi condimentum efficitur mauris sit amet feugiat. Sed pulvinar aliquet leo, a efficitur tortor cursus non. Nam efficitur libero ac purus vestibulum tincidunt. <strong>In interdum suscipit ex</strong>, nec euismod velit semper eu. Mauris tortor nulla, molestie non dignissim luctus, porttitor elementum nisl. Donec blandit nulla sit amet purus facilisis, id mollis diam fringilla.'
+            application:
+                appStore:
+                    url: 'https://magasin.merevo.com'
+                    label: 'App Store'
+                    pathImg: 'app-store.svg'
+                googlePlay:
+                    url: 'https://magasin.merevo.com'
+                    label: 'Google Play'
+                    pathImg: 'google-play.svg'
+            legalLinks:
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGU'
+                -
+                    url: 'https://magasin.merevo.com'
+                    label: 'CGV'
+            socialLinks:
+                facebook:
+                    url: 'https://magasin.merevo.com'
+                    label: 'facebook'
+                    icon: 'bridge-icon-brand-facebook'
+                twitter:
+                    url: 'https://magasin.merevo.com'
+                    label: 'twitter'
+                    icon: 'bridge-icon-brand-twitter'
+                youtube:
+                    url: 'https://magasin.merevo.com'
+                    label: 'youtube'
+                    icon: 'bridge-icon-brand-youtube'
+                instagram:
+                    url: 'https://magasin.merevo.com'
+                    label: 'instagram'
+                    icon: 'bridge-icon-brand-instagram'
+                pinterest:
+                    url: 'https://magasin.merevo.com'
+                    label: 'pinterest'
+                    icon: 'bridge-icon-brand-pinterest'
+            links:
+                firstSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt with long name'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                secondSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                thirdSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'
+                fourthSection:
+                    -
+                        title: 'Our company'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Merevo Ldt'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Products'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Services'
+                    -
+                        url: 'https://magasin.merevo.com'
+                        label: 'Contact Us'

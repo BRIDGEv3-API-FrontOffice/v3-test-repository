@@ -1,0 +1,72 @@
+{# component 'offers-slider' #}
+
+{# @param  string  id                   custom id                     default('lf-offers-slider')  example('custom-id') #}
+{# @param  string  class                custom class                  default(null)                example('custom-class') #}
+{# @param  object  availableOfferRange  available offer range object  default(null)                example(availableOfferRange) #}
+{# @param  object  location             location object               default(null)                example(location) #}
+{# @param  object  attributes           html attributes               default(null)                example({}) #}
+
+{% set id = id|default('lf-offers-slider') %}
+
+{% if availableOfferRange is defined
+    and availableOfferRange.offerRange is defined
+    and availableOfferRange.availableOffers is defined
+    and availableOfferRange.availableOffers|length > 0
+    and location is defined %}
+
+    {% set availableOffers = [] %}
+    {% for offer in availableOfferRange.availableOffers %}
+        {% if offer.name is not empty %}
+            {% set availableOffers = availableOffers|merge([offer]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if availableOffers|length > 0 %}
+        <div {% if id is defined %}id="{{ id }}"{% endif %}
+            class="lf-offers-slider {{ class|default(null) }}"
+            {{ htmlAttrs(attributes|default(null)) }}>
+            {% block title %}
+                <h2 class="lf-offers-slider__title">
+                    {{- availableOfferRange.offerRange.name|default('')|striptags -}}
+                </h2>
+            {% endblock %}
+
+            {% block slider %}
+                {% embed '@components/slider/swiper/template.html.twig' with {
+                    'id': id ~ '-slider',
+                    'class': 'lf-offers-slider__slider',
+                    'slides': availableOfferRange.availableOffers | filter(item => item.image is defined and item.image.host is defined and item.image.path is defined),
+                    'availableOfferRange': availableOfferRange,
+                    'outerPagination': true,
+                    'location': location
+                } only %}
+                    {% block slide %}
+                        {% if slide.image is defined and slide.image.host is defined and slide.image.path is defined %}
+                            <div class="lf-offers-slider__slider__slide">
+                                {% set trackingCategory = 'Offer link' %}
+                                {% set trackingLabel = availableOfferRange.offerRange.name ~ ' | ' ~  slide.name ~ ' | ' ~ tracking_location_label(location) %}
+
+                                {% if slide.link is not empty %}
+                                    <a class="lf-offers-slider__slider__slide__link"
+                                        href="{{ slide.link }}"
+                                        traget="_blank"
+                                        data-lf-tracking="{{ tracking({category: trackingCategory, label: trackingLabel}) }}">
+                                {% endif %}
+
+                                <img class="lf-offers-slider__slider__slide__image"
+                                    src="{{ slide.image.host }}/150x/{{ slide.image.path }}"
+                                    srcset="{{ slide.image.host }}/150x/{{ slide.image.path }} 1x,
+                                            {{ slide.image.host }}/300x/{{ slide.image.path }} 2x"
+                                    alt="{{ location.name }} - {{ slide.name }}" />
+
+                                {% if slide.link is not empty %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endif %}

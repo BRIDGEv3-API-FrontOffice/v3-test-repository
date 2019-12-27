@@ -1,0 +1,201 @@
+theme:
+    all:
+        globals:
+            front_office_id: "%bridge_front_api.services.api.front_office_id%"
+            deployment_namespace: "%bridge_front_starter_kit.deployment_namespace%"
+            webmastertools: "%bridge_front_starter_kit.webmastertools%"
+            front_theme: "%bridge_front_starter_kit.front_theme%"
+            icon_set: "%bridge_front_starter_kit.icon_set%"
+            date_format: "%bridge_front_components.twig.date_format%"
+            time_format: "%bridge_front_components.twig.time_format%"
+            default_timezone: "%bridge_front_starter_kit.default_timezone%"
+            special_periods_threshold: "%bridge_front_components.twig.special_periods_threshold%"
+            tracking: "%bridge_front_components.tracking%"
+            toybox_token: "%bridge_front_starter_kit.toybox.token%"
+            brand: "%bridge_front_starter_kit.brand%"
+            header: "%bridge_front_starter_kit.header%"
+            footer: "%bridge_front_starter_kit.footer%"
+            gdprLinks: "%bridge_front_starter_kit.gdpr_links%"
+            homeIllustration: "%bridge_front_starter_kit.home_illustration%"
+            homeVideoYoutube: "%bridge_front_starter_kit.home_video_youtube%"
+            homeVideo: "%bridge_front_starter_kit.home_video%"
+            locationIllustration: "%bridge_front_starter_kit.location_illustration%"
+            footerSeoOrder: "%bridge_front_starter_kit.footer_seo.order%"
+            offerRangeStyle: "%bridge_front_starter_kit.offer_range_style%"
+            critizr:
+                demo: true
+                clientName: 'velo'
+                buttonCustom:
+                    active: false
+                buttonFeedback:
+                    active: false
+                notationReviews:
+                    active: false
+                detailedReviews:
+                    active: true
+            forms:
+                theme: "materialize"
+                recaptcha:
+                    active: "%bridge_front_starter_kit.forms.contact.recaptcha.active%"
+                    siteKey: "%bridge_front_starter_kit.forms.contact.recaptcha.site_key%"
+                showAllFields: "%bridge_front_starter_kit.forms.show_all_fields%"
+                contact:
+                    maxSize: "%bridge_front_starter_kit.forms.contact.max_size%"
+                    mimeType: "%bridge_front_starter_kit.forms.contact.mime_type%"
+            itinerary: "%bridge_front_starter_kit.map.itinerary%"
+            map:
+                provider: "%bridge_front_starter_kit.map.provider%"
+                showLabel: "%bridge_front_starter_kit.map.markers.show_label%"
+                showInfoWindow: "%bridge_front_starter_kit.map.markers.show_infowindow%"
+        javascript:
+            components:
+                critizr:
+                    active: true
+                    apiKey: '7f614697ac3524af3ca4ce0df9164caf'
+                contactForm:
+                    override:
+                        finalOW: 'finallyOverride'
+                    funcs: ['initModalConfig']
+                    recaptcha:
+                        active: "%bridge_front_starter_kit.forms.contact.recaptcha.active%"
+                        container: "#captcha-container"
+                        siteKey: "%bridge_front_starter_kit.forms.contact.recaptcha.site_key%"
+                newsletterForm:
+                    override:
+                        finalOW: 'finallyOverride'
+                    funcs: ['initModalConfig']
+                addressForm:
+                    override:
+                        finalOW: 'finallyOverride'
+                    funcs: ['definePhoneValidation', 'initModalConfig']
+                geolocation:
+                    useGeocoding: "%bridge_front_starter_kit.search.use_geocoding%"
+                tracking:
+                    keys: "%bridge_front_components.tracking%"
+                sliderBanner:
+                    options:
+                        autoplay:
+                            delay: 5000
+                        breakpoints: ~
+                sliderMedia:
+                    options:
+                        autoplay:
+                            delay: 5000
+                        breakpoints: ~
+                sliderOffer:
+                    options:
+                        slidesPerView: 2
+                        breakpoints:
+                            768:
+                                slidesPerView: 3
+                            992:
+                                slidesPerView: 5
+                sliderNews:
+                    options:
+                        slidesPerView: 2
+                        breakpoints:
+                            768:
+                                slidesPerView: 3
+                map:
+                    provider: "%bridge_front_starter_kit.map.provider%"
+                    apiKey: "%bridge_front_starter_kit.map.api_key%"
+                    showLabel: "%bridge_front_starter_kit.map.markers.show_label%"
+                    showPosition: "%bridge_front_starter_kit.map.markers.show_position%"
+                    showCluster: "%bridge_front_starter_kit.map.markers.show_cluster%"
+                    showInfoWindow: "%bridge_front_starter_kit.map.markers.show_infowindow%"
+                    options:
+                        zoom: 12
+                        locationZoom: 16
+                    markers: "%bridge_front_theme.map.markers.icons%"
+                    labels: "%bridge_front_theme.map.markers.labels%"
+                autocomplete:
+                    api:
+                        algoliaApplicationId: "%bridge_front_api.services.algolia.application_id%"
+                        algoliaApiKey: "%bridge_front_api.services.algolia.api_key%"
+                    datasets:
+                        locations:
+                            options:
+                                hitsPerPage: 3
+                        places:
+                            options:
+                                type: 'city'
+                                countries: "%bridge_front_starter_kit.search.country%"
+                                language: "%locale%"
+                                useDeviceLocation: false
+                                aroundLatLngViaIP: true
+                                hitsPerPage: 3
+                                style: false
+                itinerary: "%bridge_front_starter_kit.map.itinerary%"
+
+    actions:
+        -
+            action: Bridge\FrontBundle\Controller\FrontController::homeAction
+            zones:
+                banners-mobile:
+                    maxResults: 20
+                banners-desktop:
+                    maxResults: 20
+                news:
+                    maxResults: 20
+                events:
+                    maxResults: 20
+            javascript:
+                components:
+                    tracking:
+                        parameters:
+                            page: home
+
+        -
+            action: Bridge\FrontBundle\Controller\FrontController::searchAction
+            javascript:
+                components:
+                    tracking:
+                        parameters:
+                            page: search
+
+        -
+            action: Bridge\FrontBundle\Controller\FrontController::locationAction
+            zones:
+                banners-mobile:
+                    maxResults: 20
+                banners-desktop:
+                    maxResults: 20
+                news:
+                    maxResults: 20
+                events:
+                    maxResults: 20
+            javascript:
+                components:
+                    sliderNews:
+                        options:
+                            breakpoints:
+                                768:
+                                    slidesPerView: 2
+                    sliderEvents:
+                        options:
+                            breakpoints:
+                                768:
+                                    slidesPerView: 2
+                    map:
+                        options:
+                            # Mappy options
+                            scrollWheelZoom: false
+                            dragging: false
+                            doubleClickZoom: false
+                            zoomControl: false
+                            layersControl: false
+                            attributionControl:
+                                scale: false
+                            # Gmaps options
+                            disableDefaultUI: true
+                            gestureHandling: 'none'
+                            draggableCursor: 'default'
+                            clickableIcons: false
+                        showLabel: false
+                        showPosition: false
+                        showCluster: false
+                        enableMarkerEvents: false
+                        defaultMarker: 'location'
+                    tracking:
+                        parameters:
+                            page: location

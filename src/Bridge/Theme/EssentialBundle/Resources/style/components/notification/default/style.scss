@@ -1,0 +1,119 @@
+//------------------------------------------------------------------
+// Component NotificationDefault
+//------------------------------------------------------------------
+
+@keyframes fadeFromTop {
+    0% {
+        top: -100px;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    100% {
+        top: 156px;
+        visibility: visible;
+        opacity: 1;
+        z-index: 1000;
+    }
+}
+
+@keyframes fadeToTop {
+    0% {
+        top: 156px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -100px;
+        opacity: 0;
+    }
+}
+
+.lf-notification-default {
+    @media print {
+        display: none;
+    }
+
+    position: fixed;
+    top: -156px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 1;
+    border-top: 6px solid;
+    border-radius: $input-border-radius-base;
+    box-shadow: $box-shadow-default;
+    background-color: $background-color;
+    padding: $gutter-base;
+    height: 120px;
+    overflow: hidden;
+
+    &.active {
+        top: 156px;
+        visibility: visible;
+        opacity: 1;
+        z-index: 1000;
+        animation: fadeFromTop 1s;
+    }
+
+    &.inactive {
+        opacity: 0;
+        z-index: 1000;
+        animation: fadeToTop 1s;
+    }
+
+    &.success {
+        border-color: $success-color;
+
+        em {
+            @include bridge-icon('correct');
+
+            color: lighten($success-color, 5%);
+            font-weight: 600;
+        }
+    }
+
+    &.warning {
+        border-color: $warning-color;
+
+        em {
+            @include bridge-icon('info');
+
+            color: lighten($warning-color, 5%);
+            font-weight: 600;
+        }
+    }
+
+    &.error {
+        border-color: $danger-color;
+
+        em {
+            @include bridge-icon('remove');
+
+            color: lighten($danger-color, 5%);
+        }
+    }
+
+    &__title {
+        margin: calc($gutter-small / 2) auto;
+        padding-left: 50px;
+        color: $brand-primary;
+        font-size: floor($font-size-base * 1.2);
+        font-weight: $font-weight-bold;
+    }
+
+    &__message {
+        margin: 0;
+        padding-left: 50px;
+        color: $brand-primary;
+        font-size: $font-size-base;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 34px;
+        padding: 2px;
+        font-size: 36px;
+    }
+}
